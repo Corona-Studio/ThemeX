@@ -1,0 +1,52 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="clr-namespace:ThemeX.Controls.Animations;assembly=ThemeX"
+    xmlns:cc="clr-namespace:ThemeX.Controls.Effects;assembly=ThemeX"
+    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX">
+    <Design.PreviewWith>
+        <Border>
+            <animations:AnimationLayer Width="180" Height="180" />
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type animations:AnimationLayer}" TargetType="animations:AnimationLayer">
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel
+                    x:Name="Panel"
+                    Background="{TemplateBinding Background}"
+                    ClipToBounds="True">
+                    <Rectangle
+                        Name="ActiveRect"
+                        ClipToBounds="True"
+                        Fill="{TemplateBinding MouseOnBrush}"
+                        Opacity="0"
+                        RadiusX="{TemplateBinding CornerRadius,
+                                                  Converter={StaticResource CornerRadiusToDoubleConverter}}"
+                        RadiusY="{TemplateBinding CornerRadius,
+                                                  Converter={StaticResource CornerRadiusToDoubleConverter}}">
+                        <Rectangle.Transitions>
+                            <Transitions>
+                                <DoubleTransition
+                                    Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                                    Property="Opacity"
+                                    Duration="{x:Static cc:Ripple.Duration}" />
+                            </Transitions>
+                        </Rectangle.Transitions>
+                    </Rectangle>
+                    <Canvas
+                        Name="PART_RippleCanvasRoot"
+                        Background="{TemplateBinding Background}"
+                        IsHitTestVisible="False" />
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+    </ControlTheme>
+
+</ResourceDictionary>

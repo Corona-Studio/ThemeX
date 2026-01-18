@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="avares://ThemeX/Styles/IconPack/IconPackStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/IconPack/CombinedIconPackStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/AnimationLayerStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/AutoCompleteBoxStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/BadgeStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ButtonStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/CarouselStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/CheckBoxStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ComboBoxStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ContentControlStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ContextMenuStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/DataValidationErrorsStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/EmbeddableControlRootStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ExpanderStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/GridSplitterStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/HyperLinkButtonStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ItemsControlStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ListBoxItemStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ListBoxStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/MenuItemStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/MenuStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/MultiProgressBarStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/OverlayPopupHostStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/PopupRootStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ProgressBarStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ProgressRingStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/RadioButtonStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/RippleEffectStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ScrollBarStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ScrollViewerStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/SelectableTextBlockStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/SeperatorStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/SimpleLineChartStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/SliderStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/SmoothScrollViewerStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/SplitView.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/TextBoxStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ToggleButtonStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ToggleSwitchStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/ToolTipStyles.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/TransitioningContentControlStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/WindowStyle.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+</Styles>

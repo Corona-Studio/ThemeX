@@ -1,9 +1,58 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.10" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\LauncherX.SourceGenerator.Shared\LauncherX.SourceGenerator.Shared.csproj" />
+    <ProjectReference Include="..\..\LauncherX.StyledProp.SourceGenerator\LauncherX.StyledProp.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.4.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Styles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Remove="Styles\SimpleLineChartStyle.axaml" />
+    <AvaloniaXaml Remove="Styles\ThemeXControls.axaml" />
+    <AvaloniaXaml Remove="ThemeX.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Fonts\SegoeIcons.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\Fonts\SegoeIcons.ttf" />
+    <AvaloniaResource Include="ThemeX.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Update="Styles\SimpleLineChartStyle.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+  </ItemGroup>
 
 </Project>

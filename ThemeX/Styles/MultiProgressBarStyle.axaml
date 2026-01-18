@@ -1,0 +1,52 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:themeX="clr-namespace:ThemeX">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <controls:MultiProgressBar />
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:MultiProgressBar}" TargetType="controls:MultiProgressBar">
+
+        <Setter Property="FillColor"
+                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Spacing="6">
+                        <Border
+                            Height="4"
+                            ClipToBounds="True"
+                            CornerRadius="4">
+                            <Grid x:Name="MainGrid" ColumnSpacing="1" />
+                        </Border>
+                        <ItemsControl
+                            x:Name="Indicators"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource LauncherX.Foreground.Primary}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type controls:Indicator}">
+                                    <WrapPanel ItemSpacing="4">
+                                        <Rectangle
+                                            Width="12"
+                                            Height="12"
+                                            Fill="{Binding Color}"
+                                            RadiusX="3"
+                                            RadiusY="3" />
+                                        <TextBlock FontSize="12" Text="{Binding Text}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </ControlTheme>
+
+</ResourceDictionary>

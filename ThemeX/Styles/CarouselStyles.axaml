@@ -1,0 +1,29 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scroll="clr-namespace:ThemeX.Controls.Scroll"
+    xmlns:themeX="clr-namespace:ThemeX">
+
+    <ControlTheme x:Key="{x:Type Carousel}" TargetType="Carousel">
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <scroll:SmoothScrollViewer
+                    Name="PART_ScrollViewer"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    HorizontalScrollBarVisibility="Hidden"
+                    UseSmoothScrolling="{DynamicResource {x:Static themeX:ThemeSettings.FluentScrollKey}}"
+                    VerticalScrollBarVisibility="Hidden">
+                    <ItemsPresenter
+                        Name="PART_ItemsPresenter"
+                        Margin="{TemplateBinding Padding}"
+                        ItemsPanel="{TemplateBinding ItemsPanel}" />
+                </scroll:SmoothScrollViewer>
+            </ControlTemplate>
+        </Setter>
+
+    </ControlTheme>
+
+</ResourceDictionary>

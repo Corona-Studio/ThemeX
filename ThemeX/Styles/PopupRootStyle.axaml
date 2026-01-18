@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTheme x:Key="{x:Type PopupRoot}" TargetType="PopupRoot">
+        <Setter Property="TransparencyLevelHint" Value="Transparent" />
+        <!--Setter Property="control:WindowBaseCornerRadiusHelper.SystemDecorations" Value="BorderOnly"/>
+        <Setter Property="control:WindowBaseCornerRadiusHelper.ExtendClientAreaChromeHints" Value="NoChrome"/>
+        <Setter Property="control:WindowBaseCornerRadiusHelper.ExtendClientAreaToDecorationsHint" Value="True"/>
+		<Setter Property="control:WindowBaseCornerRadiusHelper.Enable" Value="True"/>
+        <Setter Property="TransparencyLevelHint">
+	        <Setter.Value>
+		        <OnPlatform>
+			        <OnPlatform.Default>
+				        <x:Static Member="managers:InterfaceSettingsManager.PopupWindowTransparent"/>
+			        </OnPlatform.Default>
+			        <OnPlatform.Windows>
+				        <x:Static Member="managers:InterfaceSettingsManager.PopupWindowBlur"/>
+			        </OnPlatform.Windows>
+		        </OnPlatform>
+	        </Setter.Value>
+        </Setter-->
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Margin="10" CornerRadius="{TemplateBinding CornerRadius}">
+
+                    <!-->Border.BoxShadow>
+						<DynamicResource ResourceKey="{OnPlatform 'LauncherX.DefaultShadow', Windows='DisableShadow'}"/>
+					</Border.BoxShadow-->
+
+                    <VisualLayerManager IsPopup="True">
+                        <ContentPresenter
+                            Background="{TemplateBinding Background}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
+                    </VisualLayerManager>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

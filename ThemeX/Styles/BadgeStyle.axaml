@@ -1,0 +1,67 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks;assembly=ThemeX"
+    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX"
+    xmlns:controls="clr-namespace:ThemeX.Controls">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <controls:Badge
+                Background="{DynamicResource LauncherX.Foreground.Error}"
+                Content="TEST NOTICE"
+                Symbol="&#xF83E;,&#xE998;" />
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:Badge}" TargetType="controls:Badge">
+
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="Background"
+                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Badge}">
+                    <Border
+                        x:Name="ClippingBorder"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <iconPacks:CombinedIconPack
+                                x:Name="Icon"
+                                Padding="0,0,5,0"
+                                VerticalAlignment="Center"
+                                IsVisible="{TemplateBinding Symbol,
+                                                            Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                Symbol1="{TemplateBinding Symbol1}"
+                                Symbol1Foreground="{TemplateBinding Foreground}"
+                                Symbol2="{TemplateBinding Symbol2}"
+                                Symbol2Foreground="{TemplateBinding Foreground}" />
+
+                            <ContentPresenter
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"
+                                MaxLines="1"
+                                TextTrimming="CharacterEllipsis" />
+
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </ControlTheme>
+
+</ResourceDictionary>

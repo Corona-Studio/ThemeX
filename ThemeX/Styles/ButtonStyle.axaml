@@ -1,0 +1,230 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:animations="clr-namespace:ThemeX.Controls.Animations"
+    xmlns:themeX="clr-namespace:ThemeX">
+
+    <Design.PreviewWith>
+        <Border Padding="50">
+            <StackPanel Spacing="5">
+                <controls:PrimaryButton
+                    Width="100"
+                    Padding="16,0"
+                    Content="TEST"
+                    FontSize="12" />
+                <controls:PrimaryButton
+                    Width="100"
+                    Padding="16,0"
+                    Content="DISABLED"
+                    FontSize="12"
+                    IsEnabled="False" />
+                <controls:PrimaryButton
+                    Width="100"
+                    Padding="16,0"
+                    Background="Aquamarine"
+                    Content="TEST"
+                    FontSize="12" />
+                <Button
+                    x:Name="NextButton"
+                    Padding="5"
+                    HorizontalAlignment="Right"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Content="Disabled"
+                    FontSize="14"
+                    Foreground="Red"
+                    IsEnabled="False" />
+                <Button Background="#00696969" Content="Button" />
+                <Button Content="Button" />
+                <Button Content="Button" IsEnabled="False" />
+                <Border Height="1" Background="Gray" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Thickness x:Key="ButtonPadding">11, 6</Thickness>
+
+    <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
+
+        <Setter Property="UseLayoutRounding" Value="False" />
+        <Setter Property="BorderThickness" Value="0.2, 0.2, 0.2, 1" />
+        <Setter Property="Background" Value="{DynamicResource LauncherX.ButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Foreground.Reverse.Primary}" />
+        <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="MinWidth" Value="96" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <animations:RevealEffect
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        HaloBrush="{TemplateBinding Background,
+                                                    Converter={StaticResource ColorToDarkerColorConverter},
+                                                    ConverterParameter=3}"
+                        MouseEnterAnimation="True"
+                        MouseOnBrush="{TemplateBinding Background,
+                                                       Converter={StaticResource ColorToDarkerColorConverter},
+                                                       ConverterParameter=2}">
+                        <Border
+                            x:Name="EffectBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+
+                            <Border.Transitions>
+                                <Transitions>
+                                    <ThicknessTransition
+                                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                                        Property="BorderThickness"
+                                        Duration="00:00:00.200" />
+                                </Transitions>
+                            </Border.Transitions>
+
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                CornerRadius="{TemplateBinding CornerRadius}" />
+                        </Border>
+                    </animations:RevealEffect>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border#EffectBorder">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
+        </Style>
+
+        <Style Selector="^:pressed /template/ Border#BorderElement">
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+        </Style>
+
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.BorderBrush}" />
+        </Style>
+
+    </ControlTheme>
+
+    <!--  Transparent Background Button  -->
+    <ControlTheme
+        x:Key="TransparentBg"
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="Button">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <animations:RevealEffect
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        HaloBrush="{DynamicResource LauncherX.Transparent.Reverse.Tertiary}"
+                        MouseEnterAnimation="True"
+                        MouseOnBrush="{DynamicResource LauncherX.Transparent.Reverse.Secondary}">
+                        <Border
+                            x:Name="EffectBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+
+                            <Border.Transitions>
+                                <Transitions>
+                                    <ThicknessTransition
+                                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                                        Property="BorderThickness"
+                                        Duration="00:00:00.200" />
+                                </Transitions>
+                            </Border.Transitions>
+
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                CornerRadius="{TemplateBinding CornerRadius}" />
+                        </Border>
+                    </animations:RevealEffect>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </ControlTheme>
+
+    <!--  Cubic Button  -->
+    <ControlTheme
+        x:Key="CubicButton"
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="Button">
+
+        <Setter Property="MinWidth" Value="25" />
+        <Setter Property="MinHeight" Value="25" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+
+    </ControlTheme>
+
+    <ControlTheme
+        x:Key="CubicTransparentBgButton"
+        BasedOn="{StaticResource TransparentBg}"
+        TargetType="Button">
+
+        <Setter Property="MinWidth" Value="25" />
+        <Setter Property="MinHeight" Value="25" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+
+    </ControlTheme>
+
+    <!--  Accent  -->
+
+    <ControlTheme
+        x:Key="AccentButton"
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="Button">
+
+        <Setter Property="Background"
+                Value="{DynamicResource ThemeX.AccentColor}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorDark3Key}}" />
+
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+            <!--<Setter Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrush}" />-->
+            <Setter Property="TextBlock.Foreground"
+                    Value="{TemplateBinding Background, Converter={StaticResource GreyLevelToForegroundConverter}}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Background" Value="{DynamicResource LauncherX.ButtonBackground.Pressed}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.ButtonBackground.Pressed}" />
+        </Style>
+
+    </ControlTheme>
+
+    <ControlTheme
+        x:Key="{x:Type controls:PrimaryButton}"
+        BasedOn="{StaticResource AccentButton}"
+        TargetType="controls:PrimaryButton" />
+
+</ResourceDictionary>

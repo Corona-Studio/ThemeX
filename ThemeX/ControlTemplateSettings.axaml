@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="ThemeX.AccentColor">#FFB900</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeX.AccentColorLighter">#FFDF5D</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeX.AccentColorForeground">#000000</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeX.AccentColorTransparent">#7FFFCD00</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeX.BackgroundFillColor">#FFCD00</SolidColorBrush>
+
+    <Color x:Key="ThemeX.AccentColorTransparentMedia">#FFFFFFFF</Color>
+    <Color x:Key="ThemeX.AcrylicBackgroundTintColor">#FFFFFFFF</Color>
+
+</ResourceDictionary>

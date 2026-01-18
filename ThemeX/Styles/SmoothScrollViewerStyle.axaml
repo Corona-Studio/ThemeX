@@ -1,0 +1,65 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scroll="clr-namespace:ThemeX.Controls.Scroll">
+    <ControlTheme x:Key="{x:Type scroll:SmoothScrollViewer}" TargetType="scroll:SmoothScrollViewer">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="UseCustomScrollAnimation" Value="False" />
+        <Setter Property="scroll:SmoothScrollViewer.Template">
+            <ControlTemplate TargetType="scroll:SmoothScrollViewer">
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
+                    <scroll:AdvanceScrollContentPresenter
+                        Name="PART_ContentPresenter"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        Content="{TemplateBinding Content}"
+                        IsScrollChainingEnabled="{TemplateBinding IsScrollChainingEnabled}" />
+                    <ScrollBar
+                        Name="PART_HorizontalScrollBar"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,0,0,5"
+                        AllowAutoHide="{TemplateBinding AllowAutoHide}"
+                        Focusable="False"
+                        LargeChange="{Binding LargeChange.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                        Orientation="Horizontal"
+                        SmallChange="{Binding SmallChange.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                        Visibility="{TemplateBinding HorizontalScrollBarVisibility}" />
+                    <ScrollBar
+                        Name="PART_VerticalScrollBar"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,5,0"
+                        AllowAutoHide="{TemplateBinding AllowAutoHide}"
+                        Focusable="False"
+                        LargeChange="{Binding LargeChange.Height, RelativeSource={RelativeSource TemplatedParent}}"
+                        Orientation="Vertical"
+                        SmallChange="{Binding SmallChange.Height, RelativeSource={RelativeSource TemplatedParent}}"
+                        Visibility="{TemplateBinding VerticalScrollBarVisibility}" />
+                    <Panel
+                        x:Name="PART_ScrollBarsSeparator"
+                        Grid.Row="1"
+                        Grid.Column="1" />
+
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style
+            Selector="^[UseSmoothScrolling=True][UseCustomScrollAnimation=False] /template/ scroll|AdvanceScrollContentPresenter#PART_ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <VectorTransition Property="AnimatableOffset" Duration="0:0:0.4">
+                        <VectorTransition.Easing>
+                            <QuinticEaseOut />
+                        </VectorTransition.Easing>
+                    </VectorTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

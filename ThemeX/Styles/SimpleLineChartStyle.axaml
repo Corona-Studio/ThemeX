@@ -1,0 +1,12 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:ThemeX.Controls">
+
+    <ControlTheme x:Key="{x:Type controls:SimpleLineChart}" TargetType="Separator">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid x:Name="MainGrid" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

@@ -1,0 +1,28 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPack="clr-namespace:ThemeX.Controls.IconPacks">
+
+    <ControlTheme x:Key="{x:Type iconPack:CombinedIconPack}" TargetType="iconPack:CombinedIconPack">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Panel>
+                        <iconPack:IconPack
+                            x:Name="PART_Icon1"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            Symbol="{TemplateBinding Symbol1}" />
+                        <iconPack:IconPack
+                            x:Name="PART_Icon2"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            Symbol="{TemplateBinding Symbol2}" />
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

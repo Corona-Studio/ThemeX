@@ -1,0 +1,139 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:converters="clr-namespace:ThemeX.Converters">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="10">
+                <controls:ProgressRing
+                    Width="80"
+                    Height="80"
+                    Margin="10,24,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Foreground="Green"
+                    IsIndeterminate="True" />
+                <controls:ProgressRing
+                    Width="80"
+                    Height="80"
+                    Margin="10,24,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Foreground="Blue"
+                    IsIndeterminate="False" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:ProgressRing}" TargetType="controls:ProgressRing">
+
+        <ControlTheme.Resources>
+            <converters:ThicknessToSingleValueConverter x:Key="ThicknessToSingleValueConverter" />
+            <converters:FitSquarelyWithinAspectRatioConverter x:Key="FitSquarelyWithinAspectRatioConverter" />
+        </ControlTheme.Resources>
+
+        <Style Selector="^">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="9" />
+            <Setter Property="MinHeight" Value="8" />
+            <Setter Property="MinWidth" Value="8" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel x:Name="FluentRingRoot">
+                        <Ellipse
+                            x:Name="Track"
+                            Stroke="{TemplateBinding Background}"
+                            StrokeThickness="{TemplateBinding BorderThickness,
+                                                              Converter={StaticResource ThicknessToSingleValueConverter},
+                                                              ConverterParameter='Left'}" />
+                        <Arc
+                            x:Name="Fill"
+                            StartAngle="{TemplateBinding StartAngle}"
+                            Stroke="{TemplateBinding Foreground}"
+                            StrokeLineCap="Round"
+                            StrokeThickness="{TemplateBinding BorderThickness,
+                                                              Converter={StaticResource ThicknessToSingleValueConverter},
+                                                              ConverterParameter='Left'}"
+                            SweepAngle="{TemplateBinding ValueAngle}" />
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^:preserveaspect">
+            <Setter Property="MinWidth" Value="8" />
+            <Setter Property="MinHeight" Value="8" />
+        </Style>
+
+        <Style Selector="^:preserveaspect /template/ Panel#FluentRingRoot">
+            <Setter Property="Width"
+                    Value="{TemplateBinding Bounds, Converter={StaticResource FitSquarelyWithinAspectRatioConverter}}" />
+            <Setter Property="Height"
+                    Value="{TemplateBinding Bounds, Converter={StaticResource FitSquarelyWithinAspectRatioConverter}}" />
+        </Style>
+
+        <Style Selector="^[IsEnabled=True][IsVisible=True]:indeterminate /template/ Arc#Fill">
+            <Style.Animations>
+                <Animation
+                    Easing="QuadraticEaseInOut"
+                    FillMode="Both"
+                    IterationCount="INFINITE"
+                    Duration="0:0:3">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="StartAngle" Value="-720" />
+                        <Setter Property="SweepAngle" Value="0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="12.5%">
+                        <Setter Property="StartAngle" Value="-540" />
+                        <Setter Property="SweepAngle" Value="50" />
+                    </KeyFrame>
+                    <KeyFrame Cue="25%">
+                        <Setter Property="StartAngle" Value="-360" />
+                        <Setter Property="SweepAngle" Value="100" />
+                    </KeyFrame>
+                    <KeyFrame Cue="32.5%">
+                        <Setter Property="StartAngle" Value="-180" />
+                        <Setter Property="SweepAngle" Value="50" />
+                    </KeyFrame>
+                    <KeyFrame Cue="50%">
+                        <Setter Property="StartAngle" Value="0" />
+                        <Setter Property="SweepAngle" Value="5" />
+                    </KeyFrame>
+                    <KeyFrame Cue="62.5%">
+                        <Setter Property="StartAngle" Value="180" />
+                        <Setter Property="SweepAngle" Value="50" />
+                    </KeyFrame>
+                    <KeyFrame Cue="75%">
+                        <Setter Property="StartAngle" Value="360" />
+                        <Setter Property="SweepAngle" Value="100" />
+                    </KeyFrame>
+                    <KeyFrame Cue="87.5%">
+                        <Setter Property="StartAngle" Value="540" />
+                        <Setter Property="SweepAngle" Value="50" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="StartAngle" Value="720" />
+                        <Setter Property="SweepAngle" Value="0" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <Style Selector="^[IsEnabled=True][IsVisible=True] /template/ Ellipse#Track">
+            <Style.Animations>
+                <Animation IterationCount="INFINITE" Duration="0:0:1">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0.99" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+    </ControlTheme>
+
+</ResourceDictionary>

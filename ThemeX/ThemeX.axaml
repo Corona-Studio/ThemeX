@@ -1,0 +1,18 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:themeX="clr-namespace:ThemeX"
+        x:Class="ThemeX.ThemeX">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themeX:ThemeSettings />
+                <themeX:ColorPresets />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <StyleInclude Source="avares://ThemeX/Styles/DataGridStyle.axaml" />
+    <StyleInclude Source="avares://ThemeX/Styles/FocusAdornerStyles.axaml" />
+    <StyleInclude Source="avares://ThemeX/Styles/UserControlStyles.axaml" />
+    <StyleInclude Source="avares://ThemeX/Styles/ThemeXControls.axaml" />
+</Styles>
