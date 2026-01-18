@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\LauncherX.SourceGenerator.Shared\LauncherX.SourceGenerator.Shared.csproj" />
     <ProjectReference Include="..\..\LauncherX.StyledProp.SourceGenerator\LauncherX.StyledProp.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
@@ -32,27 +28,7 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Styles\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaXaml Remove="Styles\SimpleLineChartStyle.axaml" />
-    <AvaloniaXaml Remove="Styles\ThemeXControls.axaml" />
-    <AvaloniaXaml Remove="ThemeX.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Assets\Fonts\SegoeIcons.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\Fonts\SegoeIcons.ttf" />
-    <AvaloniaResource Include="ThemeX.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaResource Update="Styles\SimpleLineChartStyle.axaml">
-      <SubType>Designer</SubType>
-    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
 </Project>
