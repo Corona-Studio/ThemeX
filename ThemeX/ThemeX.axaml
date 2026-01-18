@@ -12,7 +12,5 @@
     </Styles.Resources>
 
     <StyleInclude Source="avares://ThemeX/Styles/DataGridStyle.axaml" />
-    <StyleInclude Source="avares://ThemeX/Styles/FocusAdornerStyles.axaml" />
-    <StyleInclude Source="avares://ThemeX/Styles/UserControlStyles.axaml" />
     <StyleInclude Source="avares://ThemeX/Styles/ThemeXControls.axaml" />
 </Styles>
