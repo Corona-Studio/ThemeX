@@ -1,6 +1,6 @@
 # ThemeX
 
-## [简体中文](https://github.com/Corona-Studio/ThemeX/blob/main/README_zh_cn.md)
+## [简体中文](https://github.com/Corona-Studio/ThemeX/blob/master/README_zh_cn.md)
 
 ![GitHub](https://img.shields.io/github/license/corona-studio/themex?logo=github&style=for-the-badge)
 ![Maintenance](https://img.shields.io/maintenance/yes/2026?logo=diaspora&style=for-the-badge)
