@@ -31,4 +31,22 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AvaloniaXaml Remove="Assets\ControlBaseResources.axaml" />
+    <AvaloniaXaml Remove="Assets\Themes\Dark.axaml" />
+    <AvaloniaXaml Remove="Assets\Themes\Light.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Update="Assets\ControlBaseResources.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\Themes\Dark.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\Themes\Light.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+  </ItemGroup>
+
 </Project>

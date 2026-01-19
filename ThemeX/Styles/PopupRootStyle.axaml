@@ -25,7 +25,7 @@
                 <Border Margin="10" CornerRadius="{TemplateBinding CornerRadius}">
 
                     <!-->Border.BoxShadow>
-						<DynamicResource ResourceKey="{OnPlatform 'LauncherX.DefaultShadow', Windows='DisableShadow'}"/>
+						<DynamicResource ResourceKey="{OnPlatform 'ThemeX.DefaultShadow', Windows='DisableShadow'}"/>
 					</Border.BoxShadow-->
 
                     <VisualLayerManager IsPopup="True">

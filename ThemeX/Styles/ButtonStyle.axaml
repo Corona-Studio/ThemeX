@@ -49,9 +49,9 @@
 
         <Setter Property="UseLayoutRounding" Value="False" />
         <Setter Property="BorderThickness" Value="0.2, 0.2, 0.2, 1" />
-        <Setter Property="Background" Value="{DynamicResource LauncherX.ButtonBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Foreground.Reverse.Primary}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Reverse.Primary}" />
         <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -113,12 +113,12 @@
             <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
         </Style>
         <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.BorderBrush}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.BorderBrush}" />
         </Style>
 
     </ControlTheme>
@@ -134,9 +134,9 @@
                 <ControlTemplate>
                     <animations:RevealEffect
                         CornerRadius="{TemplateBinding CornerRadius}"
-                        HaloBrush="{DynamicResource LauncherX.Transparent.Reverse.Tertiary}"
+                        HaloBrush="{DynamicResource ThemeX.Transparent.Reverse.Tertiary}"
                         MouseEnterAnimation="True"
-                        MouseOnBrush="{DynamicResource LauncherX.Transparent.Reverse.Secondary}">
+                        MouseOnBrush="{DynamicResource ThemeX.Transparent.Reverse.Secondary}">
                         <Border
                             x:Name="EffectBorder"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -216,8 +216,8 @@
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.ButtonBackground.Pressed}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.ButtonBackground.Pressed}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Pressed}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.ButtonBackground.Pressed}" />
         </Style>
 
     </ControlTheme>

@@ -58,7 +58,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="{StaticResource TextBoxIconFontSize}"
-                        Foreground="{DynamicResource LauncherX.Foreground.Secondary}"
+                        Foreground="{DynamicResource ThemeX.Foreground.Secondary}"
                         Symbol="&#xE106;" />
                 </Border>
             </ControlTemplate>
@@ -104,7 +104,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="{StaticResource TextBoxIconFontSize}"
-                        Foreground="{DynamicResource LauncherX.Foreground.Primary}"
+                        Foreground="{DynamicResource ThemeX.Foreground.Primary}"
                         Symbol="&#xE18B;" />
                 </Border>
             </ControlTemplate>
@@ -112,15 +112,15 @@
 
         <Style Selector="^:pointerover">
             <Style Selector="^ /template/ Border#ButtonLayoutGrid">
-                <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Tertiary}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Transparent.Tertiary}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Tertiary}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Tertiary}" />
             </Style>
         </Style>
 
         <Style Selector="^:pressed">
             <Style Selector="^ /template/ Border#ButtonLayoutGrid">
-                <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Secondary}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Transparent.Secondary}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
             </Style>
         </Style>
 
@@ -160,10 +160,10 @@
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type TextBox}" TargetType="TextBox">
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
-        <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Primary}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource LauncherX.Transparent.Reverse.Secondary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Primary}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
         <Setter Property="SelectionBrush"
                 Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
         <Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextOnAccentFillColorSelectedTextBrush}" />
@@ -274,38 +274,38 @@
         <!--  Disabled State  -->
         <Style Selector="^:disabled">
             <Setter Property="Opacity" Value="0.75" />
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
 
             <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Reverse.Secondary}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush.Reverse}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.Reverse}" />
             </Style>
 
             <Style Selector="^ /template/ TextBlock#PART_Watermark, ^ /template/ TextBlock#PART_FloatingWatermark">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
             </Style>
         </Style>
 
         <!--  PointerOver State  -->
         <Style Selector="^:pointerover">
             <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
-                <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Tertiary}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}" />
             </Style>
 
             <Style Selector="^ /template/ TextBlock#PART_Watermark">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
             </Style>
         </Style>
 
         <!--  Focused State  -->
         <Style Selector="^:focus">
             <Style Selector="^ /template/ TextBlock#PART_Watermark">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
             </Style>
 
             <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Primary}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Primary}" />
                 <Setter Property="BorderBrush"
                         Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
                 <Setter Property="BorderThickness" Value="0.6, 0.6, 0.6, 3" />
@@ -313,7 +313,7 @@
         </Style>
 
         <Style Selector="^:error /template/ Border#PART_BorderElement">
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Foreground.Error}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Error}" />
         </Style>
 
         <Style Selector="^[UseFloatingWatermark=true]:not(:empty) /template/ TextBlock#PART_FloatingWatermark">

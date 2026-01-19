@@ -27,7 +27,7 @@
                         <ItemsControl
                             x:Name="Indicators"
                             HorizontalAlignment="Left"
-                            Foreground="{DynamicResource LauncherX.Foreground.Primary}">
+                            Foreground="{DynamicResource ThemeX.Foreground.Primary}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="{x:Type controls:Indicator}">
                                     <WrapPanel ItemSpacing="4">

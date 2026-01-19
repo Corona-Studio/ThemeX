@@ -47,11 +47,11 @@
     <x:Double x:Key="ToolTipContentThemeFontSize">12</x:Double>
 
     <ControlTheme x:Key="{x:Type ToolTip}" TargetType="ToolTip">
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
-        <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Tertiary}">
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}">
             <!--Setter.Value>
                 <DynamicResource
-                    ResourceKey="{OnPlatform 'LauncherX.ContentBackground.Tertiary', Windows='LauncherX.Transparent.Secondary'}" />
+                    ResourceKey="{OnPlatform 'ThemeX.ContentBackground.Tertiary', Windows='ThemeX.Transparent.Secondary'}" />
             </Setter.Value-->
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ToolTipBorderBrush}" />
@@ -69,7 +69,7 @@
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    BoxShadow="{DynamicResource LauncherX.DefaultShadow}"
+                    BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
                     CornerRadius="{TemplateBinding CornerRadius}">
                     <ContentPresenter
                         Name="PART_ContentPresenter"

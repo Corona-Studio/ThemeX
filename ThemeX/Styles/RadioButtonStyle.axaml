@@ -19,8 +19,8 @@
     <ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton">
 
         <Setter Property="Background" Value="{x:Null}" />
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
         <Setter Property="Padding" Value="8,6,0,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -88,7 +88,7 @@
         </Setter>
 
         <Style Selector="^ /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource LauncherX.BorderBrush}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.BorderBrush}" />
             <Setter Property="StrokeThickness" Value="{DynamicResource RadioButtonBorderThemeThickness}" />
 
         </Style>
@@ -137,7 +137,7 @@
             <Setter Property="BorderBrush" Value="{DynamicResource RadioButtonBorderBrushPointerOver}" />
         </Style>
         <Style Selector="^:pointerover /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
             <Setter Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillPointerOver}" />
         </Style>
         <Style Selector="^:pointerover /template/ Ellipse#CheckOuterEllipse">
@@ -157,7 +157,7 @@
 
         <!--  Pressed  -->
         <Style Selector="^:pressed /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource LauncherX.ButtonBackground.Pressed}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.ButtonBackground.Pressed}" />
         </Style>
         <Style Selector="^:pressed /template/ Ellipse#CheckOuterEllipse">
             <Setter Property="Stroke"
@@ -176,8 +176,8 @@
 
         <!--  Disabled  -->
         <Style Selector="^:disabled /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
-            <Setter Property="Fill" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
         </Style>
 
         <!--  Checked  -->

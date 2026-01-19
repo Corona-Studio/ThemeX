@@ -126,7 +126,7 @@
                                 Margin="{DynamicResource MenuFlyoutItemChevronMargin}"
                                 VerticalAlignment="Center"
                                 FontSize="18"
-                                Foreground="{DynamicResource LauncherX.Foreground.Primary}"
+                                Foreground="{DynamicResource ThemeX.Foreground.Primary}"
                                 Symbol="&#xE00F;" />
                         </Grid>
                     </Border>
@@ -142,11 +142,11 @@
                             MinHeight="{DynamicResource MenuFlyoutThemeMinHeight}"
                             MaxWidth="{DynamicResource FlyoutThemeMaxWidth}"
                             HorizontalAlignment="Stretch"
-                            Background="{DynamicResource LauncherX.ContentBackground.Tertiary}"
+                            Background="{DynamicResource ThemeX.ContentBackground.Tertiary}"
                             CornerRadius="{DynamicResource OverlayCornerRadius}">
 
                             <!--Border.Background>
-                                <DynamicResource ResourceKey="{OnPlatform 'LauncherX.ContentBackground.Tertiary', Windows='LauncherX.Transparent.Secondary'}" />
+                                <DynamicResource ResourceKey="{OnPlatform 'ThemeX.ContentBackground.Tertiary', Windows='ThemeX.Transparent.Secondary'}" />
                             </Border.Background-->
 
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -168,63 +168,63 @@
 
         <Style Selector="^:selected">
             <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Secondary}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
             </Style>
             <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
             </Style>
             <Style Selector="^ /template/ TextBlock#PART_InputGestureText">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
             </Style>
             <Style Selector="^ /template/ iconPacks|IconPack#PART_ChevronPath">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
             </Style>
         </Style>
 
         <!--  Listen for PART_LayoutRoot:pointerover, so it will not be triggered when subitem is pressed  -->
         <Style Selector="^:pressed /template/ Border#PART_LayoutRoot:pointerover">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Primary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Primary}" />
             <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
             </Style>
             <Style Selector="^ TextBlock#PART_InputGestureText">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
             </Style>
             <Style Selector="^ iconPacks|IconPack#PART_ChevronPath">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
             </Style>
         </Style>
 
 
         <Style Selector="^:disabled">
             <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Transparent.Reverse.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
             </Style>
             <Style Selector="^ /template/ TextBlock#PART_InputGestureText">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Transparent.Reverse.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
             </Style>
             <Style Selector="^ /template/ iconPacks|IconPack#PART_ChevronPath">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Transparent.Reverse.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
             </Style>
             <Style Selector="^ /template/ ContentPresenter#PART_IconContentPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource LauncherX.Transparent.Reverse.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
             </Style>
         </Style>
 
         <Style Selector="^ /template/ ContentPresenter#PART_IconContentPresenter">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^ /template/ iconPacks|IconPack#PART_ChevronPath">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:open /template/ iconPacks|IconPack#PART_ChevronPath">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
         </Style>
 
         <Style Selector="^:empty /template/ iconPacks|IconPack#PART_ChevronPath">

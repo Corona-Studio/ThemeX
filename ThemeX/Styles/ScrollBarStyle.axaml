@@ -69,14 +69,14 @@
     <x:Double x:Key="ScrollBarButtonArrowIconFontSize">8</x:Double>
 
     <ControlTheme x:Key="ScrollBarThumb" TargetType="Thumb">
-        <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Primary}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Primary}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ScrollBarThumbBorderBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle
                         Name="ThumbVisual"
-                        Fill="{DynamicResource LauncherX.Transparent.Reverse.Primary}"
+                        Fill="{DynamicResource ThemeX.Transparent.Reverse.Primary}"
                         RadiusX="4"
                         RadiusY="4"
                         Stroke="{TemplateBinding BorderBrush}"
@@ -127,7 +127,7 @@
                         Padding="0"
                         HorizontalAlignment="Center"
                         FontSize="{DynamicResource ScrollBarButtonArrowIconFontSize}"
-                        Foreground="{DynamicResource LauncherX.Foreground.Primary}"
+                        Foreground="{DynamicResource ThemeX.Foreground.Primary}"
                         RenderTransform="none"
                         RenderTransformOrigin="50%,50%"
                         Symbol="{TemplateBinding Content}">

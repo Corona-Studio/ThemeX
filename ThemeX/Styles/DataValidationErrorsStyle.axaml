@@ -52,7 +52,7 @@
             <DataTemplate>
                 <ItemsControl
                     x:DataType="DataValidationErrors"
-                    Foreground="{DynamicResource LauncherX.Foreground.Error}"
+                    Foreground="{DynamicResource ThemeX.Foreground.Error}"
                     ItemsSource="{Binding}">
                     <ItemsControl.Styles>
                         <Style Selector="TextBlock">

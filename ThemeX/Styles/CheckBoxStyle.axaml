@@ -31,7 +31,7 @@
     <ControlTheme x:Key="{x:Type CheckBox}" TargetType="CheckBox">
 
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         <Setter Property="Padding" Value="{StaticResource CheckBoxPadding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -90,7 +90,7 @@
 
         <!--  Default / Unchecked Normal  -->
         <Style Selector="^ /template/ Border#NormalRectangle">
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
             <Setter Property="BorderThickness" Value="{StaticResource CheckBoxBorderThickness}" />
         </Style>
 
@@ -101,17 +101,17 @@
         </Style>
 
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <!--  Unchecked pointerover  -->
         <Style Selector="^:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
         <Style Selector="^:pointerover /template/ Border#NormalRectangle">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Secondary}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Secondary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
         </Style>
 
         <Style Selector="^:pointerover /template/ iconPacks|IconPack#CheckGlyph">
@@ -120,8 +120,8 @@
 
         <!--  Unchecked pressed  -->
         <Style Selector="^:pressed /template/ Border#NormalRectangle">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Tertiary}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush.Pressed}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.Pressed}" />
         </Style>
 
         <Style Selector="^:pressed /template/ iconPacks|IconPack#CheckGlyph">
@@ -130,17 +130,17 @@
 
         <!--  Unchecked disabled  -->
         <Style Selector="^:disabled /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#NormalRectangle">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Reverse.Primary}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Foreground.Reverse.Primary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Reverse.Primary}" />
         </Style>
 
         <!--  Checked Normal  -->
         <Style Selector="^:checked /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:checked /template/ Border#NormalRectangle">
@@ -157,7 +157,7 @@
 
         <!--  Checked pointerover  -->
         <Style Selector="^:checked:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:checked:pointerover /template/ Border#NormalRectangle">
@@ -174,7 +174,7 @@
 
         <!--  Checked pressed  -->
         <Style Selector="^:checked:pressed /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:checked:pressed /template/ Border#NormalRectangle">
@@ -190,16 +190,16 @@
 
         <!--  Checked disabled  -->
         <Style Selector="^:checked:disabled /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:checked:disabled /template/ Border#NormalRectangle">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Reverse.Primary}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Transparent.Reverse.Primary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
         </Style>
 
         <Style Selector="^:checked:disabled /template/ iconPacks|IconPack#CheckGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
             <Setter Property="Opacity" Value="1" />
         </Style>
 

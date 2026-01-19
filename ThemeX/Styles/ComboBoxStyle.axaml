@@ -59,9 +59,9 @@
 
         <Setter Property="Padding" Value="{DynamicResource ComboBoxPadding}" />
         <Setter Property="MaxDropDownHeight" Value="504" />
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThemeThickness}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -70,7 +70,7 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="PlaceholderForeground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+        <Setter Property="PlaceholderForeground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
                 <StackPanel />
@@ -171,8 +171,8 @@
                                 x:Name="PopupBorder"
                                 Padding="{DynamicResource ComboBoxDropdownBorderPadding}"
                                 HorizontalAlignment="Stretch"
-                                Background="{DynamicResource LauncherX.ContentBackground.Secondary}"
-                                BoxShadow="{DynamicResource LauncherX.DefaultShadow}"
+                                Background="{DynamicResource ThemeX.ContentBackground.Secondary}"
+                                BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
                                 CornerRadius="{DynamicResource OverlayCornerRadius}">
                                 <scroll:SmoothScrollViewer
                                     HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -199,11 +199,11 @@
         </Style>
 
         <Style Selector="^ /template/ ContentPresenter#HeaderContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^ /template/ iconPacks|IconPack#DropDownGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
             <Setter Property="Transitions">
                 <Transitions>
                     <TransformOperationsTransition Property="RenderTransform" Duration="00:00:00.167" />
@@ -234,16 +234,16 @@
 
         <!--  PointerOver  -->
         <Style Selector="^:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:pointerover /template/ TextBlock#PlaceholderTextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:pointerover /template/ Border#Background">
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
         </Style>
 
         <!--  Pressed  -->
@@ -256,7 +256,7 @@
         </Style>
 
         <Style Selector="^:pressed /template/ Border#Background">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Reverse.Primary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
         </Style>
 
         <!--  Disabled  -->
@@ -265,20 +265,20 @@
         </Style>
 
         <Style Selector="^:disabled /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#Background">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
         </Style>
 
         <Style Selector="^:disabled /template/ ContentPresenter#HeaderContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ iconPacks|IconPack#DropDownGlyph">
             <Setter Property="Symbol" Value="&#xE9AE;" />
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <!--  Focused  -->
@@ -287,7 +287,7 @@
         </Style>
 
         <Style Selector="^:focus-visible /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:focus-visible /template/ TextBlock#PlaceholderTextBlock">
@@ -295,7 +295,7 @@
         </Style>
 
         <Style Selector="^:focus-visible /template/ iconPacks|IconPack#DropDownGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:focus /template/ Border#Background">
@@ -306,7 +306,7 @@
 
         <!--  Error State  -->
         <Style Selector="^:error /template/ Border#Background">
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Foreground.Error}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Error}" />
         </Style>
 
     </ControlTheme>
@@ -364,12 +364,12 @@
 
         <!--  PointerOver  -->
         <Style Selector="^:pointerover /template/ Border#LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Secondary}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
         </Style>
 
         <Style Selector="^:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
         <!--  Pressed  -->
@@ -381,17 +381,17 @@
         </Style>
 
         <Style Selector="^:pressed /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
         </Style>
 
         <!--  Disabled  -->
         <Style Selector="^:disabled /template/ Border#LayoutRoot">
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Transparent.Reverse.Tertiary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Reverse.Tertiary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
         <!--  Selected  -->
@@ -452,7 +452,7 @@
         </Style>
 
         <Style Selector="^:selected:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Secondary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
 

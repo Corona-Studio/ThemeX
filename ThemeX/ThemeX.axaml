@@ -7,10 +7,29 @@
             <ResourceDictionary.MergedDictionaries>
                 <themeX:ThemeSettings />
                 <themeX:ColorPresets />
+                <MergeResourceInclude Source="/Assets/ControlBaseResources.axaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceInclude Source="/Assets/Themes/Light.axaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceInclude Source="/Assets/Themes/Light.axaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceInclude Source="/Assets/Themes/Dark.axaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
 
-    <StyleInclude Source="avares://ThemeX/Styles/DataGridStyle.axaml" />
-    <StyleInclude Source="avares://ThemeX/Styles/ThemeXControls.axaml" />
+    <StyleInclude Source="/Styles/DataGridStyle.axaml" />
+    <StyleInclude Source="/Assets/ThemeXControls.axaml" />
 </Styles>

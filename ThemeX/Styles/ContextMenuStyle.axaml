@@ -42,10 +42,10 @@
 
         <!-->Setter Property="Background">
             <Setter.Value>
-                <DynamicResource ResourceKey="{OnPlatform 'LauncherX.ContentBackground.Tertiary', Windows='LauncherX.Transparent.Secondary'}" />
+                <DynamicResource ResourceKey="{OnPlatform 'ThemeX.ContentBackground.Tertiary', Windows='ThemeX.Transparent.Secondary'}" />
             </Setter.Value>
         </-->
-        <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Tertiary}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}" />
         <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
         <Setter Property="MaxWidth" Value="{DynamicResource FlyoutThemeMaxWidth}" />
         <Setter Property="MinHeight" Value="{DynamicResource MenuFlyoutThemeMinHeight}" />
@@ -65,7 +65,7 @@
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    BoxShadow="{DynamicResource LauncherX.DefaultShadow}"
+                    BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
                     CornerRadius="{TemplateBinding CornerRadius}">
                     <scroll:SmoothScrollViewer
                         UseSmoothScrolling="{DynamicResource {x:Static themeX:ThemeSettings.FluentScrollKey}}">

@@ -14,7 +14,7 @@
                         Activated="{TemplateBinding IsSelected}"
                         ActiveBrush="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}"
                         CornerRadius="{DynamicResource ControlCornerRadius}"
-                        MouseOnBrush="{DynamicResource LauncherX.BorderBrush.Pressed}">
+                        MouseOnBrush="{DynamicResource ThemeX.BorderBrush.Pressed}">
                         <ContentPresenter Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}" />
                     </animations:ActivatableToggle>
@@ -40,7 +40,7 @@
                     <Border
                         x:Name="ShadowBorder"
                         Margin="6,8"
-                        Background="{DynamicResource LauncherX.ContentBackground.Primary}"
+                        Background="{DynamicResource ThemeX.ContentBackground.Primary}"
                         CornerRadius="{DynamicResource ControlCornerRadius}">
                         <ContentPresenter Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}" />
@@ -65,11 +65,11 @@
         </Style>
 
         <Style Selector="^:pointerover /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="{DynamicResource LauncherX.DefaultShadow}" />
+            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
         </Style>
 
         <Style Selector="^:selected /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="{DynamicResource LauncherX.DefaultShadow}" />
+            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
         </Style>
 
     </ControlTheme>
@@ -81,7 +81,7 @@
                     <Border
                         x:Name="ShadowBorder"
                         Margin="6,8"
-                        Background="{DynamicResource LauncherX.ContentBackground.Primary}"
+                        Background="{DynamicResource ThemeX.ContentBackground.Primary}"
                         CornerRadius="{DynamicResource ControlCornerRadius}">
                         <Panel>
                             <ContentPresenter Content="{TemplateBinding Content}"
@@ -93,7 +93,7 @@
                                 Margin="0,0,10,10"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
-                                Foreground="{DynamicResource LauncherX.Foreground.Primary}"
+                                Foreground="{DynamicResource ThemeX.Foreground.Primary}"
                                 Symbol="&#xE718;" />
                         </Panel>
                     </Border>
@@ -121,11 +121,11 @@
         </Style>
 
         <Style Selector="^:pointerover /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="{DynamicResource LauncherX.DefaultShadow}" />
+            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
         </Style>
 
         <Style Selector="^:selected /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="{DynamicResource LauncherX.DefaultShadow}" />
+            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
         </Style>
 
         <Style Selector="^:selected /template/ iconPacks|IconPack#PinIcon">
@@ -152,7 +152,7 @@
                                 Margin="0,0,10,10"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
-                                Foreground="{DynamicResource LauncherX.Foreground.Primary}"
+                                Foreground="{DynamicResource ThemeX.Foreground.Primary}"
                                 Symbol="&#xE718;" />
                         </Panel>
                     </Border>
@@ -181,7 +181,7 @@
                     <Border
                         x:Name="ShadowBorder"
                         Margin="5"
-                        Background="{DynamicResource LauncherX.ContentBackground.Primary}"
+                        Background="{DynamicResource ThemeX.ContentBackground.Primary}"
                         CornerRadius="{DynamicResource ControlCornerRadius}">
                         <ContentPresenter Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}" />

@@ -56,8 +56,8 @@
         TargetType="ToggleButton">
 
         <Setter Property="ZIndex" Value="999" />
-        <Setter Property="Background" Value="{DynamicResource LauncherX.ContentBackground.Secondary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.ContentBackground.Secondary}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Secondary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.ContentBackground.Secondary}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}" />
         <Setter Property="Padding" Value="{DynamicResource ExpanderHeaderPadding}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -120,7 +120,7 @@
         </Style>
 
         <Style Selector="^ /template/ iconPacks|IconPack#ExpandCollapseChevron">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
             <Setter Property="RenderTransform" Value="rotate(0deg)" />
             <Setter Property="Transitions">
                 <Transitions>
@@ -143,7 +143,7 @@
         </Style>
 
         <Style Selector="^:pressed /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:pressed /template/ Border#ExpandCollapseChevronBorder">
@@ -152,7 +152,7 @@
         </Style>
 
         <Style Selector="^:pressed /template/ iconPacks|IconPack#ExpandCollapseChevron">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#Root">
@@ -169,7 +169,7 @@
         </Style>
 
         <Style Selector="^:disabled /template/ iconPacks|IconPack#ExpandCollapseChevron">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
         </Style>
 
         <Style Selector="^:checked /template/ Border#Root">
@@ -186,7 +186,7 @@
         </Style>
 
         <Style Selector="^:checked /template/ iconPacks|IconPack#ExpandCollapseChevron">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
             <Setter Property="RenderTransform" Value="rotate(180deg)" />
         </Style>
 
@@ -213,7 +213,7 @@
         </Style>
 
         <Style Selector="^:checked:pressed /template/ iconPacks|IconPack#ExpandCollapseChevron">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
             <Setter Property="RenderTransform" Value="rotate(180deg)" />
         </Style>
 
@@ -231,7 +231,7 @@
         </Style>
 
         <Style Selector="^:checked:disabled /template/ iconPacks|IconPack#ExpandCollapseChevron">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
             <Setter Property="RenderTransform" Value="rotate(180deg)" />
         </Style>
 
@@ -270,7 +270,7 @@
                     Padding="{TemplateBinding Padding}"
                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Background="{DynamicResource LauncherX.ContentBackground}"
+                    Background="{DynamicResource ThemeX.ContentBackground}"
                     Content="{TemplateBinding Content}"
                     ContentTemplate="{TemplateBinding ContentTemplate}"
                     IsVisible="{TemplateBinding IsExpanded}" />
@@ -312,7 +312,7 @@
                     Padding="{TemplateBinding Padding}"
                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Background="{DynamicResource LauncherX.ContentBackground}"
+                    Background="{DynamicResource ThemeX.ContentBackground}"
                     Content="{TemplateBinding Content}"
                     ContentTemplate="{TemplateBinding ContentTemplate}"
                     IsVisible="{TemplateBinding IsExpanded}" />
@@ -356,7 +356,7 @@
                     Padding="{TemplateBinding Padding}"
                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Background="{DynamicResource LauncherX.ContentBackground}"
+                    Background="{DynamicResource ThemeX.ContentBackground}"
                     Content="{TemplateBinding Content}"
                     ContentTemplate="{TemplateBinding ContentTemplate}"
                     IsVisible="{TemplateBinding IsExpanded}" />
@@ -396,7 +396,7 @@
                     Padding="{TemplateBinding Padding}"
                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Background="{DynamicResource LauncherX.ContentBackground}"
+                    Background="{DynamicResource ThemeX.ContentBackground}"
                     Content="{TemplateBinding Content}"
                     ContentTemplate="{TemplateBinding ContentTemplate}"
                     IsVisible="{TemplateBinding IsExpanded}" />
@@ -412,7 +412,7 @@
         <Setter Property="Background" Value="{DynamicResource ExpanderContentBackground}" />
         <Setter Property="MinWidth" Value="{DynamicResource FlyoutThemeMinWidth}" />
         <Setter Property="MinHeight" Value="{DynamicResource ExpanderMinHeight}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.ContentBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.ContentBackground}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />

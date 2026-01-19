@@ -16,9 +16,9 @@
 
     <ControlTheme x:Key="{x:Type ToggleButton}" TargetType="ToggleButton">
 
-        <Setter Property="Background" Value="{DynamicResource LauncherX.ButtonBackground.MouseOver}" />
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.MouseOver}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -64,25 +64,25 @@
         </Setter>
 
         <Style Selector="^:pointerover /template/ Border#BorderElement">
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
         </Style>
         <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.ButtonBackground.Primary.Pressed}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Primary.Pressed}" />
         </Style>
 
         <Style Selector="^:pressed /template/ Border#BorderElement">
             <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushPressed}" />
         </Style>
         <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.ButtonBackground.Pressed}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Pressed}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#BorderElement">
             <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushDisabled}" />
         </Style>
         <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LauncherX.BorderBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.BorderBrush}" />
         </Style>
 
 

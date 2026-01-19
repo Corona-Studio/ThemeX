@@ -61,7 +61,7 @@
         </Style>
 
         <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
         </Style>
 
         <Style Selector="^:pointerover">

@@ -23,7 +23,7 @@
 
         <Setter Property="OffContent" Value="{DynamicResource Disable}" />
         <Setter Property="OnContent" Value="{DynamicResource Enable}" />
-        <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -171,7 +171,7 @@
 
         <Style Selector="^ /template/ Border#OuterBorder">
             <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOff}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.BorderBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
             <Setter Property="Transitions">
                 <Transitions>
                     <BrushTransition Property="BorderBrush" Duration="00:00:00.167" />
@@ -214,7 +214,7 @@
         </Style>
 
         <Style Selector="^ /template/ Ellipse#SwitchKnobOff">
-            <Setter Property="Fill" Value="{DynamicResource LauncherX.Foreground.Primary}" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Foreground.Primary}" />
             <Setter Property="Width" Value="12" />
             <Setter Property="Height" Value="12" />
             <Setter Property="Transitions">
@@ -245,7 +245,7 @@
         <!--  PointerOverState  -->
         <Style Selector="^:pointerover /template/ Border#OuterBorder">
             <Setter Property="BorderBrush" Value="{DynamicResource ToggleSwitchStrokeOffPointerOver}" />
-            <Setter Property="Background" Value="{DynamicResource LauncherX.BorderBrush.MouseOver}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
         </Style>
 
         <Style Selector="^:pointerover /template/ Ellipse#SwitchKnobOff">
@@ -294,25 +294,25 @@
 
         <!--  DisabledState  -->
         <Style Selector="^:disabled">
-            <Setter Property="Foreground" Value="{DynamicResource LauncherX.Foreground.Tertiary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#OuterBorder">
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Transparent.Reverse.Primary}" />
-            <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Secondary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Ellipse#SwitchKnobOff">
-            <Setter Property="Fill" Value="{DynamicResource LauncherX.ButtonBackground.MouseOver}" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.ButtonBackground.MouseOver}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Ellipse#SwitchKnobOn">
-            <Setter Property="Fill" Value="{DynamicResource LauncherX.ButtonBackground.MouseOver}" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.ButtonBackground.MouseOver}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#SwitchKnobBounds">
-            <Setter Property="Background" Value="{DynamicResource LauncherX.Transparent.Reverse.Primary}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource LauncherX.Transparent.Secondary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
         </Style>
 
         <!--  CheckedState  -->
