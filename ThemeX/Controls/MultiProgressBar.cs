@@ -6,8 +6,8 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using Avalonia.Media.Immutable;
 using CommunityToolkit.Diagnostics;
-using LauncherX.SourceGenerator.Shared;
 using ThemeX.Helpers;
+using ThemeX.SourceGenerator.Shared;
 
 namespace ThemeX.Controls;
 

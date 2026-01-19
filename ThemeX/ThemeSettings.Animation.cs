@@ -14,7 +14,7 @@ public partial class ThemeSettings
     private bool _enableAnimation;
 
     public static TimeSpan AnimationDuration { get; private set; }
-    public static Easing AnimationEasing { get; private set; }
+    public static Easing AnimationEasing { get; private set; } = null!;
 
     public void SetEnableAnimation(bool value)
     {

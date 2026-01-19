@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\LauncherX.SourceGenerator.Shared\LauncherX.SourceGenerator.Shared.csproj" />
-    <ProjectReference Include="..\..\LauncherX.StyledProp.SourceGenerator\LauncherX.StyledProp.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\ThemeX.SourceGenerator.Shared\ThemeX.SourceGenerator.Shared.csproj" />
+    <ProjectReference Include="..\ThemeX.StyledProp.SourceGenerator\ThemeX.StyledProp.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>

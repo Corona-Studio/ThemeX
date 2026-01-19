@@ -1,5 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
-using LauncherX.SourceGenerator.Shared;
+using ThemeX.SourceGenerator.Shared;
 
 namespace ThemeX.Controls.IconPacks;
 

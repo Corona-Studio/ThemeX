@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
-using LauncherX.SourceGenerator.Shared;
+using ThemeX.SourceGenerator.Shared;
 
 namespace ThemeX.Controls;
 

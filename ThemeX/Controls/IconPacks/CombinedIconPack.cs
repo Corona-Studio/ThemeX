@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
-using LauncherX.SourceGenerator.Shared;
+using ThemeX.SourceGenerator.Shared;
 
 namespace ThemeX.Controls.IconPacks;
 

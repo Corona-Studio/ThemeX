@@ -1,5 +1,5 @@
 ﻿using Avalonia.Controls;
-using LauncherX.SourceGenerator.Shared;
+using ThemeX.SourceGenerator.Shared;
 
 namespace ThemeX.Controls.Scroll;
 
