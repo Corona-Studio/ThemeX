@@ -10,7 +10,7 @@ namespace ThemeX.Controls.Effects;
 
 public sealed class Ripple : Ellipse
 {
-    public static readonly TimeSpan Duration = new(0, 0, 0, 0, 500);
+    public static readonly TimeSpan Duration = new(0, 0, 0, 0, 450);
     private readonly double _endX;
     private readonly double _endY;
 

@@ -11,8 +11,8 @@ namespace ThemeX.Controls.Animations;
 
 public class AnimationLayer : ContentControl
 {
-    [Category("Animation")] public static readonly StyledProperty<Brush> MouseOnBrushProperty =
-        AvaloniaProperty.Register<AnimationLayer, Brush>(
+    [Category("Animation")] public static readonly StyledProperty<ISolidColorBrush> MouseOnBrushProperty =
+        AvaloniaProperty.Register<AnimationLayer, ISolidColorBrush>(
             nameof(MouseOnBrush), new SolidColorBrush(Color.FromArgb(90, 0, 0, 0)));
 
     public static readonly StyledProperty<bool> MouseEnterAnimationProperty =
@@ -24,7 +24,7 @@ public class AnimationLayer : ContentControl
     protected Rectangle? ActiveRect;
     protected Canvas? PART_RippleCanvasRoot;
 
-    public Brush MouseOnBrush
+    public ISolidColorBrush MouseOnBrush
     {
         get => GetValue(MouseOnBrushProperty);
         set => SetValue(MouseOnBrushProperty, value);

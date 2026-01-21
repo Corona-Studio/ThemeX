@@ -12,8 +12,9 @@ namespace ThemeX.Controls.Animations;
 
 public sealed class RevealEffect : AnimationLayer
 {
-    public static readonly StyledProperty<IBrush> HaloBrushProperty = AvaloniaProperty.Register<RevealEffect, IBrush>(
-        nameof(HaloBrush));
+    public static readonly StyledProperty<ISolidColorBrush> HaloBrushProperty =
+        AvaloniaProperty.Register<RevealEffect, ISolidColorBrush>(
+            nameof(HaloBrush));
 
     private static readonly IBrush MaskBrush = new RadialGradientBrush
     {
@@ -32,7 +33,7 @@ public sealed class RevealEffect : AnimationLayer
         MouseEnterAnimation = false;
     }
 
-    public IBrush HaloBrush
+    public ISolidColorBrush HaloBrush
     {
         get => GetValue(HaloBrushProperty);
         set => SetValue(HaloBrushProperty, value);

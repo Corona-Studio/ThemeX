@@ -44,6 +44,7 @@
     </Design.PreviewWith>
 
     <Thickness x:Key="ButtonPadding">11, 6</Thickness>
+    <SolidColorBrush x:Key="HaloColorBrush">#62000000</SolidColorBrush>
 
     <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
 
@@ -68,13 +69,9 @@
                     <animations:RevealEffect
                         Background="{TemplateBinding Background}"
                         CornerRadius="{TemplateBinding CornerRadius}"
-                        HaloBrush="{TemplateBinding Background,
-                                                    Converter={StaticResource ColorToDarkerColorConverter},
-                                                    ConverterParameter=3}"
+                        HaloBrush="{StaticResource HaloColorBrush}"
                         MouseEnterAnimation="True"
-                        MouseOnBrush="{TemplateBinding Background,
-                                                       Converter={StaticResource ColorToDarkerColorConverter},
-                                                       ConverterParameter=2}">
+                        MouseOnBrush="{StaticResource HaloColorBrush}">
                         <Border
                             x:Name="EffectBorder"
                             BorderBrush="{TemplateBinding BorderBrush}"

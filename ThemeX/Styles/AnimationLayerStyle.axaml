@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="clr-namespace:ThemeX.Controls.Animations;assembly=ThemeX"
     xmlns:cc="clr-namespace:ThemeX.Controls.Effects;assembly=ThemeX"
-    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX">
+    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX"
+    xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls">
     <Design.PreviewWith>
         <Border>
             <animations:AnimationLayer Width="180" Height="180" />
@@ -11,6 +12,10 @@
     </Design.PreviewWith>
 
     <ControlTheme x:Key="{x:Type animations:AnimationLayer}" TargetType="animations:AnimationLayer">
+
+        <ControlTheme.Resources>
+            <converters:CornerRadiusToDoubleConverter x:Key="TopLeftCornerConverter" Corner="TopLeft" />
+        </ControlTheme.Resources>
 
         <Setter Property="Template">
             <ControlTemplate>
@@ -24,9 +29,9 @@
                         Fill="{TemplateBinding MouseOnBrush}"
                         Opacity="0"
                         RadiusX="{TemplateBinding CornerRadius,
-                                                  Converter={StaticResource CornerRadiusToDoubleConverter}}"
+                                                  Converter={StaticResource TopLeftCornerConverter}}"
                         RadiusY="{TemplateBinding CornerRadius,
-                                                  Converter={StaticResource CornerRadiusToDoubleConverter}}">
+                                                  Converter={StaticResource TopLeftCornerConverter}}">
                         <Rectangle.Transitions>
                             <Transitions>
                                 <DoubleTransition
