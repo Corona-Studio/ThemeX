@@ -1,5 +1,8 @@
 # ThemeX
 
+![0124](https://github.com/user-attachments/assets/f32cc9e2-6969-45b1-9bf7-f82ec3d7509d)
+
+
 ## [简体中文](https://github.com/Corona-Studio/ThemeX/blob/master/README_zh_cn.md)
 
 ![GitHub](https://img.shields.io/github/license/corona-studio/themex?logo=github&style=for-the-badge)
