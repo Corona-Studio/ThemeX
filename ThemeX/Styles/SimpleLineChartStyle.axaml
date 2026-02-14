@@ -2,14 +2,17 @@
                     xmlns:controls="clr-namespace:ThemeX.Controls"
                     xmlns:themeX="clr-namespace:ThemeX">
     
-    <LinearGradientBrush x:Key="ThemeX.SimpleLineGraph.Brush" StartPoint="0.5,0" EndPoint="0.5,1">
-        <GradientStop
-            Color="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentColorKey}}"
-            Offset="0" />
-        <GradientStop Color="Transparent" Offset="1" />
-    </LinearGradientBrush>
-
     <ControlTheme x:Key="{x:Type controls:SimpleLineChart}" TargetType="controls:SimpleLineChart">
+        
+        <ControlTheme.Resources>
+            <LinearGradientBrush x:Key="ThemeX.SimpleLineGraph.Brush" StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop
+                    Color="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentColorKey}}"
+                    Offset="0" />
+                <GradientStop Color="Transparent" Offset="1" />
+            </LinearGradientBrush>
+        </ControlTheme.Resources>
+        
         <Setter Property="DataColumnFill" Value="{StaticResource ThemeX.SimpleLineGraph.Brush}"/>
         <Setter Property="Template">
             <Setter.Value>

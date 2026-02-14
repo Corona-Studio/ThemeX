@@ -17,6 +17,13 @@ public sealed partial class ThemeSettings : ResourceProvider
         SetAnimationDuration(TimeSpan.FromMilliseconds(450));
         SetAnimationEasing(new SplineEasing(0.1, 0.9, 0.2));
         SetEnableAnimation(true);
+
+        SetFontSizeWindowTitle(17);
+        SetFontSizeNormalText(14);
+        SetFontSizeNormalTextSecondary(10);
+        SetFontSizeTabItem(16);
+        SetFontSizeTitle(18);
+        SetFontSizeTitleSecondary(14);
     }
 
     public override bool HasResources => true;
