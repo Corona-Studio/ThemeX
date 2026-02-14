@@ -7,12 +7,13 @@ using Avalonia.Media;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Avalonia.Controls.Metadata;
+using Avalonia.Interactivity;
 using ThemeX.Helpers;
 
 namespace ThemeX.Controls;
 
 [TemplatePart("MainGrid", typeof(Grid), IsRequired = true)]
-public sealed class SimpleLineChart : UserControl
+public sealed class SimpleLineChart : TemplatedControl
 {
     public static readonly StyledProperty<ObservableCollection<double>?> DataSourceProperty =
         AvaloniaProperty.Register<SimpleLineChart, ObservableCollection<double>?>(
@@ -35,13 +36,17 @@ public sealed class SimpleLineChart : UserControl
     private Grid? _mainGrid;
     private int _currentColumnCount;
 
-    protected override Type StyleKeyOverride => typeof(SimpleLineChart);
-
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
 
         _mainGrid = e.NameScope.Find<Grid>("MainGrid")!;
+    }
+
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        base.OnLoaded(e);
+        OnDataSourceChanged();
     }
 
     public ObservableCollection<double>? DataSource
@@ -200,19 +205,14 @@ public sealed class SimpleLineChart : UserControl
             this,
             typeof(IBrush),
             o => ((SimpleLineChart)o).DataColumnFill);
-        /*
-        rect.Bind(Shape.FillProperty, new Binding(nameof(DataColumnFill))
-        {
-            Source = this,
-            Mode = BindingMode.OneWay
-        });
-        */
 
         return rect;
     }
 
     private void OnDataSourceChanged()
     {
+        if (!IsLoaded) return;
+        
         using (_locker.EnterScope())
         {
             _mainGrid!.Children.Clear();

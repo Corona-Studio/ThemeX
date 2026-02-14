@@ -1,11 +1,22 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:ThemeX.Controls">
+                    xmlns:controls="clr-namespace:ThemeX.Controls"
+                    xmlns:themeX="clr-namespace:ThemeX">
+    
+    <LinearGradientBrush x:Key="ThemeX.SimpleLineGraph.Brush" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop
+            Color="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentColorKey}}"
+            Offset="0" />
+        <GradientStop Color="Transparent" Offset="1" />
+    </LinearGradientBrush>
 
-    <ControlTheme x:Key="{x:Type controls:SimpleLineChart}" TargetType="Separator">
+    <ControlTheme x:Key="{x:Type controls:SimpleLineChart}" TargetType="controls:SimpleLineChart">
+        <Setter Property="DataColumnFill" Value="{StaticResource ThemeX.SimpleLineGraph.Brush}"/>
         <Setter Property="Template">
-            <ControlTemplate>
-                <Grid x:Name="MainGrid" />
-            </ControlTemplate>
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid x:Name="MainGrid" />
+                </ControlTemplate>
+            </Setter.Value>
         </Setter>
     </ControlTheme>
 
