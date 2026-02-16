@@ -1,4 +1,5 @@
 ﻿using System.Collections.Frozen;
+using System.Collections.Immutable;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Immutable;
@@ -62,6 +63,8 @@ public sealed class ColorPresets : ResourceProvider
             { "ThemeX.ColorPalette47", new ImmutableSolidColorBrush(Color.Parse("#847545")) },
             { "ThemeX.ColorPalette48", new ImmutableSolidColorBrush(Color.Parse("#7e735f")) }
         }.ToFrozenDictionary();
+    
+    public static ImmutableArray<ImmutableSolidColorBrush> ColorValues => Colors.Values;
 
     public override bool HasResources => true;
 
