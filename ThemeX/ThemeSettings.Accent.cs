@@ -40,7 +40,7 @@ public partial class ThemeSettings
     public const string AcrylicTintKey = "ThemeX.Acrylic.TintColor";
 
     public static readonly Color Light = Color.Parse("#fafafa");
-    public static readonly Color Dark = Color.Parse("#000000");
+    public static readonly Color Dark = Color.Parse("#212121");
 
     public static readonly ImmutableSolidColorBrush LightBrush = new(Light);
     public static readonly ImmutableSolidColorBrush DarkBrush = new(Dark);
