@@ -63,8 +63,13 @@ public sealed class ColorPresets : ResourceProvider
             { "ThemeX.ColorPalette47", new ImmutableSolidColorBrush(Color.Parse("#847545")) },
             { "ThemeX.ColorPalette48", new ImmutableSolidColorBrush(Color.Parse("#7e735f")) }
         }.ToFrozenDictionary();
-    
-    public static ImmutableArray<ImmutableSolidColorBrush> ColorValues => Colors.Values;
+
+    public static ImmutableArray<ImmutableSolidColorBrush> ColorValues { get; } = [
+        ..Enumerable
+            .Range(1, 48)
+            .Select(r => $"ThemeX.ColorPalette{r}")
+            .Select(k => Colors[k])
+    ];
 
     public override bool HasResources => true;
 
