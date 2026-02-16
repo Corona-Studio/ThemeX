@@ -207,7 +207,7 @@ namespace ThemeX.StyledProp.SourceGenerator
 
                 var defaultValueBinding = isLangKey switch
                 {
-                    true => $"global::LauncherX.Avalonia.UI.Theme.LangSwitcher.GetOneTimeStr(\"{rawDefaultValue}\")",
+                    true => $"global::LauncherX.UI.Theme.LangSwitcher.GetOneTimeStr(\"{rawDefaultValue}\")",
                     false => defaultValueFullName,
                     _ => defaultValueFullName
                 };
