@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
@@ -6,7 +7,6 @@ using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
 using ThemeX.Controls.Effects;
-using ThemeX.Helpers;
 
 namespace ThemeX.Controls.Animations;
 
@@ -63,32 +63,15 @@ public sealed class ActivatableToggle : AnimationLayer
         if (Activated)
         {
             ActiveRect.ClearValue(Shape.FillProperty);
-
-            var path = ActiveBrush == null
-                ? nameof(MouseOnBrush)
-                : nameof(ActiveBrush);
-
-            ActiveRect.CompiledBind(
-                Shape.FillProperty,
-                path,
-                this,
-                typeof(IBrush),
-                o =>
-                {
-                    var that = (ActivatableToggle)o;
-
-                    return that.ActiveBrush == null ? MouseOnBrush : ActiveBrush;
-                });
+            ActiveRect.Bind(Shape.FillProperty,
+                ActiveBrush == null
+                    ? this.GetObservable(MouseOnBrushProperty)
+                    : this.GetObservable(ActiveBrushProperty).Select(v => v ?? MouseOnBrush));
         }
         else
         {
             ActiveRect.ClearValue(Shape.FillProperty);
-            ActiveRect.CompiledBind(
-                Shape.FillProperty,
-                nameof(MouseOnBrush),
-                this,
-                typeof(Brush),
-                o => ((ActivatableToggle)o).MouseOnBrush);
+            ActiveRect.Bind(Shape.FillProperty, this.GetObservable(MouseOnBrushProperty));
         }
 
         if (Activated)

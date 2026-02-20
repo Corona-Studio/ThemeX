@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Avalonia.Controls.Metadata;
 using Avalonia.Interactivity;
-using ThemeX.Helpers;
 
 namespace ThemeX.Controls;
 
@@ -199,12 +198,7 @@ public sealed class SimpleLineChart : TemplatedControl
             Height = value / Maximum * Bounds.Height
         };
 
-        rect.CompiledBind(
-            Shape.FillProperty,
-            nameof(DataColumnFill),
-            this,
-            typeof(IBrush),
-            o => ((SimpleLineChart)o).DataColumnFill);
+        rect.Bind(Shape.FillProperty, this.GetObservable(DataColumnFillProperty));
 
         return rect;
     }
@@ -212,7 +206,7 @@ public sealed class SimpleLineChart : TemplatedControl
     private void OnDataSourceChanged()
     {
         if (!IsLoaded) return;
-        
+
         using (_locker.EnterScope())
         {
             _mainGrid!.Children.Clear();
