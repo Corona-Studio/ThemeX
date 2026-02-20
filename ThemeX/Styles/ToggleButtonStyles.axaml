@@ -31,11 +31,10 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <effects:RippleEffect RippleFill="{TemplateBinding Background}" RippleOpacity="0.26">
-                    <Panel>
-                        <!--
-                            Separate border from ContentPresenter to account for RenderTransform
-                            scaling for Elevation Brushes
-                        -->
+                    <Border Name="BorderElement"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
                         <ContentPresenter
                             Name="PART_ContentPresenter"
                             Padding="{TemplateBinding Padding}"
@@ -51,14 +50,7 @@
                                 </Transitions>
                             </ContentPresenter.Transitions>
                         </ContentPresenter>
-                        <Border
-                            Name="BorderElement"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            IsHitTestVisible="False"
-                            RenderTransform="scaleY(-1)" />
-                    </Panel>
+                    </Border>
                 </effects:RippleEffect>
             </ControlTemplate>
         </Setter>
