@@ -140,6 +140,7 @@
                 <ControlTemplate>
                     <Border
                         x:Name="ShadowBorder"
+                        HorizontalAlignment="Stretch"
                         Margin="0,4,16,4"
                         CornerRadius="{DynamicResource ControlCornerRadius}">
                         <Panel>

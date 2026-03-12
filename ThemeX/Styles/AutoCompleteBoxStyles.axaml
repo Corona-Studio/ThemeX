@@ -44,7 +44,7 @@
                         FontSize="{TemplateBinding FontSize}"
                         FontWeight="{TemplateBinding FontWeight}"
                         Foreground="{TemplateBinding Foreground}"
-                        Watermark="{TemplateBinding Watermark}" />
+                        PlaceholderText="{TemplateBinding PlaceholderText}" />
 
                     <Popup
                         Name="PART_Popup"

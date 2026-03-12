@@ -40,8 +40,7 @@
                             Name="PART_Popup"
                             MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
                             IsLightDismissEnabled="True"
-                            IsOpen="{TemplateBinding IsSubMenuOpen,
-                                                     Mode=TwoWay}"
+                            IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}"
                             OverlayInputPassThroughElement="{Binding $parent[Menu]}"
                             WindowManagerAddShadowHint="False">
                             <Border

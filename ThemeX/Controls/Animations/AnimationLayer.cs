@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
@@ -9,6 +10,8 @@ using ThemeX.Helpers;
 
 namespace ThemeX.Controls.Animations;
 
+[TemplatePart(Name = "ActiveRect", IsRequired = true)]
+[TemplatePart(Name = "PART_RippleCanvasRoot", IsRequired = true)]
 public class AnimationLayer : ContentControl
 {
     [Category("Animation")] public static readonly StyledProperty<ISolidColorBrush> MouseOnBrushProperty =
@@ -39,18 +42,26 @@ public class AnimationLayer : ContentControl
         set => SetValue(MouseEnterAnimationProperty, value);
     }
 
+    private bool _isPointerOver;
+
     protected override void OnPointerEntered(PointerEventArgs e)
     {
         base.OnPointerEntered(e);
-
-        BeginMouseEnterAnim(e);
+        if (!_isPointerOver)
+        {
+            _isPointerOver = true;
+            BeginMouseEnterAnim(e);
+        }
     }
 
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
-
-        BeginMouseLeaveAnim(e);
+        if (!IsPointerOver)
+        {
+            _isPointerOver = false;
+            BeginMouseLeaveAnim(e);
+        }
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

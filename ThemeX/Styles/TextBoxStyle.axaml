@@ -23,7 +23,7 @@
                 </TextBox>
                 <TextBox Classes="noEffect" Text="Hello Down there" />
                 <TextBox Text="Hello Down there" />
-                <TextBox Watermark="Watermark" />
+                <TextBox PlaceholderText="PlaceholderText" />
                 <TextBox IsEnabled="False" Text="Test" />
                 <TextBox Classes="clearButton" Text="Test Clear" />
                 <TextBox
@@ -202,7 +202,7 @@
                                         FontSize="{TemplateBinding FontSize}"
                                         Foreground="{DynamicResource SystemAccentColor}"
                                         IsVisible="False"
-                                        Text="{TemplateBinding Watermark}" />
+                                        Text="{TemplateBinding PlaceholderText}" />
                                     <ScrollViewer
                                         AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
                                         HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
@@ -215,7 +215,7 @@
                                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                 IsVisible="{TemplateBinding Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
                                                 Opacity="0.5"
-                                                Text="{TemplateBinding Watermark}"
+                                                Text="{TemplateBinding PlaceholderText}"
                                                 TextAlignment="{TemplateBinding TextAlignment}"
                                                 TextWrapping="{TemplateBinding TextWrapping}" />
                                             <TextPresenter
@@ -316,7 +316,7 @@
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Error}" />
         </Style>
 
-        <Style Selector="^[UseFloatingWatermark=true]:not(:empty) /template/ TextBlock#PART_FloatingWatermark">
+        <Style Selector="^[UseFloatingPlaceholder=true]:not(:empty) /template/ TextBlock#PART_FloatingWatermark">
             <Setter Property="IsVisible" Value="True" />
         </Style>
 

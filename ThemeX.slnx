@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="ThemeX.SourceGenerator.Shared/ThemeX.SourceGenerator.Shared.csproj" />
+  <Project Path="ThemeX.StyledProp.SourceGenerator/ThemeX.StyledProp.SourceGenerator.csproj" />
   <Project Path="ThemeX/ThemeX.csproj" />
 </Solution>

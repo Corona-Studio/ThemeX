@@ -117,8 +117,7 @@
                                 Margin="{DynamicResource MenuInputGestureTextMargin}"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
-                                Text="{TemplateBinding InputGesture,
-                                                       Converter={StaticResource KeyGestureConverter}}" />
+                                Text="{TemplateBinding InputGesture, Converter={StaticResource KeyGestureConverter}}" />
                             <iconPacks:IconPack
                                 Name="PART_ChevronPath"
                                 Grid.Column="3"
@@ -134,11 +133,12 @@
                         Name="PART_Popup"
                         HorizontalOffset="{DynamicResource MenuFlyoutSubItemPopupHorizontalOffset}"
                         IsLightDismissEnabled="False"
-                        IsOpen="{TemplateBinding IsSubMenuOpen,
-                                                 Mode=TwoWay}"
+                        IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}"
                         Placement="Right"
                         WindowManagerAddShadowHint="False">
                         <Border
+                            Margin="0, 8, 8, 8"
+                            BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
                             MinHeight="{DynamicResource MenuFlyoutThemeMinHeight}"
                             MaxWidth="{DynamicResource FlyoutThemeMaxWidth}"
                             HorizontalAlignment="Stretch"
