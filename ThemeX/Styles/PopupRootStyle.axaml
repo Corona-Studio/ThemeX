@@ -13,7 +13,7 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <LayoutTransformControl LayoutTransform="{TemplateBinding Transform}">
-                    <Panel>
+                    <Panel Margin="10">
                         <Border Name="PART_TransparencyFallback" IsHitTestVisible="False" />
                         <VisualLayerManager Name="PART_VisualLayerManager">
                             <ContentPresenter Name="PART_ContentPresenter"
