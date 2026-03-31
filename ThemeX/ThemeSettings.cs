@@ -24,6 +24,8 @@ public sealed partial class ThemeSettings : ResourceProvider
         SetFontSizeTabItem(16);
         SetFontSizeTitle(18);
         SetFontSizeTitleSecondary(14);
+        SetFontSizeIconPrimary(14);
+        SetIconFontSizeBig1Text(24);
     }
 
     public override bool HasResources => true;
