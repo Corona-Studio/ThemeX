@@ -1,17 +1,11 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Controls.Shapes;
-using Avalonia.Layout;
 using Avalonia.Media;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using Avalonia.Controls.Metadata;
-using Avalonia.Interactivity;
 
 namespace ThemeX.Controls;
 
-[TemplatePart("MainGrid", typeof(Grid), IsRequired = true)]
 public sealed class SimpleLineChart : TemplatedControl
 {
     public static readonly StyledProperty<ObservableCollection<double>?> DataSourceProperty =
@@ -30,36 +24,14 @@ public sealed class SimpleLineChart : TemplatedControl
         AvaloniaProperty.Register<SimpleLineChart, IBrush>(
             nameof(DataColumnFill), new SolidColorBrush(Colors.Black));
 
-    private readonly List<Rectangle> _columnShapes = [];
-    private readonly Lock _locker = new();
-    private Grid? _mainGrid;
-    private int _currentColumnCount;
-
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-
-        _mainGrid = e.NameScope.Find<Grid>("MainGrid")!;
-    }
-
-    protected override void OnLoaded(RoutedEventArgs e)
-    {
-        base.OnLoaded(e);
-        OnDataSourceChanged();
-    }
+    public static readonly StyledProperty<double> LineThicknessProperty =
+        AvaloniaProperty.Register<SimpleLineChart, double>(
+            nameof(LineThickness), 2);
 
     public ObservableCollection<double>? DataSource
     {
         get => GetValue(DataSourceProperty);
-        set
-        {
-            var old = GetValue(DataSourceProperty);
-
-            if (old != null)
-                old.CollectionChanged -= DataSourceOnCollectionChanged;
-
-            SetValue(DataSourceProperty, value);
-        }
+        set => SetValue(DataSourceProperty, value);
     }
 
     public double Maximum
@@ -80,191 +52,112 @@ public sealed class SimpleLineChart : TemplatedControl
         set => SetValue(DataColumnFillProperty, value);
     }
 
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    public double LineThickness
     {
-        base.OnAttachedToVisualTree(e);
-
-        SizeChanged += OnSizeChanged;
+        get => GetValue(LineThicknessProperty);
+        set => SetValue(LineThicknessProperty, value);
     }
 
-    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    private void OnDataSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) =>
+        InvalidateVisual();
+
+    private static Color GetPrimaryColor(IBrush? brush) => brush switch
     {
-        base.OnDetachedFromVisualTree(e);
+        ISolidColorBrush scb => scb.Color,
+        IGradientBrush gb when gb.GradientStops.Count > 0 => gb.GradientStops[0].Color,
+        _ => Colors.Black
+    };
 
-        SizeChanged -= OnSizeChanged;
-    }
-
-    private void OnSizeChanged(object? sender, SizeChangedEventArgs e)
+    public override void Render(DrawingContext context)
     {
-        OnMaximumChanged();
-    }
+        base.Render(context);
 
-    private void DataSourceOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.Action == NotifyCollectionChangedAction.Reset)
+        var width = Bounds.Width;
+        var height = Bounds.Height;
+        if (width <= 0 || height <= 0) return;
+
+        var source = DataSource;
+        if (source == null || source.Count == 0) return;
+
+        var maxCols = MaximumColumns;
+        var start = maxCols > 0 ? Math.Max(0, source.Count - maxCols) : 0;
+        var count = source.Count - start;
+        if (count <= 0) return;
+
+        var maxValue = Maximum;
+        if (maxValue <= 0) maxValue = 1;
+
+        var points = new Point[count];
+        for (var i = 0; i < count; i++)
         {
-            lock (_locker)
-            {
-                _mainGrid!.Children.Clear();
-                _columnShapes.Clear();
-            }
-
-
-            return;
+            var v = Math.Clamp(source[start + i] / maxValue, 0, 1);
+            var x = count == 1 ? width * 0.5 : i * width / (count - 1);
+            var y = height - v * height;
+            points[i] = new Point(x, y);
         }
 
-        if (e.Action == NotifyCollectionChangedAction.Replace)
+        // Gradient-filled area beneath the line: line color → transparent
+        var lineColor = GetPrimaryColor(DataColumnFill);
+        var areaGeom = new StreamGeometry();
+        using (var ctx = areaGeom.Open())
         {
-            lock (_locker)
-            {
-                _mainGrid!.Children.Remove(_columnShapes[e.OldStartingIndex]);
-            }
-
-
-            var newRect = CreateNewRect(DataSource![e.OldStartingIndex]);
-
-            lock (_locker)
-            {
-                _columnShapes[e.OldStartingIndex] = newRect;
-            }
-
-            Grid.SetColumn(newRect, e.OldStartingIndex);
-
-            _mainGrid.Children.Add(newRect);
+            ctx.BeginFigure(new Point(points[0].X, height));
+            foreach (var p in points)
+                ctx.LineTo(p);
+            ctx.LineTo(new Point(points[^1].X, height));
+            ctx.EndFigure(true);
         }
 
-        if (e.Action is NotifyCollectionChangedAction.Move)
+        var areaFill = new LinearGradientBrush
         {
-            OnDataSourceChanged();
-            return;
-        }
-
-        if (e.Action == NotifyCollectionChangedAction.Remove)
-        {
-            if (e.OldStartingIndex < MaximumColumns - _currentColumnCount)
-                return;
-
-            lock (_locker)
-            {
-                var oldRect = _columnShapes[e.OldStartingIndex];
-
-                _mainGrid!.Children.Remove(oldRect);
-                _columnShapes.RemoveAt(e.OldStartingIndex);
-            }
-
-            return;
-        }
-
-        if (e.Action == NotifyCollectionChangedAction.Add)
-        {
-            var newDataList = e.NewItems!.Cast<double>().ToList();
-
-            if (_currentColumnCount + newDataList.Count < MaximumColumns)
-            {
-                _currentColumnCount += newDataList.Count;
-                _mainGrid!.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-            else
-            {
-                for (var i = 0; i < newDataList.Count; i++)
-                    lock (_locker)
-                    {
-                        var oldRect = _columnShapes[0];
-
-                        _mainGrid!.Children.Remove(oldRect);
-                        _columnShapes.RemoveAt(0);
-                    }
-            }
-
-            foreach (var newRect in newDataList.Select(CreateNewRect))
-                lock (_locker)
-                {
-                    _columnShapes.Add(newRect);
-                    _mainGrid!.Children.Add(newRect);
-                }
-
-            lock (_locker)
-            {
-                foreach (var (i, rect) in _columnShapes.Index()) Grid.SetColumn(rect, i);
-            }
-        }
-    }
-
-    private Rectangle CreateNewRect(double value)
-    {
-        var rect = new Rectangle
-        {
-            VerticalAlignment = VerticalAlignment.Bottom,
-            Height = value / Maximum * Bounds.Height
+            StartPoint = new RelativePoint(0.5, 0, RelativeUnit.Relative),
+            EndPoint = new RelativePoint(0.5, 1, RelativeUnit.Relative),
+            GradientStops =
+            [
+                new GradientStop(lineColor, 0),
+                new GradientStop(Color.FromArgb(0, lineColor.R, lineColor.G, lineColor.B), 1)
+            ]
         };
 
-        rect.Bind(Shape.FillProperty, this.GetObservable(DataColumnFillProperty));
+        context.DrawGeometry(areaFill, null, areaGeom);
 
-        return rect;
-    }
-
-    private void OnDataSourceChanged()
-    {
-        if (!IsLoaded) return;
-
-        using (_locker.EnterScope())
+        // Line stroke
+        if (points.Length > 1)
         {
-            _mainGrid!.Children.Clear();
-            _columnShapes.Clear();
-        }
+            var pen = new Pen(DataColumnFill, LineThickness,
+                lineCap: PenLineCap.Round, lineJoin: PenLineJoin.Round);
 
-        if (DataSource == null) return;
-
-        var newColDef = new ColumnDefinitions();
-        for (var i = 0; i < DataSource.Count; i++)
-            newColDef.Add(new ColumnDefinition());
-
-        _mainGrid.ColumnDefinitions = newColDef;
-
-        var startIndex = 0;
-
-        foreach (var data in DataSource)
-        {
-            var rect = CreateNewRect(data);
-
-            Grid.SetColumn(rect, startIndex++);
-
-            using (_locker.EnterScope())
+            var lineGeom = new StreamGeometry();
+            using (var ctx = lineGeom.Open())
             {
-                _columnShapes.Add(rect);
-                _mainGrid.Children.Add(rect);
+                ctx.BeginFigure(points[0], false);
+                for (var i = 1; i < points.Length; i++)
+                    ctx.LineTo(points[i]);
+                ctx.EndFigure(false);
             }
+
+            context.DrawGeometry(null, pen, lineGeom);
         }
-
-        DataSource.CollectionChanged += DataSourceOnCollectionChanged;
-    }
-
-    private void OnMaximumChanged()
-    {
-        if (DataSource == null) return;
-
-        var end = Math.Min(_currentColumnCount, DataSource.Count);
-
-        for (var i = 0; i < end; i++)
-            using (_locker.EnterScope())
-            {
-                _columnShapes[i].Height = DataSource[i] / Maximum * Bounds.Height;
-            }
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
+        base.OnPropertyChanged(change);
+
         if (change.Property == DataSourceProperty)
         {
             if (change.OldValue is ObservableCollection<double> old)
-                old.CollectionChanged -= DataSourceOnCollectionChanged;
-
-            OnDataSourceChanged();
+                old.CollectionChanged -= OnDataSourceCollectionChanged;
+            if (change.NewValue is ObservableCollection<double> @new)
+                @new.CollectionChanged += OnDataSourceCollectionChanged;
+            InvalidateVisual();
         }
-
-        if (change.Property == MaximumProperty)
-            OnMaximumChanged();
-
-        base.OnPropertyChanged(change);
+        else if (change.Property == MaximumProperty
+                 || change.Property == MaximumColumnsProperty
+                 || change.Property == LineThicknessProperty
+                 || change.Property == DataColumnFillProperty)
+        {
+            InvalidateVisual();
+        }
     }
 }
