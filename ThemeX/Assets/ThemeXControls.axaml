@@ -45,6 +45,8 @@
                 <MergeResourceInclude Source="avares://ThemeX/Styles/ToolTipStyles.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/TransitioningContentControlStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/WindowStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/TreeView.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/TreeViewItem.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
