@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Threading;
 using ThemeX.Helpers;
 
 namespace ThemeX.Controls;
@@ -45,10 +46,52 @@ public sealed class Badge : ContentControl
 
     private void OnBackgroundChanged()
     {
-        var primaryColor = (ISolidColorBrush?)Background;
-        var foreground = primaryColor?.Color.GetGrayLevel() < 0.5 ? ThemeSettings.LightBrush : ThemeSettings.DarkBrush;
+        if (!TryReadBackgroundColor(Background, out var color))
+            return;
+
+        var foreground = color.GetGrayLevel() < 0.5 ? ThemeSettings.LightBrush : ThemeSettings.DarkBrush;
 
         SetValue(ForegroundProperty, foreground);
+    }
+
+    private static bool TryReadBackgroundColor(IBrush? brush, out Color color)
+    {
+        switch (brush)
+        {
+            case null:
+                color = default;
+                return false;
+
+            // Immutable brushes are not AvaloniaObjects and are safe to read from any thread.
+            case IImmutableSolidColorBrush immutable:
+                color = immutable.Color;
+                return true;
+
+            // Mutable SolidColorBrush is an AvaloniaObject affined to its owning dispatcher.
+            // Reading Color off-thread throws InvalidOperationException (VerifyAccess).
+            case SolidColorBrush solid:
+                if (Dispatcher.UIThread.CheckAccess())
+                {
+                    try
+                    {
+                        color = solid.Color;
+                        return true;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        // Brush is owned by a different dispatcher; bail out gracefully.
+                        color = default;
+                        return false;
+                    }
+                }
+
+                color = default;
+                return false;
+
+            default:
+                color = default;
+                return false;
+        }
     }
 
     private void OnSymbolChanged()
