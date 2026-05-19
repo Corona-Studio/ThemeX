@@ -57,7 +57,7 @@ public static class ColorHelper
         var quantizedImage = bitmap.Clone(ctx =>
         {
             ctx.Resize(256, 0)
-                .Quantize(new OctreeQuantizer(new QuantizerOptions
+                .Quantize(new HexadecatreeQuantizer(new QuantizerOptions
                 {
                     MaxColors = colorCount + 3
                 }));

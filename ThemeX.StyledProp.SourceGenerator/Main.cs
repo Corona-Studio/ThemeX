@@ -108,7 +108,7 @@ namespace ThemeX.StyledProp.SourceGenerator
 
                 var bindingMode = styledPropAttribute.NamedArguments
                     .FirstOrDefault(arg => arg.Key == "BindingMode")
-                    .Value.Value;
+                    .Value.Value as string;
 
                 var isLangKey = styledPropAttribute.NamedArguments
                     .FirstOrDefault(arg => arg.Key == "IsLangKey")
@@ -196,11 +196,11 @@ namespace ThemeX.StyledProp.SourceGenerator
 
                 var bindingModeStr = bindingMode switch
                 {
-                    0 => "global::Avalonia.Data.BindingMode.Default",
-                    1 => "global::Avalonia.Data.BindingMode.OneWay",
-                    2 => "global::Avalonia.Data.BindingMode.TwoWay",
-                    3 => "global::Avalonia.Data.BindingMode.OneTime",
-                    4 => "global::Avalonia.Data.BindingMode.OneWayToSource",
+                    "Default" => "global::Avalonia.Data.BindingMode.Default",
+                    "OneWay" => "global::Avalonia.Data.BindingMode.OneWay",
+                    "TwoWay" => "global::Avalonia.Data.BindingMode.TwoWay",
+                    "OneTime" => "global::Avalonia.Data.BindingMode.OneTime",
+                    "OneWayToSource" => "global::Avalonia.Data.BindingMode.OneWayToSource",
                     null => null,
                     _ => "global::Avalonia.Data.BindingMode.OneWay"
                 };

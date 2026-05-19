@@ -5,12 +5,18 @@ namespace ThemeX.SourceGenerator.Shared
     [AttributeUsage(AttributeTargets.Property)]
     public class StyledPropAttribute : Attribute
     {
+        public const string BindingDefault = "Default";
+        public const string BindingOneWay = "OneWay";
+        public const string BindingTwoWay = "TwoWay";
+        public const string BindingOneTime = "OneTime";
+        public const string BindingOneWayToSource = "OneWayToSource";
+
         /// <summary>
         /// Specifies the target class type for the styled property.
         /// </summary>
         public Type? TargetClass { get; set; }
 
-        public Avalonia.Data.BindingMode BindingMode { get; set; } = Avalonia.Data.BindingMode.Default;
+        public string BindingMode { get; set; } = BindingDefault;
 
         public object? DefaultValue { get; set; }
 
