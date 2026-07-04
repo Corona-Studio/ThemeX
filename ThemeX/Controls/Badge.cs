@@ -71,7 +71,6 @@ public sealed class Badge : ContentControl
             // Reading Color off-thread throws InvalidOperationException (VerifyAccess).
             case SolidColorBrush solid:
                 if (Dispatcher.UIThread.CheckAccess())
-                {
                     try
                     {
                         color = solid.Color;
@@ -83,7 +82,6 @@ public sealed class Badge : ContentControl
                         color = default;
                         return false;
                     }
-                }
 
                 color = default;
                 return false;

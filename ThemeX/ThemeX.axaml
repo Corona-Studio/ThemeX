@@ -7,7 +7,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <themeX:ThemeSettings />
                 <themeX:ColorPresets />
-                <MergeResourceInclude Source="/Assets/ControlBaseResources.axaml"/>
+                <MergeResourceInclude Source="/Assets/ControlBaseResources.axaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <ResourceDictionary.ThemeDictionaries>

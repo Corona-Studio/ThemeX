@@ -1,6 +1,6 @@
-﻿using Avalonia.Data.Converters;
+﻿using System.Globalization;
+using Avalonia.Data.Converters;
 using CommunityToolkit.Diagnostics;
-using System.Globalization;
 
 namespace ThemeX.Converters;
 

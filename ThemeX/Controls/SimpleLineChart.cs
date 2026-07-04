@@ -1,8 +1,8 @@
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace ThemeX.Controls;
 
@@ -58,15 +58,20 @@ public sealed class SimpleLineChart : TemplatedControl
         set => SetValue(LineThicknessProperty, value);
     }
 
-    private void OnDataSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) =>
-        InvalidateVisual();
-
-    private static Color GetPrimaryColor(IBrush? brush) => brush switch
+    private void OnDataSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        ISolidColorBrush scb => scb.Color,
-        IGradientBrush gb when gb.GradientStops.Count > 0 => gb.GradientStops[0].Color,
-        _ => Colors.Black
-    };
+        InvalidateVisual();
+    }
+
+    private static Color GetPrimaryColor(IBrush? brush)
+    {
+        return brush switch
+        {
+            ISolidColorBrush scb => scb.Color,
+            IGradientBrush gb when gb.GradientStops.Count > 0 => gb.GradientStops[0].Color,
+            _ => Colors.Black
+        };
+    }
 
     public override void Render(DrawingContext context)
     {

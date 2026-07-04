@@ -126,12 +126,14 @@
 
         <!-- Selected -->
         <Style Selector="^:selected /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
         </Style>
 
         <!-- Selected + PointerOver -->
         <Style Selector="^:selected /template/ Border#PART_LayoutRoot:pointerover">
-            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
             <Setter Property="Opacity" Value="0.85" />
         </Style>
 

@@ -24,6 +24,8 @@ public class AnimationLayer : ContentControl
             true
         );
 
+    private bool _isPointerOver;
+
     protected Rectangle? ActiveRect;
     protected Canvas? PART_RippleCanvasRoot;
 
@@ -41,8 +43,6 @@ public class AnimationLayer : ContentControl
         get => GetValue(MouseEnterAnimationProperty);
         set => SetValue(MouseEnterAnimationProperty, value);
     }
-
-    private bool _isPointerOver;
 
     protected override void OnPointerEntered(PointerEventArgs e)
     {

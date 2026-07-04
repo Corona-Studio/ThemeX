@@ -178,19 +178,13 @@ namespace ThemeX.StyledProp.SourceGenerator
                     {
                         var exprSymbol = semanticModel.GetSymbolInfo(defaultValueName.Expression!).Symbol;
                         if (exprSymbol is IFieldSymbol fs)
-                        {
                             defaultValueFullName =
                                 $"{fs.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}.{fs.Name}";
-                        }
                         else if (exprSymbol is IPropertySymbol ps)
-                        {
                             defaultValueFullName =
                                 $"{ps.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}.{ps.Name}";
-                        }
                         else
-                        {
                             defaultValueFullName = defaultValueName.Expression!.ToFullString();
-                        }
                     }
                 }
 
@@ -219,7 +213,7 @@ namespace ThemeX.StyledProp.SourceGenerator
                     Type = propertySymbol.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     TargetClass = targetClassType?.ToDisplayString(),
                     BindingMode = bindingModeStr,
-                    DefaultValue = defaultValueBinding,
+                    DefaultValue = defaultValueBinding
                 });
             }
 

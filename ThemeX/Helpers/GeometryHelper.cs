@@ -47,7 +47,7 @@ public static class GeometryHelper
             // - All corners are constructed using elliptical arcs 
 
             // Line 1 + Corner 1
-            context.BeginFigure(new Point(rect.Left + radiusX, rect.Top), true);
+            context.BeginFigure(new Point(rect.Left + radiusX, rect.Top));
             context.LineTo(new Point(rect.Right - radiusX, rect.Top));
             context.ArcTo(
                 new Point(rect.Right, rect.Top + radiusY),

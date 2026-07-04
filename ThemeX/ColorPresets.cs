@@ -9,8 +9,6 @@ namespace ThemeX;
 
 public sealed class ColorPresets : ResourceProvider
 {
-    public static string GetPaletteKey(int index) => $"ThemeX.ColorPalette{index}";
-
     public static FrozenDictionary<string, ImmutableSolidColorBrush> Colors { get; } =
         new Dictionary<string, ImmutableSolidColorBrush>
         {
@@ -64,7 +62,8 @@ public sealed class ColorPresets : ResourceProvider
             { "ThemeX.ColorPalette48", new ImmutableSolidColorBrush(Color.Parse("#7e735f")) }
         }.ToFrozenDictionary();
 
-    public static ImmutableArray<ImmutableSolidColorBrush> ColorValues { get; } = [
+    public static ImmutableArray<ImmutableSolidColorBrush> ColorValues { get; } =
+    [
         ..Enumerable
             .Range(1, 48)
             .Select(r => $"ThemeX.ColorPalette{r}")
@@ -72,6 +71,11 @@ public sealed class ColorPresets : ResourceProvider
     ];
 
     public override bool HasResources => true;
+
+    public static string GetPaletteKey(int index)
+    {
+        return $"ThemeX.ColorPalette{index}";
+    }
 
     public override bool TryGetResource(object key, ThemeVariant? theme, out object? value)
     {
