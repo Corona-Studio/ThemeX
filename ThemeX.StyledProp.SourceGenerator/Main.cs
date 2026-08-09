@@ -13,6 +13,11 @@ namespace ThemeX.StyledProp.SourceGenerator
     public class Main : IIncrementalGenerator
     {
         private const string GenerateAttribute = "ThemeX.SourceGenerator.Shared.StyledPropAttribute";
+        private const string GenerateDirectAttribute = "ThemeX.SourceGenerator.Shared.DirectPropAttribute";
+        private static readonly SymbolDisplayFormat FullyQualifiedNullableFormat =
+            SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
+                SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions |
+                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier);
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
@@ -61,11 +66,12 @@ namespace ThemeX.StyledProp.SourceGenerator
             if (node is not ClassDeclarationSyntax classDeclaration)
                 return false;
 
-            // Check if any property in the class has the [StyledProp] attribute
+            // Check if any property in the class has one of the supported attributes.
             return classDeclaration.Members.OfType<PropertyDeclarationSyntax>()
                 .Any(property => property.AttributeLists
                     .SelectMany(attrList => attrList.Attributes)
-                    .Any(attr => attr.Name.ToString().Contains("StyledProp")));
+                    .Any(attr => attr.Name.ToString().Contains("StyledProp") ||
+                                 attr.Name.ToString().Contains("DirectProp")));
         }
 
         private static ClassInfo? GetClassWithStyledProps(GeneratorSyntaxContext context)
@@ -91,30 +97,40 @@ namespace ThemeX.StyledProp.SourceGenerator
             {
                 var propertySymbol = context.SemanticModel.GetDeclaredSymbol(member);
 
-                // Check if the property has the [StyledProp] attribute
-                var styledPropAttribute = propertySymbol?.GetAttributes()
-                    .FirstOrDefault(attr => attr.AttributeClass?.ToDisplayString() == GenerateAttribute);
+                // Check if the property has a supported property-generation attribute.
+                var generatedPropAttribute = propertySymbol?.GetAttributes()
+                    .FirstOrDefault(attr =>
+                        attr.AttributeClass?.ToDisplayString() == GenerateAttribute ||
+                        attr.AttributeClass?.ToDisplayString() == GenerateDirectAttribute);
 
-                if (styledPropAttribute == null)
+                if (generatedPropAttribute == null)
                     continue;
 
+                var isDirect = generatedPropAttribute.AttributeClass?.ToDisplayString() == GenerateDirectAttribute;
+
                 var semanticModel = context.SemanticModel;
-                var attribute = member.DescendantNodes().OfType<AttributeSyntax>().ToList()[0];
+                var attribute = member.AttributeLists
+                    .SelectMany(list => list.Attributes)
+                    .First(candidate =>
+                    {
+                        var constructor = semanticModel.GetSymbolInfo(candidate).Symbol as IMethodSymbol;
+                        return constructor?.ContainingType.ToDisplayString() is GenerateAttribute or GenerateDirectAttribute;
+                    });
 
                 // Determine the target class from the attribute argument
-                var targetClassType = styledPropAttribute.NamedArguments
+                var targetClassType = generatedPropAttribute.NamedArguments
                     .FirstOrDefault(arg => arg.Key == "TargetClass")
                     .Value.Value as INamedTypeSymbol;
 
-                var bindingMode = styledPropAttribute.NamedArguments
+                var bindingMode = generatedPropAttribute.NamedArguments
                     .FirstOrDefault(arg => arg.Key == "BindingMode")
                     .Value.Value as string;
 
-                var isLangKey = styledPropAttribute.NamedArguments
+                var isLangKey = generatedPropAttribute.NamedArguments
                     .FirstOrDefault(arg => arg.Key == "IsLangKey")
                     .Value.Value as bool?;
 
-                var rawDefaultValue = styledPropAttribute.NamedArguments
+                var rawDefaultValue = generatedPropAttribute.NamedArguments
                     .FirstOrDefault(arg => arg.Key == "DefaultValue")
                     .Value.Value;
 
@@ -206,14 +222,22 @@ namespace ThemeX.StyledProp.SourceGenerator
                     _ => defaultValueFullName
                 };
 
+                var setter = member.AccessorList?.Accessors
+                    .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.SetAccessorDeclaration));
+
                 // Add the property information to the ClassInfo object
                 classInfo.Properties.Add(new PropertyDetail
                 {
                     Name = propertySymbol!.Name,
-                    Type = propertySymbol.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                    Type = propertySymbol.Type.ToDisplayString(FullyQualifiedNullableFormat),
                     TargetClass = targetClassType?.ToDisplayString(),
                     BindingMode = bindingModeStr,
-                    DefaultValue = defaultValueBinding
+                    DefaultValue = defaultValueBinding,
+                    IsDirect = isDirect,
+                    HasSetter = setter != null,
+                    SetterModifiers = setter == null
+                        ? string.Empty
+                        : string.Join(" ", setter.Modifiers.Select(modifier => modifier.Text))
                 });
             }
 
@@ -369,6 +393,55 @@ namespace ThemeX.StyledProp.SourceGenerator
                 .AddAttributeLists(GetGeneratedCodeAttribute());
         }
 
+        private static IEnumerable<MemberDeclarationSyntax> GenerateDirectProperty(ClassInfo info,
+            PropertyDetail detail)
+        {
+            var ownerType = detail.TargetClass ?? info.ClassName;
+            var backingFieldName = $"__directProperty{detail.Name}";
+            var initialValue = string.IsNullOrEmpty(detail.DefaultValue) ? "default!" : detail.DefaultValue!;
+
+            yield return ParseMemberDeclaration($@"
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute(""StyledPropGenerator"", ""1.0"")]
+private {detail.Type} {backingFieldName} = {initialValue};")!;
+
+            var registrationArguments = new StringBuilder()
+                .Append("nameof(").Append(detail.Name).Append("), ")
+                .Append("static owner => owner.").Append(detail.Name);
+
+            var hasPublicSetter = detail.HasSetter && string.IsNullOrEmpty(detail.SetterModifiers);
+            if (hasPublicSetter)
+                registrationArguments.Append(", static (owner, value) => owner.")
+                    .Append(detail.Name).Append(" = value");
+
+            if (!string.IsNullOrEmpty(detail.DefaultValue))
+                registrationArguments.Append(", unsetValue: ").Append(detail.DefaultValue);
+
+            if (!string.IsNullOrEmpty(detail.BindingMode))
+                registrationArguments.Append(", defaultBindingMode: ").Append(detail.BindingMode);
+
+            yield return ParseMemberDeclaration($@"
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute(""StyledPropGenerator"", ""1.0"")]
+public static readonly global::Avalonia.DirectProperty<{ownerType}, {detail.Type}> {detail.Name}Property =
+    global::Avalonia.AvaloniaProperty.RegisterDirect<{ownerType}, {detail.Type}>(
+        {registrationArguments});")!;
+
+            var setterImplementation = detail.HasSetter
+                ? $"{detail.SetterModifiers} set => SetAndRaise({detail.Name}Property, ref {backingFieldName}, value);"
+                : string.Empty;
+
+            yield return ParseMemberDeclaration($@"
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute(""StyledPropGenerator"", ""1.0"")]
+public partial {detail.Type} {detail.Name}
+{{
+    get => {backingFieldName};
+    {setterImplementation}
+}}")!;
+
+            yield return ParseMemberDeclaration($@"
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute(""StyledPropGenerator"", ""1.0"")]
+partial void On{detail.Name}Changed();")!;
+        }
+
         private static IfStatementSyntax GeneratePropertyChangedCheckStatement(PropertyDetail detail)
         {
             return IfStatement(
@@ -388,7 +461,6 @@ namespace ThemeX.StyledProp.SourceGenerator
         {
             var list = new List<StatementSyntax>();
 
-            list.AddRange(info.Properties.Select(GeneratePropertyChangedCheckStatement));
             list.Add(ExpressionStatement(
                 InvocationExpression(
                         MemberAccessExpression(
@@ -400,6 +472,7 @@ namespace ThemeX.StyledProp.SourceGenerator
                             SingletonSeparatedList(
                                 Argument(
                                     IdentifierName("change")))))));
+            list.AddRange(info.Properties.Select(GeneratePropertyChangedCheckStatement));
 
             return MethodDeclaration(
                     PredefinedType(
@@ -421,7 +494,9 @@ namespace ThemeX.StyledProp.SourceGenerator
         private static string GeneratePropertyImplementation(ClassInfo classInfo)
         {
             var classMembers = new List<MemberDeclarationSyntax>();
-            classMembers.AddRange(classInfo.Properties.SelectMany(detail => GenerateStyledProperty(classInfo, detail)));
+            classMembers.AddRange(classInfo.Properties.SelectMany(detail => detail.IsDirect
+                ? GenerateDirectProperty(classInfo, detail)
+                : GenerateStyledProperty(classInfo, detail)));
             classMembers.Add(GeneratePropertyChangedMethod(classInfo));
 
             var generatedClass = CompilationUnit()

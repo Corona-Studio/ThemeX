@@ -8,9 +8,11 @@ namespace ThemeX.Controls;
 
 public sealed class SimpleLineChart : TemplatedControl
 {
-    public static readonly StyledProperty<ObservableCollection<double>?> DataSourceProperty =
-        AvaloniaProperty.Register<SimpleLineChart, ObservableCollection<double>?>(
-            nameof(DataSource));
+    public static readonly DirectProperty<SimpleLineChart, ObservableCollection<double>?> DataSourceProperty =
+        AvaloniaProperty.RegisterDirect<SimpleLineChart, ObservableCollection<double>?>(
+            nameof(DataSource),
+            chart => chart.DataSource,
+            (chart, value) => chart.DataSource = value);
 
     public static readonly StyledProperty<double> MaximumProperty =
         AvaloniaProperty.Register<SimpleLineChart, double>(
@@ -30,8 +32,8 @@ public sealed class SimpleLineChart : TemplatedControl
 
     public ObservableCollection<double>? DataSource
     {
-        get => GetValue(DataSourceProperty);
-        set => SetValue(DataSourceProperty, value);
+        get;
+        set => SetAndRaise(DataSourceProperty, ref field, value);
     }
 
     public double Maximum

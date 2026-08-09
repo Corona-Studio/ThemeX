@@ -5,8 +5,8 @@ namespace ThemeX.StyledProp.SourceGenerator
 {
     public class ClassInfo
     {
-        public string Namespace { get; set; }
-        public string ClassName { get; set; }
+        public string Namespace { get; set; } = string.Empty;
+        public string ClassName { get; set; } = string.Empty;
         public List<PropertyDetail> Properties { get; set; } = new();
         public List<Diagnostic> Diagnostics { get; set; } = new();
     }

@@ -39,5 +39,20 @@ namespace ThemeX.StyledProp.SourceGenerator
         ///     Default value for the property.
         /// </summary>
         public string? DefaultValue { get; set; }
+
+        /// <summary>
+        ///     Whether this property is field-backed and registered with RegisterDirect.
+        /// </summary>
+        public bool IsDirect { get; set; }
+
+        /// <summary>
+        ///     Whether the CLR property declares a setter.
+        /// </summary>
+        public bool HasSetter { get; set; } = true;
+
+        /// <summary>
+        ///     Explicit setter modifiers such as <c>private</c>; empty means public.
+        /// </summary>
+        public string SetterModifiers { get; set; } = string.Empty;
     }
 }

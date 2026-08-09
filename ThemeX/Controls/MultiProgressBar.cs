@@ -28,9 +28,9 @@ public sealed partial class MultiProgressBar : TemplatedControl
     private ItemsControl? _indicators;
     private Grid? _mainGrid;
 
-    [StyledProp] public partial List<double>? Values { get; set; }
+    [DirectProp] public partial List<double>? Values { get; set; }
 
-    [StyledProp] public partial List<string>? Tags { get; set; }
+    [DirectProp] public partial List<string>? Tags { get; set; }
 
     [StyledProp(DefaultValue = "####")] public partial string ValueFormat { get; set; }
 

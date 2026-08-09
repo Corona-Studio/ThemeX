@@ -2,6 +2,10 @@
 
 namespace ThemeX.SourceGenerator.Shared;
 
+/// <summary>
+///     Generates an Avalonia <c>StyledProperty</c> that participates in styles, animations,
+///     inheritance, coercion, and value precedence.
+/// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public class StyledPropAttribute : Attribute
 {
