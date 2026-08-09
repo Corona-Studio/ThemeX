@@ -75,8 +75,7 @@ public sealed class RippleEffect : ContentControl
         r.RunSecondStep();
 
         // Remove ripple from canvas to finalize ripple instance
-        Task.Delay(Ripple.Duration)
-            .ContinueWith(_ => Dispatcher.UIThread.Post(RemoveRippleTask));
+        DispatcherTimer.RunOnce(RemoveRippleTask, Ripple.Duration);
         return;
 
         void RemoveRippleTask()

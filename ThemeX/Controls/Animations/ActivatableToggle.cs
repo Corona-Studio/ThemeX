@@ -75,8 +75,7 @@ public sealed class ActivatableToggle : AnimationLayer
         }
 
         if (Activated)
-            Task.Delay(Ripple.Duration)
-                .ContinueWith(_ => Dispatcher.UIThread.Post(() => ActiveRect.Opacity = Activated ? 1 : 0));
+            DispatcherTimer.RunOnce(() => ActiveRect.Opacity = Activated ? 1 : 0, Ripple.Duration);
         else
             ActiveRect.Opacity = 0;
     }

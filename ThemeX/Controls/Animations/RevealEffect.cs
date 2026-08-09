@@ -103,8 +103,7 @@ public sealed class RevealEffect : AnimationLayer
         e.Opacity = 0;
 
         // Remove ripple from canvas to finalize ripple instance
-        Task.Delay(Ripple.Duration)
-            .ContinueWith(_ => Dispatcher.UIThread.Post(RemoveRippleTask));
+        DispatcherTimer.RunOnce(RemoveRippleTask, Ripple.Duration);
         return;
 
         void RemoveRippleTask()
