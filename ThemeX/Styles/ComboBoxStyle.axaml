@@ -314,6 +314,7 @@
     <ControlTheme x:Key="{x:Type ComboBoxItem}" TargetType="ComboBoxItem">
 
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         <Setter Property="Padding" Value="{DynamicResource ComboBoxItemThemePadding}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="FocusAdorner">
@@ -361,6 +362,10 @@
         </Style>
 
         <!--  PointerOver  -->
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
+        </Style>
+
         <Style Selector="^:pointerover /template/ Border#LayoutRoot">
             <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
@@ -371,6 +376,11 @@
         </Style>
 
         <!--  Pressed  -->
+        <Style Selector="^:pressed">
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
+        </Style>
+
         <Style Selector="^:pressed /template/ Border#LayoutRoot">
             <Setter Property="Background"
                     Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
@@ -383,6 +393,10 @@
         </Style>
 
         <!--  Disabled  -->
+        <Style Selector="^:disabled">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
+        </Style>
+
         <Style Selector="^:disabled /template/ Border#LayoutRoot">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Reverse.Tertiary}" />
@@ -395,7 +409,8 @@
         <!--  Selected  -->
 
         <Style Selector="^:selected">
-            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
         </Style>
 
         <Style Selector="^:selected /template/ Border#LayoutRoot">
@@ -438,6 +453,11 @@
         </Style>
 
         <!--  Selected PointerOver  -->
+        <Style Selector="^:selected:pointerover">
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
+        </Style>
+
         <Style Selector="^:selected:pointerover /template/ Border#Pill">
             <Setter Property="Opacity" Value="1" />
         </Style>
@@ -450,7 +470,8 @@
         </Style>
 
         <Style Selector="^:selected:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
+            <Setter Property="TextBlock.Foreground"
+                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
         </Style>
 
 

@@ -44,6 +44,23 @@ public sealed partial class ProgressRing : RangeBase
         UpdatePseudoClasses(null, PreserveAspect);
     }
 
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+
+        // Infinite style animations are stopped when the control leaves the visual tree.
+        // Restore the pseudo class on reattachment so a reused ProgressRing starts again.
+        UpdatePseudoClasses(IsIndeterminate, PreserveAspect);
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        // Make the indeterminate selector transition again on the next attachment.
+        UpdatePseudoClasses(false, null);
+
+        base.OnDetachedFromVisualTree(e);
+    }
+
     private void UpdatePseudoClasses(
         bool? isIndeterminate,
         bool? preserveAspect)
