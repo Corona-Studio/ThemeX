@@ -30,7 +30,6 @@
     <ControlTheme x:Key="{x:Type controls:ProgressRing}" TargetType="controls:ProgressRing">
 
         <ControlTheme.Resources>
-            <converters:ThicknessToSingleValueConverter x:Key="ThicknessToSingleValueConverter" />
             <converters:FitSquarelyWithinAspectRatioConverter x:Key="FitSquarelyWithinAspectRatioConverter" />
         </ControlTheme.Resources>
 
@@ -45,17 +44,13 @@
                         <Ellipse
                             x:Name="Track"
                             Stroke="{TemplateBinding Background}"
-                            StrokeThickness="{TemplateBinding BorderThickness,
-                                                              Converter={StaticResource ThicknessToSingleValueConverter},
-                                                              ConverterParameter='Left'}" />
+                            StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}" />
                         <Arc
                             x:Name="Fill"
                             StartAngle="{TemplateBinding StartAngle}"
                             Stroke="{TemplateBinding Foreground}"
                             StrokeLineCap="Round"
-                            StrokeThickness="{TemplateBinding BorderThickness,
-                                                              Converter={StaticResource ThicknessToSingleValueConverter},
-                                                              ConverterParameter='Left'}"
+                            StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}"
                             SweepAngle="{TemplateBinding ValueAngle}" />
                     </Panel>
                 </ControlTemplate>

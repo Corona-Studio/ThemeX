@@ -4,7 +4,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <MergeResourceInclude Source="avares://ThemeX/Styles/IconPack/IconPackStyle.axaml" />
-                <MergeResourceInclude Source="avares://ThemeX/Styles/IconPack/CombinedIconPackStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/AnimationLayerStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/AutoCompleteBoxStyles.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/BadgeStyle.axaml" />

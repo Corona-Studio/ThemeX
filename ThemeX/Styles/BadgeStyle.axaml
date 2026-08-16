@@ -37,17 +37,17 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <iconPacks:CombinedIconPack
+                            <iconPacks:IconPack
                                 x:Name="Icon"
                                 Padding="0,0,5,0"
                                 FontSize="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeIconKey}}"
                                 VerticalAlignment="Center"
                                 IsVisible="{TemplateBinding Symbol,
                                                             Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                                Symbol1="{TemplateBinding Symbol1}"
-                                Symbol1Foreground="{TemplateBinding Foreground}"
-                                Symbol2="{TemplateBinding Symbol2}"
-                                Symbol2Foreground="{TemplateBinding Foreground}" />
+                                Symbol="{TemplateBinding Symbol1}"
+                                Foreground="{TemplateBinding Foreground}"
+                                OverlaySymbol="{TemplateBinding Symbol2}"
+                                OverlayForeground="{TemplateBinding Foreground}" />
 
                             <ContentPresenter
                                 Grid.Column="1"

@@ -1,4 +1,4 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:iconPack="clr-namespace:ThemeX.Controls.IconPacks">
@@ -12,7 +12,6 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="Black"
-                BorderBrush="Black"
                 FontSize="40"
                 Foreground="White"
                 Symbol="&#xE008;" />
@@ -20,20 +19,7 @@
     </Design.PreviewWith>
 
     <ControlTheme x:Key="{x:Type iconPack:IconPack}" TargetType="iconPack:IconPack">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type iconPack:IconPack}">
-                    <TextBlock
-                        Padding="{TemplateBinding Padding}"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        Background="{TemplateBinding Background}"
-                        FontFamily="/Assets/Fonts/SegoeIcons.ttf#Segoe Fluent Icons"
-                        Foreground="{TemplateBinding Foreground}"
-                        Text="{TemplateBinding Symbol}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="FontFamily" Value="/Assets/Fonts/SegoeIcons.ttf#Segoe Fluent Icons" />
     </ControlTheme>
 
 </ResourceDictionary>

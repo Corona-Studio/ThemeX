@@ -523,7 +523,11 @@ partial void On{detail.Name}Changed();")!;
                         ))
                 .NormalizeWhitespace();
 
-            return generatedClass.ToFullString();
+            // Nullable annotations in the generated property types (for example
+            // ObservableCollection<T>?) need an explicit nullable context in the
+            // generated file itself. The consuming project's nullable setting is
+            // not inherited by source-generated trees.
+            return "#nullable enable\n" + generatedClass.ToFullString();
         }
     }
 }

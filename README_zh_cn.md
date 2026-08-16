@@ -21,8 +21,7 @@
 | `Badge` | 徽章控件，可根据背景自动调整前景色 |
 | `MultiProgressBar` | 多段式进度条，支持自动颜色渐变 |
 | `ProgressRing` | 圆形进度指示器，支持不确定模式 |
-| `IconPack` | 使用 Segoe 图标字体的符号图标控件 |
-| `CombinedIconPack` | 双符号图标包，用于组合图标显示 |
+| `IconPack` | 使用 Segoe 图标字体、支持可选叠加字形的单视觉节点图标控件 |
 | `SimpleLineChart` | 轻量级实时折线图可视化 |
 | `PrimaryButton` | 样式化的主要操作按钮 |
 | `SmoothScrollViewer` | 带有平滑滚动动画的滚动视图 |

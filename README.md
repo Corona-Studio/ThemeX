@@ -22,8 +22,7 @@ Developed and maintained by Corona Studio.
 | `Badge` | A badge control with automatic foreground color adjustment based on background |
 | `MultiProgressBar` | Multi-segment progress bar with automatic color gradient |
 | `ProgressRing` | Circular progress indicator with indeterminate mode support |
-| `IconPack` | Symbol icon control using Segoe icon fonts |
-| `CombinedIconPack` | Dual-symbol icon pack for combined icon display |
+| `IconPack` | Single-visual Segoe icon control with optional overlay glyph support |
 | `SimpleLineChart` | Lightweight, real-time line chart visualization |
 | `PrimaryButton` | Styled primary action button |
 | `SmoothScrollViewer` | ScrollViewer with smooth scrolling animation |
