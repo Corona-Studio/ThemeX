@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks">
 
@@ -66,6 +67,7 @@
         <Setter Property="BorderThickness" Value="{DynamicResource MenuBarItemBorderThickness}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="helpers:SubmenuAnimationHelper.IsEnabled" Value="True" />
         <!--  Narrow padding should be used for mouse input, when non-narrow one should be used for touch input in future.  -->
         <Setter Property="Padding" Value="{DynamicResource MenuFlyoutItemThemePaddingNarrow}" />
         <Setter Property="Template">
@@ -133,17 +135,29 @@
                         Name="PART_Popup"
                         HorizontalOffset="{DynamicResource MenuFlyoutSubItemPopupHorizontalOffset}"
                         IsLightDismissEnabled="False"
-                        IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}"
+                        IsOpen="{TemplateBinding (helpers:SubmenuAnimationHelper.IsPopupOpen)}"
                         Placement="Right"
                         WindowManagerAddShadowHint="False">
                         <Border
+                            Name="PART_SubmenuPresenter"
                             Margin="0, 8, 8, 8"
                             BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
                             MinHeight="{DynamicResource MenuFlyoutThemeMinHeight}"
                             MaxWidth="{DynamicResource FlyoutThemeMaxWidth}"
                             HorizontalAlignment="Stretch"
                             Background="{DynamicResource ThemeX.ContentBackground.Tertiary}"
-                            CornerRadius="{DynamicResource OverlayCornerRadius}">
+                            CornerRadius="{DynamicResource OverlayCornerRadius}"
+                            IsHitTestVisible="{TemplateBinding IsSubMenuOpen}"
+                            Opacity="{TemplateBinding (helpers:SubmenuAnimationHelper.Opacity)}">
+
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Easing="QuadraticEaseOut"
+                                        Property="Opacity"
+                                        Duration="{x:Static helpers:SubmenuAnimationHelper.FadeDuration}" />
+                                </Transitions>
+                            </Border.Transitions>
 
                             <!--Border.Background>
                                 <DynamicResource ResourceKey="{OnPlatform 'ThemeX.ContentBackground.Tertiary', Windows='ThemeX.Transparent.Secondary'}" />

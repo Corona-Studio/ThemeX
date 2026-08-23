@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <x:Double x:Key="MenuBarHeight">40</x:Double>
@@ -42,6 +43,7 @@
                             IsLightDismissEnabled="True"
                             IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}"
                             OverlayInputPassThroughElement="{Binding $parent[Menu]}"
+                            helpers:PopupFadeAnimationHelper.IsEnabled="True"
                             WindowManagerAddShadowHint="False">
                             <Border
                                 MinHeight="{DynamicResource MenuFlyoutThemeMinHeight}"
@@ -50,7 +52,16 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{DynamicResource OverlayCornerRadius}">
+                                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                                Opacity="0">
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <DoubleTransition
+                                            Easing="QuadraticEaseOut"
+                                            Property="Opacity"
+                                            Duration="{x:Static helpers:PopupFadeAnimationHelper.FadeDuration}" />
+                                    </Transitions>
+                                </Border.Transitions>
                                 <ScrollViewer>
                                     <ItemsPresenter
                                         Name="PART_ItemsPresenter"

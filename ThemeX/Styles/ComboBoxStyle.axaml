@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks"
     xmlns:scroll="clr-namespace:ThemeX.Controls.Scroll"
     xmlns:themeX="clr-namespace:ThemeX">
@@ -164,6 +165,7 @@
                             IsLightDismissEnabled="True"
                             IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
                             PlacementTarget="Background"
+                            helpers:PopupFadeAnimationHelper.IsEnabled="True"
                             WindowManagerAddShadowHint="False">
                             <Border
                                 x:Name="PopupBorder"
@@ -171,7 +173,16 @@
                                 HorizontalAlignment="Stretch"
                                 Background="{DynamicResource ThemeX.ContentBackground.Secondary}"
                                 BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
-                                CornerRadius="{DynamicResource OverlayCornerRadius}">
+                                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                                Opacity="0">
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <DoubleTransition
+                                            Easing="QuadraticEaseOut"
+                                            Property="Opacity"
+                                            Duration="{x:Static helpers:PopupFadeAnimationHelper.FadeDuration}" />
+                                    </Transitions>
+                                </Border.Transitions>
                                 <scroll:SmoothScrollViewer
                                     HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                     UseSmoothScrolling="{DynamicResource {x:Static themeX:ThemeSettings.FluentScrollKey}}"
