@@ -60,6 +60,12 @@
         <Setter Property="Padding" Value="{DynamicResource ToolTipBorderPadding}" />
         <Setter Property="MaxWidth" Value="{DynamicResource ToolTipMaxWidth}" />
         <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border
