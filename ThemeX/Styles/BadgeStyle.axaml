@@ -55,6 +55,7 @@
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Content}"
                                 MaxLines="1"
+                                TextBlock.Foreground="{TemplateBinding Foreground}"
                                 TextTrimming="CharacterEllipsis" />
 
                         </Grid>
