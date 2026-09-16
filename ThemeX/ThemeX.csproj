@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="12.1.1" />
+    <PackageReference Include="Avalonia" Version="12.1.2" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.1.2" />
     <PackageReference Include="DynamicData" Version="9.4.33" />
   </ItemGroup>
@@ -23,9 +23,9 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.4.2" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="4.1.0" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="3.1.0" />
-    <PackageReference Include="ReactiveUI.Avalonia" Version="12.1.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="4.1.2" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="3.1.1" />
+    <PackageReference Include="ReactiveUI.Avalonia" Version="12.1.2" />
   </ItemGroup>
 
   <ItemGroup>
