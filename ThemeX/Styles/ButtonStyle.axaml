@@ -203,6 +203,8 @@
 
         <Setter Property="Background"
                 Value="{DynamicResource ThemeX.AccentColor}" />
+        <Setter Property="Foreground"
+                Value="{Binding Background, RelativeSource={RelativeSource Self}, Converter={StaticResource GreyLevelToForegroundConverter}}" />
         <Setter Property="BorderBrush"
                 Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorDark3Key}}" />
 
@@ -210,6 +212,11 @@
             <!--<Setter Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrush}" />-->
             <Setter Property="TextBlock.Foreground"
                     Value="{TemplateBinding Background, Converter={StaticResource GreyLevelToForegroundConverter}}" />
+        </Style>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter TextBlock">
+            <Setter Property="Foreground"
+                    Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ContentPresenter}}" />
         </Style>
 
         <Style Selector="^:disabled">
