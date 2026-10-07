@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks">
+    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers">
     <!--  Another really complex template...  -->
 
     <Design.PreviewWith>
@@ -126,6 +127,7 @@
                         Name="ArrowGlyph"
                         Padding="0"
                         HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
                         FontSize="{DynamicResource ScrollBarButtonArrowIconFontSize}"
                         Foreground="{DynamicResource ThemeX.Foreground.Primary}"
                         RenderTransform="none"
@@ -161,6 +163,7 @@
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar">
+        <Setter Property="helpers:ScrollBarAutoHideHelper.IsEnabled" Value="True" />
         <Setter Property="MinWidth" Value="{DynamicResource ScrollBarSize}" />
         <Setter Property="MinHeight" Value="{DynamicResource ScrollBarSize}" />
         <Setter Property="Background" Value="{DynamicResource ScrollBarBackground}" />
@@ -171,7 +174,7 @@
         <Style Selector="^:vertical">
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Grid x:Name="Root">
+                    <Grid x:Name="Root" Background="Transparent">
                         <Border
                             Name="VerticalRoot"
                             Background="{TemplateBinding Background}"
@@ -194,7 +197,6 @@
                                     Grid.Row="0"
                                     Width="{DynamicResource ScrollBarSize}"
                                     Height="{DynamicResource ScrollBarSize}"
-                                    Margin="1,0,0,0"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDDB;"
                                     Focusable="False"
@@ -234,7 +236,7 @@
                                         BorderBrush="{DynamicResource ScrollBarThumbBorderBrush}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         Opacity="1"
-                                        RenderTransformOrigin="100%,100%"
+                                        RenderTransformOrigin="50%,50%"
                                         Theme="{StaticResource ScrollBarThumb}" />
                                 </Track>
 
@@ -242,8 +244,7 @@
                                     Name="PART_LineDownButton"
                                     Grid.Row="2"
                                     Height="{DynamicResource ScrollBarSize}"
-                                    MinWidth="{DynamicResource ScrollBarSize}"
-                                    Margin="1,0,0,0"
+                                    Width="{DynamicResource ScrollBarSize}"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDDC;"
                                     Focusable="False"
@@ -266,7 +267,7 @@
         <Style Selector="^:horizontal">
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Grid x:Name="Root">
+                    <Grid x:Name="Root" Background="Transparent">
                         <Border
                             Name="VerticalRoot"
                             Background="{TemplateBinding Background}"
@@ -294,8 +295,7 @@
                                     Name="PART_LineUpButton"
                                     Grid.Row="0"
                                     Width="{DynamicResource ScrollBarSize}"
-                                    MinHeight="{DynamicResource ScrollBarSize}"
-                                    Margin="0,0,0,5"
+                                    Height="{DynamicResource ScrollBarSize}"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDD9;"
                                     Focusable="False"
@@ -329,12 +329,11 @@
                                     </Track.IncreaseButton>
                                     <Thumb
                                         MinHeight="{DynamicResource ScrollBarHorizontalThumbMinHeight}"
-                                        Margin="0,0,0,5"
                                         Background="{DynamicResource ScrollBarPanningThumbBackground}"
                                         BorderBrush="{DynamicResource ScrollBarThumbBorderBrush}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         Opacity="1"
-                                        RenderTransformOrigin="100%,100%"
+                                        RenderTransformOrigin="50%,50%"
                                         Theme="{StaticResource ScrollBarThumb}" />
                                 </Track>
 
@@ -342,8 +341,7 @@
                                     Name="PART_LineDownButton"
                                     Grid.Column="2"
                                     Height="{DynamicResource ScrollBarSize}"
-                                    MinWidth="{DynamicResource ScrollBarSize}"
-                                    Margin="0,0,0,5"
+                                    Width="{DynamicResource ScrollBarSize}"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDDA;"
                                     Focusable="False"
@@ -363,7 +361,20 @@
             </Style>
         </Style>
 
-        <Style Selector="^[IsExpanded=true]">
+        <Style Selector="^[AllowAutoHide=true] /template/ Grid#Root">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="^.auto-hide-visible /template/ Grid#Root">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <Style Selector="^.auto-hide-expanded, ^[AllowAutoHide=false]">
             <Style Selector="^ /template/ Grid#Root">
                 <Setter Property="Background" Value="{DynamicResource ScrollBarBackgroundPointerOver}" />
             </Style>
@@ -380,7 +391,7 @@
             </Style>
         </Style>
 
-        <Style Selector="^:disabled /template/ Grid#Root">
+        <Style Selector="^:disabled /template/ Thumb">
             <Setter Property="Opacity" Value="0.5" />
         </Style>
     </ControlTheme>

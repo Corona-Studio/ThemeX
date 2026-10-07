@@ -16,8 +16,8 @@
     <CornerRadius x:Key="OverlayCornerRadius">6</CornerRadius>
 
     <!--  ScrollBar animation  -->
-    <TransformOperations x:Key="VerticalSmallScrollThumbScaleTransform">scaleX(0.6) translateX(-2px)</TransformOperations>
-    <TransformOperations x:Key="HorizontalSmallScrollThumbScaleTransform">scaleY(0.6) translateY(-2px)</TransformOperations>
+    <TransformOperations x:Key="VerticalSmallScrollThumbScaleTransform">scaleX(0.6)</TransformOperations>
+    <TransformOperations x:Key="HorizontalSmallScrollThumbScaleTransform">scaleY(0.6)</TransformOperations>
 
     <converters:CornerRadiusFilterConverter x:Key="TopCornerRadiusFilterConverter" Filter="TopLeft, TopRight" />
     <converters:CornerRadiusFilterConverter x:Key="RightCornerRadiusFilterConverter" Filter="TopRight, BottomRight" />

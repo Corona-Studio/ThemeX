@@ -49,6 +49,11 @@
             </ControlTemplate>
         </Setter>
 
+        <Style Selector="^.reserve-scrollbar /template/ scroll|AdvanceScrollContentPresenter#PART_ContentPresenter">
+            <Setter Property="Grid.ColumnSpan" Value="1" />
+            <Setter Property="Grid.RowSpan" Value="1" />
+        </Style>
+
         <Style
             Selector="^[UseSmoothScrolling=True][UseCustomScrollAnimation=False] /template/ scroll|AdvanceScrollContentPresenter#PART_ContentPresenter">
             <Setter Property="Transitions">
