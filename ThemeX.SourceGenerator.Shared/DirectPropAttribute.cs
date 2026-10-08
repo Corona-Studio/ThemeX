@@ -9,6 +9,8 @@ namespace ThemeX.SourceGenerator.Shared;
 ///     Use this only for properties that need binding and change notification but must not
 ///     participate in styles, animations, inheritance, coercion, or value precedence. A
 ///     <c>private set</c> accessor generates a read-only DirectProperty registration.
+///     A property with a body keeps its storage and only generates registration.
+///     An existing OnPropertyChanged override must call HandleGeneratedPropertyChanged(change).
 /// </remarks>
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class DirectPropAttribute : Attribute

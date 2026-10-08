@@ -5,6 +5,8 @@ namespace ThemeX.SourceGenerator.Shared;
 /// <summary>
 ///     Generates an Avalonia <c>StyledProperty</c> that participates in styles, animations,
 ///     inheritance, coercion, and value precedence.
+///     A partial property generates its accessors; a property with a body only generates registration.
+///     An existing OnPropertyChanged override must call HandleGeneratedPropertyChanged(change).
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public class StyledPropAttribute : Attribute
