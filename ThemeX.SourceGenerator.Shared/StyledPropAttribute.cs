@@ -25,6 +25,4 @@ public class StyledPropAttribute : Attribute
     public string BindingMode { get; set; } = BindingDefault;
 
     public object? DefaultValue { get; set; }
-
-    public bool IsLangKey { get; set; } = false;
 }

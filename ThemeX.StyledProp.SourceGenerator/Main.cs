@@ -72,9 +72,7 @@ public sealed class Main : IIncrementalGenerator
             var attrSyntax = (AttributeSyntax)attribute.ApplicationSyntaxReference!.GetSyntax(token);
             var defaultSyntax = attrSyntax.ArgumentList?.Arguments.FirstOrDefault(a => a.NameEquals?.Name.Identifier.Text == "DefaultValue")?.Expression;
             var semanticModel = context.SemanticModel.Compilation.GetSemanticModel(syntax.SyntaxTree);
-            if (Named("IsLangKey").Value is true)
-                defaultValue = "global::LauncherX.UI.Theme.LangSwitcher.GetOneTimeStr(" + CSharpNames.Literal(rawDefault.Value?.ToString() ?? "") + ")";
-            else if (defaultSyntax is InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } } invocation)
+            if (defaultSyntax is InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } } invocation)
             {
                 var reference = semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression, token).Symbol;
                 if (reference is not (IFieldSymbol { IsStatic: true } or IPropertySymbol { IsStatic: true }))

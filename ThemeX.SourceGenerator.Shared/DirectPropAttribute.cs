@@ -27,6 +27,4 @@ public sealed class DirectPropAttribute : Attribute
     ///     Sets both the backing field's initial value and the direct property's unset value.
     /// </summary>
     public object? DefaultValue { get; set; }
-
-    public bool IsLangKey { get; set; }
 }
