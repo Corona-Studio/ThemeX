@@ -107,7 +107,10 @@ public class AnimationLayer : ContentControl
     {
         if (change.Property == MouseEnterAnimationProperty)
             OnMouseEnterAnimationChanged();
-        if (change.Property == CornerRadiusProperty || change.Property == BoundsProperty)
+        // Clip geometry uses local size, independent of the layer's position.
+        // Scrolling and rearranging rows must not rebuild the same native path.
+        if (change.Property == CornerRadiusProperty ||
+            change.Property == BoundsProperty && change.GetOldValue<Rect>().Size != change.GetNewValue<Rect>().Size)
             OnCornerRadiusChanged();
 
         base.OnPropertyChanged(change);

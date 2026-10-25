@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:collections="using:Avalonia.Collections"
     xmlns:cc="clr-namespace:ThemeX.Controls.Effects"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
     xmlns:themeX="clr-namespace:ThemeX">
     <Styles.Resources>
         <Thickness x:Key="DataGridTextColumnCellTextBlockMargin">4</Thickness>
@@ -191,43 +192,38 @@
                         ClipToBounds="True"
                         CornerRadius="{TemplateBinding CornerRadius}">
 
-                        <Panel>
-                            <Rectangle
-                                Name="ActiveRect"
-                                ClipToBounds="True"
-                                Fill="{DynamicResource ThemeX.BorderBrush.Pressed}"
-                                Opacity="0" />
-
-                            <DataGridFrozenGrid
-                                Name="PART_Root"
-                                ColumnDefinitions="Auto,*"
-                                RowDefinitions="*,Auto,Auto">
-
-                                <!--<Rectangle Name="BackgroundRectangle"
-                           Grid.RowSpan="2"
-                           Grid.ColumnSpan="2" />-->
-
-                                <DataGridRowHeader
-                                    Name="PART_RowHeader"
-                                    Grid.RowSpan="3"
-                                    DataGridFrozenGrid.IsFrozen="True" />
-                                <DataGridCellsPresenter
-                                    Name="PART_CellsPresenter"
-                                    Grid.Column="1"
-                                    DataGridFrozenGrid.IsFrozen="True" />
-                                <DataGridDetailsPresenter
-                                    Name="PART_DetailsPresenter"
-                                    Grid.Row="1"
-                                    Grid.Column="1" />
+                        <controls:DataGridRowLayout
+                            Name="PART_Root"
+                            ColumnDefinitions="Auto,*"
+                            RowDefinitions="*,Auto,Auto">
+                            <controls:DataGridRowLayout.Highlight>
                                 <Rectangle
-                                    Name="PART_BottomGridLine"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Height="1"
-                                    HorizontalAlignment="Stretch" />
+                                    Name="ActiveRect"
+                                    ZIndex="-1"
+                                    ClipToBounds="True"
+                                    Fill="{DynamicResource ThemeX.BorderBrush.Pressed}"
+                                    Opacity="0" />
+                            </controls:DataGridRowLayout.Highlight>
+                            <DataGridRowHeader
+                                Name="PART_RowHeader"
+                                Grid.RowSpan="3"
+                                DataGridFrozenGrid.IsFrozen="True" />
+                            <DataGridCellsPresenter
+                                Name="PART_CellsPresenter"
+                                Grid.Column="1"
+                                DataGridFrozenGrid.IsFrozen="True" />
+                            <DataGridDetailsPresenter
+                                Name="PART_DetailsPresenter"
+                                Grid.Row="1"
+                                Grid.Column="1" />
+                            <Rectangle
+                                Name="PART_BottomGridLine"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Height="1"
+                                HorizontalAlignment="Stretch" />
 
-                            </DataGridFrozenGrid>
-                        </Panel>
+                        </controls:DataGridRowLayout>
                     </Border>
                 </ControlTemplate>
             </Setter>
