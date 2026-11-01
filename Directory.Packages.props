@@ -1,7 +1,7 @@
 <Project>
   <!-- Use the parent integration policy when embedded; otherwise keep standalone defaults. -->
   <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <ManagePackageVersionsCentrally Condition="'$(ManagePackageVersionsCentrally)' != 'false'">true</ManagePackageVersionsCentrally>
     <_ThemeXParentPackages Condition="Exists('$(MSBuildThisFileDirectory)../LauncherX.slnx') And Exists('$(MSBuildThisFileDirectory)../Directory.Packages.props')">$(MSBuildThisFileDirectory)../Directory.Packages.props</_ThemeXParentPackages>
   </PropertyGroup>
 
