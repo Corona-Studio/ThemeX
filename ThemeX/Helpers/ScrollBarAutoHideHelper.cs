@@ -63,16 +63,13 @@ public static class ScrollBarAutoHideHelper
             _owner.AddHandler(InputElement.PointerMovedEvent, OnPointerMoved, RoutingStrategies.Tunnel, true);
             _owner.PointerExited += OnPointerExited;
             _window = TopLevel.GetTopLevel(_bar) as Window;
-            if (_window is not null) _window.Deactivated += OnDeactivated;
+            _window?.Deactivated += OnDeactivated;
         }
 
         private void Detach()
         {
-            if (_window is not null)
-            {
-                _window.Deactivated -= OnDeactivated;
-                _window = null;
-            }
+            _window?.Deactivated -= OnDeactivated;
+            _window = null;
             if (_owner is { } owner)
             {
                 owner.RemoveHandler(InputElement.PointerMovedEvent, OnPointerMoved);

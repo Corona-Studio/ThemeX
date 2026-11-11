@@ -44,44 +44,44 @@ public static class ColorHelper
         return average < threshold;
     }
 
-    /// <summary>
-    ///     获取图片主题颜色
-    /// </summary>
-    /// <param name="bitmap">图像</param>
-    /// <param name="colorCount">颜色数量</param>
-    /// <returns></returns>
-    public static IEnumerable<QuantizedColor> GetPaletteFromBitmap(
-        this Image<Rgba32> bitmap,
-        int colorCount = 8)
+    extension(Image<Rgba32> bitmap)
     {
-        var quantizedImage = bitmap.Clone(ctx =>
+        /// <summary>
+        ///     获取图片主题颜色
+        /// </summary>
+        /// <param name="colorCount">颜色数量</param>
+        /// <returns></returns>
+        public IEnumerable<QuantizedColor> GetPaletteFromBitmap(int colorCount = 8)
         {
-            ctx.Resize(256, 0)
-                .Quantize(new HexadecatreeQuantizer(new QuantizerOptions
-                {
-                    MaxColors = colorCount + 3
-                }));
-        });
+            var quantizedImage = bitmap.Clone(ctx =>
+            {
+                ctx.Resize(256, 0)
+                    .Quantize(new HexadecatreeQuantizer(new QuantizerOptions
+                    {
+                        MaxColors = colorCount + 3
+                    }));
+            });
 
-        var colors = new Dictionary<Rgba32, int>();
+            var colors = new Dictionary<Rgba32, int>();
 
-        for (var x = 0; x < quantizedImage.Width; x++)
-        for (var y = 0; y < quantizedImage.Height; y++)
-        {
-            var col = quantizedImage[x, y];
+            for (var x = 0; x < quantizedImage.Width; x++)
+            for (var y = 0; y < quantizedImage.Height; y++)
+            {
+                var col = quantizedImage[x, y];
 
-            if (!colors.TryAdd(col, 1))
-                colors[col]++;
+                if (!colors.TryAdd(col, 1))
+                    colors[col]++;
+            }
+
+            var colorList = colors
+                .OrderByDescending(c => c.Value)
+                .Where(c => c.Key is not { A: 255, R: 255, G: 255, B: 255 })
+                .Take(colorCount)
+                .Select(c => new QuantizedColor(new Color(c.Key.A, c.Key.R, c.Key.G, c.Key.B), c.Value))
+                .ToList();
+
+            return colorList;
         }
-
-        var colorList = colors
-            .OrderByDescending(c => c.Value)
-            .Where(c => c.Key is not { A: 255, R: 255, G: 255, B: 255 })
-            .Take(colorCount)
-            .Select(c => new QuantizedColor(new Color(c.Key.A, c.Key.R, c.Key.G, c.Key.B), c.Value))
-            .ToList();
-
-        return colorList;
     }
 
     extension(Color color)

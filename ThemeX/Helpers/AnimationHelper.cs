@@ -13,15 +13,18 @@ public static class AnimationHelper
     public const string Scale = "Scale";
     public const string Size = "Size";
 
-    public static void OnAttachedToVisualTreeOnce(this Visual control, Action action)
+    extension(Visual control)
     {
-        control.AttachedToVisualTree += AttachedToVisualTree;
-        return;
-
-        void AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+        public void OnAttachedToVisualTreeOnce(Action action)
         {
-            action();
-            control.AttachedToVisualTree -= AttachedToVisualTree;
+            control.AttachedToVisualTree += AttachedToVisualTree;
+            return;
+
+            void AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+            {
+                action();
+                control.AttachedToVisualTree -= AttachedToVisualTree;
+            }
         }
     }
 

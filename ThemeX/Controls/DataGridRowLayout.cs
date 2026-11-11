@@ -7,20 +7,18 @@ namespace ThemeX.Controls;
 /// <summary>Places a row-state overlay behind the frozen grid without including it in track measurement.</summary>
 public sealed class DataGridRowLayout : DataGridFrozenGrid
 {
-    private Control? _highlight;
-
     public Control? Highlight
     {
-        get => _highlight;
+        get;
         set
         {
-            if (ReferenceEquals(_highlight, value)) return;
-            if (_highlight != null)
+            if (ReferenceEquals(field, value)) return;
+            if (field != null)
             {
-                VisualChildren.Remove(_highlight);
-                LogicalChildren.Remove(_highlight);
+                VisualChildren.Remove(field);
+                LogicalChildren.Remove(field);
             }
-            _highlight = value;
+            field = value;
             if (value != null)
             {
                 // Panel keeps Children at matching logical/visual indices. The overlay stays after them;
@@ -35,14 +33,14 @@ public sealed class DataGridRowLayout : DataGridFrozenGrid
     protected override Size MeasureOverride(Size availableSize)
     {
         var desired = base.MeasureOverride(availableSize);
-        _highlight?.Measure(availableSize);
+        Highlight?.Measure(availableSize);
         return desired;
     }
 
     protected override Size ArrangeOverride(Size finalSize)
     {
         var arranged = base.ArrangeOverride(finalSize);
-        _highlight?.Arrange(new Rect(arranged));
+        Highlight?.Arrange(new Rect(arranged));
         return arranged;
     }
 }

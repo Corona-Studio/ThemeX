@@ -7,9 +7,12 @@ public static class GeometryHelper
 {
     private const double PiOver2 = Math.PI / 2.0; // 90 deg to rad
 
-    public static double GetAverageCornerRadius(this CornerRadius cornerRadius)
+    extension(CornerRadius cornerRadius)
     {
-        return (cornerRadius.TopLeft + cornerRadius.TopRight + cornerRadius.BottomLeft + cornerRadius.BottomRight) / 4;
+        public double GetAverageCornerRadius()
+        {
+            return (cornerRadius.TopLeft + cornerRadius.TopRight + cornerRadius.BottomLeft + cornerRadius.BottomRight) / 4;
+        }
     }
 
     public static Geometry CreateDefiningGeometry(Size size, double thickness = 0, double radiusX = 0,

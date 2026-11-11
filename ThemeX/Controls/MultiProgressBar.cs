@@ -84,7 +84,7 @@ public sealed partial class MultiProgressBar : TemplatedControl
             _mainGrid.Children.Add(rect);
 
             if (i >= 0 && i < Tags.Count)
-                Items.Add(new Indicator($"{Tags![i]} [{Values![i].ToString(ValueFormat)}]",
+                Items.Add(new Indicator($"{Tags[i]} [{Values[i].ToString(ValueFormat)}]",
                     colorBrush));
         }
     }

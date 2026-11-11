@@ -140,7 +140,7 @@ public sealed class RevealEffect : AnimationLayer
     {
         if (_last == null) return;
 
-        _last!.Fill = HaloBrush;
+        _last.Fill = HaloBrush;
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
