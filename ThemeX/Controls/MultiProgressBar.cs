@@ -75,12 +75,7 @@ public sealed partial class MultiProgressBar : TemplatedControl
             var targetColor = FillColor.Color;
 
             for (var j = 0; j < i; j++)
-                targetColor = ColorGradientMode switch
-                {
-                    IndicatorColorGradientMode.Lighten => targetColor.ToLighter(),
-                    IndicatorColorGradientMode.Darken => targetColor.ToDarker(),
-                    _ => ThrowHelper.ThrowArgumentOutOfRangeException<Color>(nameof(ColorGradientMode))
-                };
+                targetColor = GetNextIndicatorColor(targetColor, ColorGradientMode);
 
             var colorBrush = new ImmutableSolidColorBrush(targetColor);
             var rect = new Rectangle { Fill = colorBrush };
@@ -113,12 +108,7 @@ public sealed partial class MultiProgressBar : TemplatedControl
             var targetColor = FillColor.Color;
 
             for (var j = 0; j < index; j++)
-                targetColor = ColorGradientMode switch
-                {
-                    IndicatorColorGradientMode.Lighten => targetColor.ToLighter(),
-                    IndicatorColorGradientMode.Darken => targetColor.ToDarker(),
-                    _ => ThrowHelper.ThrowArgumentOutOfRangeException<Color>(nameof(ColorGradientMode))
-                };
+                targetColor = GetNextIndicatorColor(targetColor, ColorGradientMode);
 
             var colorBrush = new ImmutableSolidColorBrush(targetColor);
 
@@ -134,6 +124,21 @@ public sealed partial class MultiProgressBar : TemplatedControl
 
             index++;
         }
+    }
+
+    private static Color GetNextIndicatorColor(Color color, IndicatorColorGradientMode mode)
+    {
+        if (!Enum.IsDefined(mode))
+            return ThrowHelper.ThrowArgumentOutOfRangeException<Color>(nameof(ColorGradientMode));
+
+        // Unknown numeric values are rejected above. A new named mode must add a branch.
+#pragma warning disable CS8524
+        return mode switch
+        {
+            IndicatorColorGradientMode.Lighten => color.ToLighter(),
+            IndicatorColorGradientMode.Darken => color.ToDarker()
+        };
+#pragma warning restore CS8524
     }
 
     partial void OnValuesChanged()
