@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -7,7 +8,6 @@ using Avalonia.Media;
 using Avalonia.Media.Immutable;
 using CommunityToolkit.Diagnostics;
 using ThemeX.Helpers;
-using ThemeX.SourceGenerator.Shared;
 
 namespace ThemeX.Controls;
 
@@ -23,23 +23,33 @@ public enum IndicatorColorGradientMode
 [TemplatePart("MainGrid", typeof(Grid), IsRequired = true)]
 public sealed partial class MultiProgressBar : TemplatedControl
 {
-    private static readonly SolidColorBrush DefaultFillColor = new(Colors.BurlyWood);
+    public static readonly StyledProperty<ISolidColorBrush> FillColorProperty =
+        AvaloniaProperty.Register<MultiProgressBar, ISolidColorBrush>(
+            nameof(FillColor),
+            new ImmutableSolidColorBrush(Colors.BurlyWood));
 
     private ItemsControl? _indicators;
     private Grid? _mainGrid;
 
-    [DirectProp] public partial List<double>? Values { get; set; }
+    [GeneratedDirectProperty]
+    public partial List<double>? Values { get; set; }
 
-    [DirectProp] public partial List<string>? Tags { get; set; }
+    [GeneratedDirectProperty]
+    public partial List<string>? Tags { get; set; }
 
-    [StyledProp(DefaultValue = "####")] public partial string ValueFormat { get; set; }
+    [GeneratedStyledProperty(DefaultValue = "####")]
+    public partial string ValueFormat { get; set; }
 
-    [StyledProp(DefaultValue = true)] public partial bool IndicatorVisibility { get; set; }
+    [GeneratedStyledProperty(DefaultValue = true)]
+    public partial bool IndicatorVisibility { get; set; }
 
-    [StyledProp(DefaultValue = nameof(DefaultFillColor))]
-    public partial ISolidColorBrush FillColor { get; set; }
+    public ISolidColorBrush FillColor
+    {
+        get => GetValue(FillColorProperty);
+        set => SetValue(FillColorProperty, value);
+    }
 
-    [StyledProp(DefaultValue = IndicatorColorGradientMode.Lighten)]
+    [GeneratedStyledProperty(DefaultValue = IndicatorColorGradientMode.Lighten)]
     public partial IndicatorColorGradientMode ColorGradientMode { get; set; }
 
     public ObservableCollection<Indicator> Items { get; } = [];
@@ -55,6 +65,21 @@ public sealed partial class MultiProgressBar : TemplatedControl
 
         OnDataPropertyChanged();
         OnIndicatorVisibilityChanged();
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == IndicatorVisibilityProperty)
+            OnIndicatorVisibilityChanged();
+        else if (change.Property == FillColorProperty)
+            OnFillColorChanged();
+        else if (change.Property == ValuesProperty ||
+                 change.Property == TagsProperty ||
+                 change.Property == ValueFormatProperty ||
+                 change.Property == ColorGradientModeProperty)
+            OnDataPropertyChanged();
     }
 
     private void OnDataPropertyChanged()
@@ -89,12 +114,12 @@ public sealed partial class MultiProgressBar : TemplatedControl
         }
     }
 
-    partial void OnIndicatorVisibilityChanged()
+    private void OnIndicatorVisibilityChanged()
     {
         _indicators?.IsVisible = IndicatorVisibility;
     }
 
-    partial void OnFillColorChanged()
+    private void OnFillColorChanged()
     {
         if (_mainGrid == null) return;
         if (_indicators == null) return;
@@ -139,20 +164,5 @@ public sealed partial class MultiProgressBar : TemplatedControl
             IndicatorColorGradientMode.Darken => color.ToDarker()
         };
 #pragma warning restore CS8524
-    }
-
-    partial void OnValuesChanged()
-    {
-        OnDataPropertyChanged();
-    }
-
-    partial void OnTagsChanged()
-    {
-        OnDataPropertyChanged();
-    }
-
-    partial void OnValueFormatChanged()
-    {
-        OnDataPropertyChanged();
     }
 }

@@ -7,8 +7,11 @@ using Avalonia.Threading;
 
 namespace ThemeX.Controls.Effects;
 
-public sealed class RippleEffect : ContentControl
+public sealed partial class RippleEffect : ContentControl
 {
+    public static readonly StyledProperty<IBrush> RippleFillProperty =
+        AvaloniaProperty.Register<RippleEffect, IBrush>(nameof(RippleFill), Brushes.White);
+
     private Ripple? _last;
     private byte _pointers;
 
@@ -110,32 +113,17 @@ public sealed class RippleEffect : ContentControl
 
     #region Styled properties
 
-    public static readonly StyledProperty<IBrush> RippleFillProperty =
-        AvaloniaProperty.Register<RippleEffect, IBrush>(nameof(RippleFill), SolidColorBrush.Parse("#FFF"));
-
     public IBrush RippleFill
     {
         get => GetValue(RippleFillProperty);
         set => SetValue(RippleFillProperty, value);
     }
 
-    public static readonly StyledProperty<double> RippleOpacityProperty =
-        AvaloniaProperty.Register<RippleEffect, double>(nameof(RippleOpacity), 0.6);
+    [GeneratedStyledProperty(DefaultValue = 0.6d)]
+    public partial double RippleOpacity { get; set; }
 
-    public double RippleOpacity
-    {
-        get => GetValue(RippleOpacityProperty);
-        set => SetValue(RippleOpacityProperty, value);
-    }
-
-    public static readonly StyledProperty<bool> RaiseRippleCenterProperty =
-        AvaloniaProperty.Register<RippleEffect, bool>(nameof(RaiseRippleCenter));
-
-    public bool RaiseRippleCenter
-    {
-        get => GetValue(RaiseRippleCenterProperty);
-        set => SetValue(RaiseRippleCenterProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool RaiseRippleCenter { get; set; }
 
     #endregion Styled properties
 }

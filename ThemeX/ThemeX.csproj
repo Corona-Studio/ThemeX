@@ -18,14 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThemeX.SourceGenerator.Shared\ThemeX.SourceGenerator.Shared.csproj" />
-    <ProjectReference Include="..\ThemeX.StyledProp.SourceGenerator\ThemeX.StyledProp.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Diagnostics" />
-    <PackageReference Include="SixLabors.ImageSharp" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" />
     <PackageReference Include="ReactiveUI.Avalonia" />
   </ItemGroup>
 

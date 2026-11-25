@@ -2,15 +2,17 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:collections="using:Avalonia.Collections"
-    xmlns:cc="clr-namespace:ThemeX.Controls.Effects"
     xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:themeX="clr-namespace:ThemeX">
     <Styles.Resources>
-        <Thickness x:Key="DataGridTextColumnCellTextBlockMargin">4</Thickness>
+        <Thickness x:Key="DataGridTextColumnCellTextBlockMargin">12,4</Thickness>
+
         <ControlTheme x:Key="DataGridCellTextBlockTheme" TargetType="TextBlock">
             <Setter Property="Margin" Value="{DynamicResource DataGridTextColumnCellTextBlockMargin}" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </ControlTheme>
+
         <ControlTheme
             x:Key="DataGridCellTextBoxTheme"
             BasedOn="{StaticResource {x:Type TextBox}}"
@@ -54,12 +56,14 @@
 
         <ControlTheme x:Key="{x:Type DataGridColumnHeader}" TargetType="DataGridColumnHeader">
             <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="MinHeight" Value="36" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="SeparatorBrush" Value="{DynamicResource ThemeControlLowColor}" />
-            <Setter Property="Padding" Value="4" />
-            <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}" />
+            <Setter Property="SeparatorBrush" Value="{DynamicResource ThemeX.Stroke.Divider}" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Template">
                 <ControlTemplate>
                     <Border
@@ -68,8 +72,12 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="Background" Duration="0:0:0.12" />
+                            </Transitions>
+                        </Border.Transitions>
                         <Grid ColumnDefinitions="*,Auto">
-
                             <Grid
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -84,39 +92,38 @@
                                     Name="SortIcon"
                                     Grid.Column="1"
                                     Width="8"
-                                    Margin="4,0,0,0"
+                                    Margin="8,0,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Data="F1 M -5.215,6.099L 5.215,6.099L 0,0L -5.215,6.099 Z "
-                                    Fill="{TemplateBinding Foreground}"
+                                    Fill="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTextKey}}"
                                     IsVisible="False"
+                                    RenderTransformOrigin="50%,50%"
                                     Stretch="Uniform" />
-
                             </Grid>
 
                             <Rectangle
                                 Name="VerticalSeparator"
                                 Grid.Column="1"
                                 Width="1"
-                                VerticalAlignment="Stretch"
+                                Height="16"
+                                VerticalAlignment="Center"
                                 Fill="{TemplateBinding SeparatorBrush}"
                                 IsVisible="{TemplateBinding AreSeparatorsVisible}" />
-
                         </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter>
 
-            <Style Selector="^:focus-visible /template/ Grid#FocusVisual">
-                <Setter Property="IsVisible" Value="True" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+            </Style>
+            <Style Selector="^:pointerover /template/ Border#HeaderBorder">
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
             </Style>
 
-            <Style Selector="^:pointerover /template/ Grid#PART_ColumnHeaderRoot">
-                <Setter Property="Background" Value="{DynamicResource DataGridColumnHeaderHoveredBackgroundBrush}" />
-            </Style>
-
-            <Style Selector="^:pressed /template/ Grid#PART_ColumnHeaderRoot">
-                <Setter Property="Background" Value="{DynamicResource DataGridColumnHeaderPressedBackgroundBrush}" />
+            <Style Selector="^:pressed /template/ Border#HeaderBorder">
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
             </Style>
 
             <Style Selector="^:dragIndicator">
@@ -138,6 +145,7 @@
         </ControlTheme>
 
         <ControlTheme x:Key="{x:Type DataGridRowHeader}" TargetType="DataGridRowHeader">
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Template">
                 <ControlTemplate>
                     <Grid
@@ -178,10 +186,7 @@
         <ControlTheme x:Key="{x:Type DataGridRow}" TargetType="DataGridRow">
             <Setter Property="Background" Value="{Binding $parent[DataGrid].RowBackground}" />
             <Setter Property="MinHeight" Value="{Binding $parent[DataGrid].RowHeight}" />
-            <!--  <Style  -->
-            <!--  Selector="^:pointerover">  -->
-            <!--   <Setter Property="Background" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}"/> -->
-            <!-- </Style> -->
+            <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
             <Setter Property="Template">
                 <ControlTemplate>
                     <Border
@@ -190,8 +195,8 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         ClipToBounds="True"
-                        CornerRadius="{TemplateBinding CornerRadius}">
-
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        helpers:RoundedClipHelper.ClipToCornerRadius="True">
                         <controls:DataGridRowLayout
                             Name="PART_Root"
                             ColumnDefinitions="Auto,*"
@@ -201,8 +206,18 @@
                                     Name="ActiveRect"
                                     ZIndex="-1"
                                     ClipToBounds="True"
-                                    Fill="{DynamicResource ThemeX.BorderBrush.Pressed}"
-                                    Opacity="0" />
+                                    Fill="{DynamicResource ThemeX.Surface.SubtleHover}"
+                                    Opacity="0">
+                                    <Rectangle.Transitions>
+                                        <Transitions>
+                                            <DoubleTransition
+                                                Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
+                                                Property="Opacity"
+                                                Duration="0:0:0.14" />
+                                            <BrushTransition Property="Fill" Duration="0:0:0.14" />
+                                        </Transitions>
+                                    </Rectangle.Transitions>
+                                </Rectangle>
                             </controls:DataGridRowLayout.Highlight>
                             <DataGridRowHeader
                                 Name="PART_RowHeader"
@@ -222,25 +237,10 @@
                                 Grid.Column="1"
                                 Height="1"
                                 HorizontalAlignment="Stretch" />
-
                         </controls:DataGridRowLayout>
                     </Border>
                 </ControlTemplate>
             </Setter>
-
-            <Style Selector="^ /template/ Rectangle#ActiveRect">
-                <!-- <Setter Property="Fill" Value="{DynamicResource HighlightBrush2}" /> -->
-                <Setter Property="Transitions">
-                    <Setter.Value>
-                        <Transitions>
-                            <DoubleTransition
-                                Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
-                                Property="Opacity"
-                                Duration="{x:Static cc:Ripple.Duration}" />
-                        </Transitions>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
             <Style Selector="^:pointerover /template/ Rectangle#ActiveRect">
                 <Setter Property="Opacity" Value="1" />
@@ -248,19 +248,17 @@
 
             <Style Selector="^:selected /template/ Rectangle#ActiveRect">
                 <Setter Property="Opacity" Value="1" />
-                <Setter Property="Fill"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
+                <Setter Property="Fill" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorSubtleKey}}" />
+            </Style>
+
+            <Style Selector="^:selected:pointerover /template/ Rectangle#ActiveRect">
+                <Setter Property="Opacity" Value="1" />
+                <Setter Property="Fill" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorSubtleHoverKey}}" />
             </Style>
 
             <Style Selector="^:selected">
-                <Setter Property="Foreground" Value="{DynamicResource HighlightForegroundBrush}" />
-                <!-- <Setter Property="Background" Value="Red"></Setter> -->
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
             </Style>
-
-            <!--<Style Selector="^:selected /template/ animations|AnimationLayer">
-        <Setter Property="animations:WaveToggle.Activated" Value="True"/>
-      </Style>-->
-
         </ControlTheme>
 
         <ControlTheme x:Key="SimpleDataGridRowGroupExpanderButtonTheme" TargetType="ToggleButton">
@@ -287,18 +285,19 @@
             </Style>
         </ControlTheme>
 
-
         <ControlTheme x:Key="{x:Type DataGridRowGroupHeader}" TargetType="DataGridRowGroupHeader">
-            <Setter Property="Background" Value="{DynamicResource ThemeControlMidHighBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.CardSecondary}" />
             <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-            <Setter Property="Height" Value="20" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="MinHeight" Value="32" />
             <Setter Property="Template">
                 <ControlTemplate x:DataType="collections:DataGridCollectionViewGroup">
                     <DataGridFrozenGrid
                         Name="Root"
+                        Background="{TemplateBinding Background}"
                         ColumnDefinitions="Auto,Auto,Auto,Auto"
                         RowDefinitions="Auto,*,Auto">
-
                         <Rectangle
                             Name="PART_IndentSpacer"
                             Grid.Row="1"
@@ -307,7 +306,7 @@
                             Name="PART_ExpanderButton"
                             Grid.Row="1"
                             Grid.Column="2"
-                            Margin="2,0,0,0"
+                            Margin="4,0,0,0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -318,7 +317,6 @@
                         <StackPanel
                             Grid.Row="1"
                             Grid.Column="3"
-                            Margin="0,1,0,1"
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
                             <TextBlock
@@ -336,7 +334,6 @@
                             Name="RowHeader"
                             Grid.RowSpan="3"
                             DataGridFrozenGrid.IsFrozen="True" />
-
                     </DataGridFrozenGrid>
                 </ControlTemplate>
             </Setter>
@@ -350,14 +347,14 @@
             <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
             <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
             <Setter Property="SelectionMode" Value="Extended" />
-            <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ThemeBorderHighColor}" />
-            <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource ThemeBorderHighColor}" />
+            <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ThemeX.Stroke.Divider}" />
+            <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource ThemeX.Stroke.Divider}" />
             <Setter Property="BorderBrush" Value="{x:Null}" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
             <Setter Property="DropLocationIndicatorTemplate">
                 <Template>
-                    <Rectangle Width="2" Fill="{DynamicResource ThemeBorderHighColor}" />
+                    <Rectangle Width="2" Fill="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
                 </Template>
             </Setter>
             <Setter Property="Template">
@@ -372,7 +369,7 @@
                             ClipToBounds="True"
                             ColumnDefinitions="Auto,*,Auto"
                             RowDefinitions="Auto,*,Auto,Auto">
-                            <DataGridColumnHeader Name="PART_TopLeftCornerHeader" Width="22" />
+                            <DataGridColumnHeader Name="PART_TopLeftCornerHeader" Width="24" />
                             <DataGridColumnHeadersPresenter Name="PART_ColumnHeadersPresenter" Grid.Column="1" />
                             <DataGridColumnHeader Name="PART_TopRightCornerHeader" Grid.Column="2" />
                             <Rectangle
@@ -380,8 +377,7 @@
                                 Grid.ColumnSpan="3"
                                 Height="1"
                                 VerticalAlignment="Bottom"
-                                Fill="{DynamicResource ThemeControlMidHighBrush}"
-                                StrokeThickness="1" />
+                                Fill="{DynamicResource ThemeX.Stroke.Divider}" />
 
                             <DataGridRowsPresenter
                                 Name="PART_RowsPresenter"
@@ -399,18 +395,18 @@
                                 Name="PART_BottomRightCorner"
                                 Grid.Row="2"
                                 Grid.Column="2"
-                                Fill="{DynamicResource ThemeControlMidHighBrush}" />
+                                Fill="Transparent" />
                             <Rectangle
                                 Name="BottomLeftCorner"
                                 Grid.Row="2"
                                 Grid.ColumnSpan="2"
-                                Fill="{DynamicResource ThemeControlMidHighBrush}" />
+                                Fill="Transparent" />
                             <ScrollBar
                                 Name="PART_VerticalScrollbar"
                                 Grid.Row="1"
                                 Grid.Column="2"
                                 Width="{DynamicResource ScrollBarThickness}"
-                                Margin="0,0,6,0"
+                                Margin="0,0,4,0"
                                 Orientation="Vertical" />
 
                             <Grid
@@ -422,7 +418,7 @@
                                     Name="PART_HorizontalScrollbar"
                                     Grid.Column="1"
                                     Height="{DynamicResource ScrollBarThickness}"
-                                    Margin="0,0,0,6"
+                                    Margin="0,0,0,4"
                                     Orientation="Horizontal" />
                             </Grid>
                         </Grid>
@@ -431,61 +427,23 @@
             </Setter>
         </ControlTheme>
     </Styles.Resources>
+
     <Style Selector="DataGridColumnHeader TextBox.FilterBox">
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}" />
-        <Style Selector="^:empty">
-            <Setter Property="CornerRadius" Value="0" />
-            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Total}" />
-        </Style>
-
-        <Style Selector="^ /template/ TextPresenter#PART_TextPresenter">
-            <Setter Property="Transitions">
-                <Transitions>
-                    <ThicknessTransition Property="Margin" Duration="0:0:0.2">
-                        <ThicknessTransition.Easing>
-                            <BackEaseOut />
-                        </ThicknessTransition.Easing>
-                    </ThicknessTransition>
-                </Transitions>
-            </Setter>
-            <Setter Property="Margin" Value="10, 0, 10, 0" />
-        </Style>
-
-        <Style Selector="^ /template/ DockPanel">
-            <Setter Property="Margin" Value="2,6,2,5" />
-        </Style>
-
-        <Style Selector="^ /template/ Border#PART_BorderElement">
-            <Setter Property="Transitions">
-                <Transitions>
-                    <ThicknessTransition Property="BorderThickness" Duration="0:0:0.2">
-                        <ThicknessTransition.Easing>
-                            <BackEaseOut />
-                        </ThicknessTransition.Easing>
-                    </ThicknessTransition>
-                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2" />
-                    <BrushTransition Property="Background" Duration="0:0:0.125">
-                        <BrushTransition.Easing>
-                            <QuadraticEaseInOut />
-                        </BrushTransition.Easing>
-                    </BrushTransition>
-                </Transitions>
-            </Setter>
+        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Control}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
+        <Style Selector="^:empty:not(:focus)">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
 
         <Style Selector="^:focus">
-            <Setter Property="CornerRadius" Value="0" />
-            <Style Selector="^ /template/ TextPresenter#PART_TextPresenter">
-                <Setter Property="Margin" Value="0" />
-            </Style>
-            <Style Selector="^ /template/ TextBlock#PART_Watermark">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-            </Style>
-
             <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Total}" />
-                <Setter Property="BorderThickness" Value="0, 0, 0, 2" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlInputActive}" />
             </Style>
         </Style>
     </Style>

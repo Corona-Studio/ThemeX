@@ -6,47 +6,19 @@ using Avalonia.Media;
 
 namespace ThemeX.Controls;
 
-public sealed class SimpleLineChart : TemplatedControl
+public sealed partial class SimpleLineChart : TemplatedControl
 {
-    public static readonly DirectProperty<SimpleLineChart, ObservableCollection<double>?> DataSourceProperty =
-        AvaloniaProperty.RegisterDirect<SimpleLineChart, ObservableCollection<double>?>(
-            nameof(DataSource),
-            chart => chart.DataSource,
-            (chart, value) => chart.DataSource = value);
-
-    public static readonly StyledProperty<double> MaximumProperty =
-        AvaloniaProperty.Register<SimpleLineChart, double>(
-            nameof(Maximum), 100);
-
-    public static readonly StyledProperty<int> MaximumColumnsProperty =
-        AvaloniaProperty.Register<SimpleLineChart, int>(
-            nameof(MaximumColumns));
-
     public static readonly StyledProperty<IBrush> DataColumnFillProperty =
-        AvaloniaProperty.Register<SimpleLineChart, IBrush>(
-            nameof(DataColumnFill), new SolidColorBrush(Colors.Black));
+        AvaloniaProperty.Register<SimpleLineChart, IBrush>(nameof(DataColumnFill), Brushes.Black);
 
-    public static readonly StyledProperty<double> LineThicknessProperty =
-        AvaloniaProperty.Register<SimpleLineChart, double>(
-            nameof(LineThickness), 2);
+    [GeneratedDirectProperty]
+    public partial ObservableCollection<double>? DataSource { get; set; }
 
-    public ObservableCollection<double>? DataSource
-    {
-        get;
-        set => SetAndRaise(DataSourceProperty, ref field, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 100d)]
+    public partial double Maximum { get; set; }
 
-    public double Maximum
-    {
-        get => GetValue(MaximumProperty);
-        set => SetValue(MaximumProperty, value);
-    }
-
-    public int MaximumColumns
-    {
-        get => GetValue(MaximumColumnsProperty);
-        set => SetValue(MaximumColumnsProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial int MaximumColumns { get; set; }
 
     public IBrush DataColumnFill
     {
@@ -54,11 +26,8 @@ public sealed class SimpleLineChart : TemplatedControl
         set => SetValue(DataColumnFillProperty, value);
     }
 
-    public double LineThickness
-    {
-        get => GetValue(LineThicknessProperty);
-        set => SetValue(LineThicknessProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = 2d)]
+    public partial double LineThickness { get; set; }
 
     private void OnDataSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {

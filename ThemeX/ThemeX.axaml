@@ -31,5 +31,6 @@
     </Styles.Resources>
 
     <StyleInclude Source="/Styles/DataGridStyle.axaml" />
+    <StyleInclude Source="/Styles/FluentSurfaces.axaml" />
     <StyleInclude Source="/Assets/ThemeXControls.axaml" />
 </Styles>

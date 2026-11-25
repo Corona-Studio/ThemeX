@@ -1,20 +1,7 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Design.PreviewWith>
-        <Grid
-            Width="200"
-            Height="300"
-            Margin="20"
-            ColumnDefinitions="*,20,*">
-            <ScrollViewer>
-                <Border Height="1000" Background="#ccc" />
-            </ScrollViewer>
-        </Grid>
-    </Design.PreviewWith>
-
     <ControlTheme x:Key="{x:Type ScrollViewer}" TargetType="ScrollViewer">
         <Setter Property="Background" Value="Transparent" />
-
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
@@ -22,7 +9,7 @@
                         Name="PART_ContentPresenter"
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="{TemplateBinding Padding}"
+                        Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         Content="{TemplateBinding Content}"
                         HorizontalSnapPointsAlignment="{TemplateBinding HorizontalSnapPointsAlignment}"
@@ -40,7 +27,7 @@
                     <ScrollBar
                         Name="PART_HorizontalScrollBar"
                         Grid.Row="1"
-                        Margin="0,0,0,5"
+                        Margin="0,0,0,4"
                         AllowAutoHide="{TemplateBinding AllowAutoHide}"
                         Focusable="False"
                         LargeChange="{Binding LargeChange.Width, RelativeSource={RelativeSource TemplatedParent}}"
@@ -50,7 +37,7 @@
                     <ScrollBar
                         Name="PART_VerticalScrollBar"
                         Grid.Column="1"
-                        Margin="0,0,5,0"
+                        Margin="0,0,4,0"
                         AllowAutoHide="{TemplateBinding AllowAutoHide}"
                         Focusable="False"
                         LargeChange="{Binding LargeChange.Height, RelativeSource={RelativeSource TemplatedParent}}"
@@ -61,7 +48,8 @@
                         x:Name="PART_ScrollBarsSeparator"
                         Grid.Row="1"
                         Grid.Column="1"
-                        Background="{DynamicResource ScrollViewerScrollBarsSeparatorBackground}">
+                        Background="Transparent"
+                        Opacity="0">
                         <Panel.Transitions>
                             <Transitions>
                                 <DoubleTransition Property="Opacity" Duration="0:0:0.1" />

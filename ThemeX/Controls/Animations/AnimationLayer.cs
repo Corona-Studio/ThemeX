@@ -6,29 +6,26 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Media;
+using Avalonia.Media.Immutable;
 using ThemeX.Helpers;
 
 namespace ThemeX.Controls.Animations;
 
 [TemplatePart(Name = "ActiveRect", IsRequired = true)]
 [TemplatePart(Name = "PART_RippleCanvasRoot", IsRequired = true)]
-public class AnimationLayer : ContentControl
+public partial class AnimationLayer : ContentControl
 {
-    [Category("Animation")] public static readonly StyledProperty<ISolidColorBrush> MouseOnBrushProperty =
+    public static readonly StyledProperty<ISolidColorBrush> MouseOnBrushProperty =
         AvaloniaProperty.Register<AnimationLayer, ISolidColorBrush>(
-            nameof(MouseOnBrush), new SolidColorBrush(Color.FromArgb(90, 0, 0, 0)));
-
-    public static readonly StyledProperty<bool> MouseEnterAnimationProperty =
-        AvaloniaProperty.Register<AnimationLayer, bool>(
-            nameof(MouseEnterAnimation),
-            true
-        );
+            nameof(MouseOnBrush),
+            new ImmutableSolidColorBrush(Color.FromArgb(90, 0, 0, 0)));
 
     private bool _isPointerOver;
 
     protected Rectangle? ActiveRect;
     protected Canvas? PART_RippleCanvasRoot;
 
+    [Category("Animation")]
     public ISolidColorBrush MouseOnBrush
     {
         get => GetValue(MouseOnBrushProperty);
@@ -38,11 +35,8 @@ public class AnimationLayer : ContentControl
     /// <summary>
     ///     鼠标移入移出动画
     /// </summary>
-    public bool MouseEnterAnimation
-    {
-        get => GetValue(MouseEnterAnimationProperty);
-        set => SetValue(MouseEnterAnimationProperty, value);
-    }
+    [GeneratedStyledProperty(DefaultValue = true)]
+    public partial bool MouseEnterAnimation { get; set; }
 
     protected override void OnPointerEntered(PointerEventArgs e)
     {

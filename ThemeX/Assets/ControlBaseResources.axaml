@@ -2,23 +2,70 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls"
+    xmlns:themeConverters="clr-namespace:ThemeX.Converters"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
+    <!--  Core typography & control metrics  -->
     <system:Double x:Key="ControlContentThemeFontSize">14</system:Double>
-
+    <system:Double x:Key="ControlMinHeight">32</system:Double>
+    <Thickness x:Key="ThemeX.Control.Padding">12,4</Thickness>
+    <system:Double x:Key="TextControlThemeMinHeight">32</system:Double>
+    <system:Double x:Key="TextControlThemeMinWidth">64</system:Double>
     <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
-    <Thickness x:Key="TextControlThemePadding">10,6,6,5</Thickness>
+    <Thickness x:Key="TextControlThemePadding">12,4</Thickness>
 
-    <!--  Override system shape defaults  -->
+    <system:Double x:Key="FlyoutThemeMinWidth">96</system:Double>
+    <system:Double x:Key="FlyoutThemeMaxWidth">480</system:Double>
+    <system:Double x:Key="ProgressBarThemeMinHeight">4</system:Double>
+    <Thickness x:Key="ProgressBarBorderThemeThickness">0</Thickness>
+    <Thickness x:Key="ToggleSwitchOnStrokeThickness">1</Thickness>
+    <Thickness x:Key="MenuBarItemBorderThickness">1</Thickness>
+    <Thickness x:Key="AutoSuggestListBorderThemeThickness">1</Thickness>
+    <system:Double x:Key="ScrollBarThickness">12</system:Double>
+    <system:Double x:Key="ScrollBarTrackBorderThemeThickness">0</system:Double>
+
+    <!--  Fluent 2 Corner Radii  -->
     <system:Double x:Key="ControlCornerRadiusX">6</system:Double>
     <system:Double x:Key="ControlCornerRadiusY">6</system:Double>
     <CornerRadius x:Key="ControlCornerRadius">6</CornerRadius>
-    <CornerRadius x:Key="OverlayCornerRadius">6</CornerRadius>
+    <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="CardCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="DialogCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="PillCornerRadius">999</CornerRadius>
+
+    <!--  Fluent 2 Motion Timing & Curves  -->
+    <system:TimeSpan x:Key="ThemeX.Motion.Fast">00:00:00.083</system:TimeSpan>
+    <system:TimeSpan x:Key="ThemeX.Motion.Normal">00:00:00.167</system:TimeSpan>
+    <system:TimeSpan x:Key="ThemeX.Motion.Slow">00:00:00.250</system:TimeSpan>
+    <SplineEasing x:Key="ThemeX.Easing.FluentDecelerate" X1="0" Y1="0" X2="0" Y2="1" />
+    <SplineEasing x:Key="ThemeX.Easing.FluentStandard" X1="0.1" Y1="0.9" X2="0.2" Y2="1" />
+
+    <!--  Shared Fluent 2 Focus Visual  -->
+    <FocusAdornerTemplate x:Key="ThemeX.FocusAdorner.Control">
+        <Border
+            Margin="-3"
+            BorderBrush="{DynamicResource ThemeX.Focus.OuterBrush}"
+            BorderThickness="2"
+            CornerRadius="8">
+            <Border
+                BorderBrush="{DynamicResource ThemeX.Focus.InnerBrush}"
+                BorderThickness="1"
+                CornerRadius="6" />
+        </Border>
+    </FocusAdornerTemplate>
 
     <!--  ScrollBar animation  -->
-    <TransformOperations x:Key="VerticalSmallScrollThumbScaleTransform">scaleX(0.6)</TransformOperations>
-    <TransformOperations x:Key="HorizontalSmallScrollThumbScaleTransform">scaleY(0.6)</TransformOperations>
+    <TransformOperations x:Key="VerticalSmallScrollThumbScaleTransform">scaleX(0.55)</TransformOperations>
+    <TransformOperations x:Key="HorizontalSmallScrollThumbScaleTransform">scaleY(0.55)</TransformOperations>
 
+    <!--  Fallback localized strings (overridden by host Application.Resources if present)  -->
+    <x:String x:Key="Enable">On</x:String>
+    <x:String x:Key="Disable">Off</x:String>
+
+    <!--  Self-contained converters  -->
+    <themeConverters:GreyLevelToForegroundConverter x:Key="GreyLevelToForegroundConverter" />
+    <themeConverters:ValidationErrorsToStringConverter x:Key="DataValidationErrorsToStringConverter" />
+    <converters:StringFormatConverter x:Key="StringFormatConverter" />
     <converters:CornerRadiusFilterConverter x:Key="TopCornerRadiusFilterConverter" Filter="TopLeft, TopRight" />
     <converters:CornerRadiusFilterConverter x:Key="RightCornerRadiusFilterConverter" Filter="TopRight, BottomRight" />
     <converters:CornerRadiusFilterConverter x:Key="BottomCornerRadiusFilterConverter" Filter="BottomLeft, BottomRight" />

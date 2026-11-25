@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:themeX="clr-namespace:ThemeX">
     <Design.PreviewWith>
         <Border Padding="20">
@@ -10,35 +11,46 @@
     </Design.PreviewWith>
 
     <ControlTheme x:Key="{x:Type controls:MultiProgressBar}" TargetType="controls:MultiProgressBar">
-
-        <Setter Property="FillColor"
-                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-
+        <Setter Property="FillColor" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Primary}" />
+        <Setter Property="CornerRadius" Value="3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <StackPanel Spacing="6">
+                    <StackPanel Spacing="8">
                         <Border
-                            Height="4"
+                            Height="6"
+                            Background="{TemplateBinding Background}"
                             ClipToBounds="True"
-                            CornerRadius="4">
-                            <Grid x:Name="MainGrid" ColumnSpacing="1" />
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            helpers:RoundedClipHelper.ClipToCornerRadius="True">
+                            <Grid x:Name="MainGrid" ColumnSpacing="2" />
                         </Border>
                         <ItemsControl
                             x:Name="Indicators"
                             HorizontalAlignment="Left"
-                            Foreground="{DynamicResource ThemeX.Foreground.Primary}">
+                            Foreground="{DynamicResource ThemeX.Foreground.Secondary}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel ItemSpacing="12" LineSpacing="8" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="{x:Type controls:Indicator}">
-                                    <WrapPanel ItemSpacing="4">
+                                    <StackPanel Orientation="Horizontal" Spacing="4">
                                         <Rectangle
-                                            Width="12"
-                                            Height="12"
+                                            Width="8"
+                                            Height="8"
+                                            VerticalAlignment="Center"
                                             Fill="{Binding Color}"
-                                            RadiusX="3"
-                                            RadiusY="3" />
-                                        <TextBlock FontSize="12" Text="{Binding Text}" />
-                                    </WrapPanel>
+                                            RadiusX="2"
+                                            RadiusY="2" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}"
+                                            Foreground="{DynamicResource ThemeX.Foreground.Secondary}"
+                                            Text="{Binding Text}" />
+                                    </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -46,7 +58,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
     </ControlTheme>
 
 </ResourceDictionary>

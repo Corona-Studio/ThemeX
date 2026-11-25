@@ -4,72 +4,84 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Border Padding="50">
-            <StackPanel Spacing="5">
-                <RadioButton Content="Radio" />
-                <RadioButton Content="Radio" IsChecked="True" />
-                <RadioButton Content="Radio" IsEnabled="False" />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
-
     <system:Double x:Key="RadioButtonBorderThemeThickness">1</system:Double>
 
     <ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton">
-
-        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
-        <Setter Property="Padding" Value="8,6,0,0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.ControlStrong}" />
+        <Setter Property="Padding" Value="8,0,0,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
-        <Setter Property="MinWidth" Value="120" />
+        <Setter Property="MinHeight" Value="32" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="FocusAdorner" Value="{StaticResource ThemeX.FocusAdorner.Control}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Border
                     Name="Root"
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}">
-
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
                     <Grid ColumnDefinitions="20,*">
-
                         <Grid
                             Grid.Column="0"
                             Height="32"
-                            VerticalAlignment="Top">
-
+                            VerticalAlignment="Center">
                             <Ellipse
                                 Name="OuterEllipse"
                                 Width="20"
                                 Height="20"
-                                UseLayoutRounding="False" />
+                                Fill="{DynamicResource ThemeX.Surface.Control}"
+                                Stroke="{DynamicResource ThemeX.Stroke.ControlStrong}"
+                                StrokeThickness="{StaticResource RadioButtonBorderThemeThickness}">
+                                <Ellipse.Transitions>
+                                    <Transitions>
+                                        <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                                        <BrushTransition Property="Fill" Duration="0:0:0.12" />
+                                        <BrushTransition Property="Stroke" Duration="0:0:0.12" />
+                                    </Transitions>
+                                </Ellipse.Transitions>
+                            </Ellipse>
 
-                            <!--  A seperate element is added since the two orthogonal state groups that cannot touch the same property  -->
                             <Ellipse
                                 Name="CheckOuterEllipse"
                                 Width="20"
                                 Height="20"
-                                UseLayoutRounding="False" />
+                                Fill="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}"
+                                Opacity="0"
+                                Stroke="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}"
+                                StrokeThickness="{StaticResource RadioButtonBorderThemeThickness}">
+                                <Ellipse.Transitions>
+                                    <Transitions>
+                                        <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                                        <BrushTransition Property="Fill" Duration="0:0:0.12" />
+                                    </Transitions>
+                                </Ellipse.Transitions>
+                            </Ellipse>
 
                             <Ellipse
                                 Name="CheckGlyph"
-                                Width="12"
-                                Height="12"
-                                UseLayoutRounding="False" />
-
-                            <!--  A seperate element is added since the two orthogonal state groups that cannot touch the same property  -->
-                            <Border
-                                Name="PressedCheckGlyph"
-                                Width="4"
-                                Height="4"
-                                CornerRadius="6"
-                                UseLayoutRounding="False" />
+                                Width="8"
+                                Height="8"
+                                Fill="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}"
+                                Opacity="0"
+                                RenderTransform="scale(0.5)"
+                                RenderTransformOrigin="50%,50%">
+                                <Ellipse.Transitions>
+                                    <Transitions>
+                                        <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                                        <TransformOperationsTransition
+                                            Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
+                                            Property="RenderTransform"
+                                            Duration="0:0:0.167" />
+                                    </Transitions>
+                                </Ellipse.Transitions>
+                            </Ellipse>
                         </Grid>
 
                         <ContentPresenter
@@ -79,122 +91,71 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}" />
-
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            TextBlock.Foreground="{TemplateBinding Foreground}" />
                     </Grid>
-
                 </Border>
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^ /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource ThemeX.BorderBrush}" />
-            <Setter Property="StrokeThickness" Value="{DynamicResource RadioButtonBorderThemeThickness}" />
-
-        </Style>
-        <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
-            <Setter Property="Stroke"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            <Setter Property="Fill"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            <Setter Property="StrokeThickness" Value="{DynamicResource RadioButtonBorderThemeThickness}" />
-            <Setter Property="Opacity" Value="0" />
-        </Style>
-        <Style Selector="^ /template/ Ellipse#CheckGlyph">
-            <Setter Property="Stroke"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-            <Setter Property="Fill"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-            <Setter Property="Opacity" Value="0" />
-            <Setter Property="RenderTransform" Value="scaleX(0.86) scaleY(0.86)" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition
-                        Easing="0.0,0.0 0.0,1.0"
-                        Property="RenderTransform"
-                        Duration="0:0:0.167" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style Selector="^ /template/ Border#PressedCheckGlyph">
-            <Setter Property="BorderBrush" Value="{DynamicResource RadioButtonCheckGlyphStroke}" />
-            <Setter Property="Background" Value="{DynamicResource RadioButtonCheckGlyphFill}" />
-            <Setter Property="Opacity" Value="0" />
-            <Setter Property="RenderTransform" Value="scaleX(0.86) scaleY(0.86)" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition
-                        Easing="0,0 0,1"
-                        Property="RenderTransform"
-                        Duration="0:0:0.167" />
-                </Transitions>
-            </Setter>
+        <!--  Empty Content  -->
+        <Style Selector="^ /template/ ContentPresenter#ContentPresenter:empty">
+            <Setter Property="Margin" Value="0" />
         </Style>
 
         <!--  PointerOver  -->
-        <Style Selector="^:pointerover /template/ Border#Root">
-            <Setter Property="Background" Value="{DynamicResource RadioButtonBackgroundPointerOver}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource RadioButtonBorderBrushPointerOver}" />
-        </Style>
         <Style Selector="^:pointerover /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
-            <Setter Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillPointerOver}" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Surface.ControlHover}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
         <Style Selector="^:pointerover /template/ Ellipse#CheckOuterEllipse">
-            <Setter Property="Stroke"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-            <Setter Property="Fill"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-        </Style>
-        <Style Selector="^:pointerover /template/ Ellipse#CheckGlyph">
-            <Setter Property="Stroke"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-            <Setter Property="Fill"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-            <Setter Property="Opacity" Value="0" />
-            <Setter Property="RenderTransform" Value="scaleX(1.167) scaleY(1.167)" />
+            <Setter Property="Fill" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorHoverKey}}" />
+            <Setter Property="Stroke" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorHoverKey}}" />
         </Style>
 
         <!--  Pressed  -->
         <Style Selector="^:pressed /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource ThemeX.ButtonBackground.Pressed}" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Surface.ControlPressed}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.Stroke.Control}" />
         </Style>
         <Style Selector="^:pressed /template/ Ellipse#CheckOuterEllipse">
-            <Setter Property="Stroke"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-            <Setter Property="Fill"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-        </Style>
-        <Style Selector="^:pressed /template/ Ellipse#CheckGlyph">
-            <Setter Property="Opacity" Value="0" />
-            <Setter Property="RenderTransform" Value="scaleX(0.71) scaleY(0.71)" />
-        </Style>
-        <Style Selector="^:pressed /template/ Border#PressedCheckGlyph">
-            <Setter Property="Opacity" Value="1" />
-            <Setter Property="RenderTransform" Value="scaleX(2.5) scaleY(2.5)" />
-        </Style>
-
-        <!--  Disabled  -->
-        <Style Selector="^:disabled /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
-            <Setter Property="Fill" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
+            <Setter Property="Fill" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorPressedKey}}" />
+            <Setter Property="Stroke" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorPressedKey}}" />
         </Style>
 
         <!--  Checked  -->
-        <Style Selector="^:checked /template/ Ellipse#CheckGlyph">
-            <Setter Property="Opacity" Value="1" />
-            <Setter Property="Stroke" Value="{DynamicResource RadioButtonCheckGlyphStrokeChecked}" />
-        </Style>
         <Style Selector="^:checked /template/ Ellipse#OuterEllipse">
             <Setter Property="Opacity" Value="0" />
         </Style>
         <Style Selector="^:checked /template/ Ellipse#CheckOuterEllipse">
             <Setter Property="Opacity" Value="1" />
         </Style>
-        <Style Selector="^:checked /template/ Border#PressedCheckGlyph">
-            <Setter Property="Opacity" Value="0" />
+        <Style Selector="^:checked /template/ Ellipse#CheckGlyph">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="RenderTransform" Value="scale(1)" />
+        </Style>
+        <Style Selector="^:checked:pointerover /template/ Ellipse#CheckGlyph">
+            <Setter Property="RenderTransform" Value="scale(1.2)" />
+        </Style>
+        <Style Selector="^:checked:pressed /template/ Ellipse#CheckGlyph">
+            <Setter Property="RenderTransform" Value="scale(0.8)" />
         </Style>
 
+        <!--  Disabled  -->
+        <Style Selector="^:disabled">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
+        <Style Selector="^:disabled /template/ Ellipse#OuterEllipse">
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.Stroke.Control}" />
+        </Style>
+        <Style Selector="^:disabled /template/ Ellipse#CheckOuterEllipse">
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
+            <Setter Property="Stroke" Value="{DynamicResource ThemeX.Stroke.Control}" />
+        </Style>
+        <Style Selector="^:disabled /template/ Ellipse#CheckGlyph">
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
     </ControlTheme>
 
 </ResourceDictionary>

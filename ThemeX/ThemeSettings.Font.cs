@@ -11,6 +11,57 @@ public partial class ThemeSettings
     public const string FontSizeBigIconKey = "ThemeX.FontSize.Icon.Big.1";
     public const string FontSizeIconKey = "ThemeX.FontSize.Icon.Primary";
 
+    // Fluent 2 typography scale
+    public const string FontSizeCaptionKey = "ThemeX.FontSize.Caption";
+    public const string FontSizeBodyKey = "ThemeX.FontSize.Body";
+    public const string FontSizeBodyLargeKey = "ThemeX.FontSize.BodyLarge";
+    public const string FontSizeSubtitleKey = "ThemeX.FontSize.Subtitle";
+    public const string FontSizeFluentTitleKey = "ThemeX.FontSize.Title";
+    public const string FontSizeTitleLargeKey = "ThemeX.FontSize.TitleLarge";
+    public const string FontSizeDisplayKey = "ThemeX.FontSize.Display";
+
+    public void SetFontSizeCaption(double value)
+    {
+        _resourceDic[FontSizeCaptionKey] = value;
+        RaiseResourcesChanged();
+    }
+
+    public void SetFontSizeBody(double value)
+    {
+        _resourceDic[FontSizeBodyKey] = value;
+        RaiseResourcesChanged();
+    }
+
+    public void SetFontSizeBodyLarge(double value)
+    {
+        _resourceDic[FontSizeBodyLargeKey] = value;
+        RaiseResourcesChanged();
+    }
+
+    public void SetFontSizeSubtitle(double value)
+    {
+        _resourceDic[FontSizeSubtitleKey] = value;
+        RaiseResourcesChanged();
+    }
+
+    public void SetFontSizeFluentTitle(double value)
+    {
+        _resourceDic[FontSizeFluentTitleKey] = value;
+        RaiseResourcesChanged();
+    }
+
+    public void SetFontSizeTitleLarge(double value)
+    {
+        _resourceDic[FontSizeTitleLargeKey] = value;
+        RaiseResourcesChanged();
+    }
+
+    public void SetFontSizeDisplay(double value)
+    {
+        _resourceDic[FontSizeDisplayKey] = value;
+        RaiseResourcesChanged();
+    }
+
     public void SetFontSizeIconPrimary(double value)
     {
         _resourceDic[FontSizeIconKey] = value;

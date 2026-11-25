@@ -1,60 +1,31 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks"
     xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Border Padding="50">
-            <StackPanel Spacing="5">
-                <TextBox Classes="clearButton" Text="测试 Clear" />
-                <TextBox
-                    Classes="revealPasswordButton"
-                    PasswordChar="*"
-                    Text="Test Pasword" />
-                <TextBox>
-                    <TextBox.InnerLeftContent>
-                        <iconPacks:IconPack
-                            Margin="10,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Symbol="&#xE094;" />
-                    </TextBox.InnerLeftContent>
-                </TextBox>
-                <TextBox Classes="noEffect" Text="Hello Down there" />
-                <TextBox Text="Hello Down there" />
-                <TextBox PlaceholderText="PlaceholderText" />
-                <TextBox IsEnabled="False" Text="Test" />
-                <TextBox Classes="clearButton" Text="Test Clear" />
-                <TextBox
-                    Classes="revealPasswordButton"
-                    PasswordChar="•"
-                    Text="Test Pasword" />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
-
     <Thickness x:Key="TextBoxTopHeaderMargin">0,0,0,8</Thickness>
-    <Thickness x:Key="TextBoxInnerButtonMargin">0,4,4,4</Thickness>
+    <Thickness x:Key="TextBoxInnerButtonMargin">0,0,4,0</Thickness>
     <x:Double x:Key="TextBoxIconFontSize">12</x:Double>
 
     <ControlTheme x:Key="TextBoxDeleteButtonStyle" TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
             <ControlTemplate>
-                <!--
-                    Note: TextControlButtonBackground isn't defined anywhere so
-                    replaced Background with Transparent
-                -->
                 <Border
                     Name="ButtonLayoutGrid"
-                    Margin="{DynamicResource TextBoxInnerButtonMargin}"
                     Background="Transparent"
-                    BorderBrush="{DynamicResource TextControlButtonBorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{TemplateBinding CornerRadius}">
+                    BorderThickness="0"
+                    CornerRadius="4">
+                    <Border.Transitions>
+                        <Transitions>
+                            <BrushTransition Property="Background" Duration="0:0:0.1" />
+                        </Transitions>
+                    </Border.Transitions>
                     <iconPacks:IconPack
                         Name="Glyph"
-                        Padding="3"
+                        Padding="4"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="{StaticResource TextBoxIconFontSize}"
@@ -64,18 +35,18 @@
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^:pointerover">
-            <Style Selector="^ /template/ iconPacks|IconPack#Glyph">
-                <Setter Property="Foreground"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            </Style>
+        <Style Selector="^:pointerover /template/ Border#ButtonLayoutGrid">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ iconPacks|IconPack#Glyph">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
-        <Style Selector="^:pressed">
-            <Style Selector="^ /template/ iconPacks|IconPack#Glyph">
-                <Setter Property="Foreground"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-            </Style>
+        <Style Selector="^:pressed /template/ Border#ButtonLayoutGrid">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
+        </Style>
+        <Style Selector="^:pressed /template/ iconPacks|IconPack#Glyph">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTextKey}}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#ButtonLayoutGrid">
@@ -84,74 +55,56 @@
     </ControlTheme>
 
     <ControlTheme x:Key="TextBoxPasswordButtonStyle" TargetType="ToggleButton">
-
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
             <ControlTemplate>
-                <!--
-                    Note: TextControlButtonBackground isn't defined anywhere so
-                    replaced Background with Transparent
-                -->
                 <Border
                     Name="ButtonLayoutGrid"
-                    Margin="{DynamicResource TextBoxInnerButtonMargin}"
                     Background="Transparent"
-                    BorderBrush="{DynamicResource TextControlButtonBorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{TemplateBinding CornerRadius}">
+                    BorderThickness="0"
+                    CornerRadius="4">
+                    <Border.Transitions>
+                        <Transitions>
+                            <BrushTransition Property="Background" Duration="0:0:0.1" />
+                        </Transitions>
+                    </Border.Transitions>
                     <iconPacks:IconPack
                         Name="Glyph"
-                        Padding="3"
+                        Padding="4"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="{StaticResource TextBoxIconFontSize}"
-                        Foreground="{DynamicResource ThemeX.Foreground.Primary}"
+                        Foreground="{DynamicResource ThemeX.Foreground.Secondary}"
                         Symbol="&#xE18B;" />
                 </Border>
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^:pointerover">
-            <Style Selector="^ /template/ Border#ButtonLayoutGrid">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Tertiary}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Tertiary}" />
-            </Style>
+        <Style Selector="^:pointerover /template/ Border#ButtonLayoutGrid">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ iconPacks|IconPack#Glyph">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
-        <Style Selector="^:pressed">
-            <Style Selector="^ /template/ Border#ButtonLayoutGrid">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
-            </Style>
+        <Style Selector="^:pressed /template/ Border#ButtonLayoutGrid">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
         </Style>
 
-        <Style Selector="^:checked">
-            <Style Selector="^ /template/ iconPacks|IconPack#Glyph">
-                <Setter Property="Symbol" Value="&#xED1A;" />
-                <Setter Property="Foreground"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-            </Style>
-
-            <Style Selector="^ /template/ Border#ButtonLayoutGrid">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-                <Setter Property="BorderBrush"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            </Style>
+        <Style Selector="^:checked /template/ iconPacks|IconPack#Glyph">
+            <Setter Property="Symbol" Value="&#xED1A;" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
+        </Style>
+        <Style Selector="^:checked /template/ Border#ButtonLayoutGrid">
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
         </Style>
 
+        <Style Selector="^:checked:pointerover /template/ Border#ButtonLayoutGrid">
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorHoverKey}}" />
+        </Style>
 
-        <Style Selector="^:checked:pressed">
-            <Style Selector="^ /template/ iconPacks|IconPack#Glyph">
-                <Setter Property="Foreground"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1ForegroundKey}}" />
-            </Style>
-
-            <Style Selector="^ /template/ Border#ButtonLayoutGrid">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-                <Setter Property="BorderBrush"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-            </Style>
+        <Style Selector="^:checked:pressed /template/ Border#ButtonLayoutGrid">
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorPressedKey}}" />
         </Style>
 
         <Style Selector="^:disabled /template/ Border#ButtonLayoutGrid">
@@ -159,20 +112,20 @@
         </Style>
     </ControlTheme>
 
+    <!--  Fluent 2 TextBox with clean resting stroke and flush bottom accent focus indicator  -->
     <ControlTheme x:Key="{x:Type TextBox}" TargetType="TextBox">
         <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Primary}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
-        <Setter Property="SelectionBrush"
-                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
-        <Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextOnAccentFillColorSelectedTextBrush}" />
-        <Setter Property="BorderThickness" Value="0.2, 0.2, 0.2, 1" />
-        <Setter Property="UseLayoutRounding" Value="False" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Control}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.ControlBorder}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
+        <Setter Property="SelectionForegroundBrush" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
         <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusAdorner" Value="{x:Null}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Template">
@@ -186,11 +139,49 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}" />
+                            ClipToBounds="True"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <BrushTransition Property="BorderBrush" Duration="0:0:0.14" />
+                                    <BrushTransition Property="Background" Duration="0:0:0.14" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+
+                        <!--  Flush Fluent 2 bottom indicator clipped cleanly to outer CornerRadius (no double-stroke stack)  -->
+                        <Border
+                            ClipToBounds="True"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            helpers:RoundedClipHelper.ClipToCornerRadius="True"
+                            IsHitTestVisible="False">
+                            <Border
+                                Name="PART_FocusIndicator"
+                                Height="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                Background="{DynamicResource ThemeX.Stroke.ControlStrong}"
+                                IsHitTestVisible="False"
+                                Opacity="0.45">
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <DoubleTransition
+                                            Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
+                                            Property="Height"
+                                            Duration="0:0:0.14" />
+                                        <DoubleTransition Property="Opacity" Duration="0:0:0.14" />
+                                        <BrushTransition Property="Background" Duration="0:0:0.14" />
+                                    </Transitions>
+                                </Border.Transitions>
+                            </Border>
+                        </Border>
 
                         <Border Margin="{TemplateBinding BorderThickness}">
                             <Grid ColumnDefinitions="Auto,*,Auto">
-                                <ContentPresenter Grid.Column="0" Content="{TemplateBinding InnerLeftContent}" />
+                                <ContentPresenter
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding InnerLeftContent}" />
                                 <DockPanel
                                     x:Name="PART_InnerDockPanel"
                                     Grid.Column="1"
@@ -198,9 +189,10 @@
                                     Cursor="IBeam">
                                     <TextBlock
                                         Name="PART_FloatingWatermark"
+                                        Margin="0,0,0,4"
                                         DockPanel.Dock="Top"
-                                        FontSize="{TemplateBinding FontSize}"
-                                        Foreground="{DynamicResource SystemAccentColor}"
+                                        FontSize="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}"
+                                        Foreground="{DynamicResource ThemeX.Foreground.Secondary}"
                                         IsVisible="False"
                                         Text="{TemplateBinding PlaceholderText}" />
                                     <ScrollViewer
@@ -213,8 +205,8 @@
                                                 Name="PART_Watermark"
                                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                Foreground="{DynamicResource ThemeX.Placeholder}"
                                                 IsVisible="{TemplateBinding Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
-                                                Opacity="0.5"
                                                 Text="{TemplateBinding PlaceholderText}"
                                                 TextAlignment="{TemplateBinding TextAlignment}"
                                                 TextWrapping="{TemplateBinding TextWrapping}" />
@@ -237,7 +229,10 @@
                                         </Panel>
                                     </ScrollViewer>
                                 </DockPanel>
-                                <ContentPresenter Grid.Column="2" Content="{TemplateBinding InnerRightContent}" />
+                                <ContentPresenter
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding InnerRightContent}" />
                             </Grid>
                         </Border>
                     </Panel>
@@ -245,75 +240,60 @@
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^ /template/ TextBlock#PART_Watermark">
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition Property="Foreground" Duration="0:0:0.2" />
-                </Transitions>
-            </Setter>
-        </Style>
-
-        <Style Selector="^ /template/ Border#PART_BorderElement">
-            <Setter Property="Transitions">
-                <Transitions>
-                    <ThicknessTransition Property="BorderThickness" Duration="0:0:0.2">
-                        <ThicknessTransition.Easing>
-                            <BackEaseOut />
-                        </ThicknessTransition.Easing>
-                    </ThicknessTransition>
-                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2" />
-                    <BrushTransition Property="Background" Duration="0:0:0.125">
-                        <BrushTransition.Easing>
-                            <QuadraticEaseInOut />
-                        </BrushTransition.Easing>
-                    </BrushTransition>
-                </Transitions>
-            </Setter>
+        <!--  Multi-line inputs align text to top cleanly  -->
+        <Style Selector="^[AcceptsReturn=True]">
+            <Setter Property="VerticalContentAlignment" Value="Top" />
         </Style>
 
         <!--  Disabled State  -->
         <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.75" />
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
 
             <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.Reverse}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
+            </Style>
+
+            <Style Selector="^ /template/ Border#PART_FocusIndicator">
+                <Setter Property="Opacity" Value="0" />
             </Style>
 
             <Style Selector="^ /template/ TextBlock#PART_Watermark, ^ /template/ TextBlock#PART_FloatingWatermark">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
             </Style>
         </Style>
 
         <!--  PointerOver State  -->
-        <Style Selector="^:pointerover">
-            <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
-                <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}" />
-            </Style>
-
-            <Style Selector="^ /template/ TextBlock#PART_Watermark">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-            </Style>
+        <Style Selector="^:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlHover}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.ControlBorderHover}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ Border#PART_FocusIndicator">
+            <Setter Property="Opacity" Value="0.65" />
         </Style>
 
         <!--  Focused State  -->
-        <Style Selector="^:focus">
-            <Style Selector="^ /template/ TextBlock#PART_Watermark">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-            </Style>
-
-            <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Primary}" />
-                <Setter Property="BorderBrush"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-                <Setter Property="BorderThickness" Value="0.6, 0.6, 0.6, 3" />
-            </Style>
+        <Style Selector="^:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlInputActive}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
+        </Style>
+        <Style Selector="^:focus /template/ Border#PART_FocusIndicator">
+            <Setter Property="Height" Value="2" />
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+        </Style>
+        <Style Selector="^:focus /template/ TextBlock#PART_FloatingWatermark">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTextKey}}" />
         </Style>
 
+        <!--  Error State  -->
         <Style Selector="^:error /template/ Border#PART_BorderElement">
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Error}" />
+        </Style>
+        <Style Selector="^:error /template/ Border#PART_FocusIndicator">
+            <Setter Property="Height" Value="2" />
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Foreground.Error}" />
         </Style>
 
         <Style Selector="^[UseFloatingPlaceholder=true]:not(:empty) /template/ TextBlock#PART_FloatingWatermark">
@@ -324,12 +304,12 @@
             <Setter Property="InnerRightContent">
                 <Template>
                     <ToggleButton
-                        Width="30"
-                        Height="30"
-                        Padding="3"
-                        VerticalAlignment="Stretch"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{DynamicResource ControlCornerRadius}"
+                        Width="24"
+                        Height="24"
+                        Margin="{DynamicResource TextBoxInnerButtonMargin}"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        CornerRadius="4"
                         Focusable="False"
                         FontSize="{TemplateBinding FontSize}"
                         IsChecked="{Binding $parent[TextBox].RevealPassword, Mode=TwoWay}"
@@ -343,13 +323,13 @@
             <Setter Property="InnerRightContent">
                 <Template>
                     <Button
-                        Width="30"
-                        Height="30"
-                        Padding="3"
-                        VerticalAlignment="Stretch"
-                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Width="24"
+                        Height="24"
+                        Margin="{DynamicResource TextBoxInnerButtonMargin}"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
                         Command="{Binding $parent[TextBox].Clear}"
-                        CornerRadius="{DynamicResource ControlCornerRadius}"
+                        CornerRadius="4"
                         Focusable="False"
                         FontSize="{TemplateBinding FontSize}"
                         IsTabStop="False"

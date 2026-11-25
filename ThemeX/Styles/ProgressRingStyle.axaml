@@ -2,40 +2,18 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:ThemeX.Controls"
-    xmlns:converters="clr-namespace:ThemeX.Converters">
-
-    <Design.PreviewWith>
-        <Border Padding="20">
-            <StackPanel Spacing="10">
-                <controls:ProgressRing
-                    Width="80"
-                    Height="80"
-                    Margin="10,24,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Foreground="Green"
-                    IsIndeterminate="True" />
-                <controls:ProgressRing
-                    Width="80"
-                    Height="80"
-                    Margin="10,24,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Foreground="Blue"
-                    IsIndeterminate="False" />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
+    xmlns:converters="clr-namespace:ThemeX.Converters"
+    xmlns:themeX="clr-namespace:ThemeX">
 
     <ControlTheme x:Key="{x:Type controls:ProgressRing}" TargetType="controls:ProgressRing">
-
         <ControlTheme.Resources>
             <converters:FitSquarelyWithinAspectRatioConverter x:Key="FitSquarelyWithinAspectRatioConverter" />
         </ControlTheme.Resources>
 
         <Style Selector="^">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="9" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+            <Setter Property="BorderThickness" Value="4" />
             <Setter Property="MinHeight" Value="8" />
             <Setter Property="MinWidth" Value="8" />
             <Setter Property="Template">
@@ -63,10 +41,8 @@
         </Style>
 
         <Style Selector="^:preserveaspect /template/ Panel#FluentRingRoot">
-            <Setter Property="Width"
-                    Value="{TemplateBinding Bounds, Converter={StaticResource FitSquarelyWithinAspectRatioConverter}}" />
-            <Setter Property="Height"
-                    Value="{TemplateBinding Bounds, Converter={StaticResource FitSquarelyWithinAspectRatioConverter}}" />
+            <Setter Property="Width" Value="{TemplateBinding Bounds, Converter={StaticResource FitSquarelyWithinAspectRatioConverter}}" />
+            <Setter Property="Height" Value="{TemplateBinding Bounds, Converter={StaticResource FitSquarelyWithinAspectRatioConverter}}" />
         </Style>
 
         <Style Selector="^[IsEnabled=True][IsVisible=True]:indeterminate /template/ Arc#Fill">
@@ -75,7 +51,7 @@
                     Easing="QuadraticEaseInOut"
                     FillMode="Both"
                     IterationCount="INFINITE"
-                    Duration="0:0:3">
+                    Duration="0:0:2.4">
                     <KeyFrame Cue="0%">
                         <Setter Property="StartAngle" Value="-720" />
                         <Setter Property="SweepAngle" Value="0" />
@@ -116,7 +92,7 @@
             </Style.Animations>
         </Style>
 
-        <Style Selector="^[IsEnabled=True][IsVisible=True] /template/ Ellipse#Track">
+        <Style Selector="^[IsEnabled=True][IsVisible=True]:indeterminate /template/ Ellipse#Track">
             <Style.Animations>
                 <Animation IterationCount="INFINITE" Duration="0:0:1">
                     <KeyFrame Cue="0%">
@@ -128,7 +104,6 @@
                 </Animation>
             </Style.Animations>
         </Style>
-
     </ControlTheme>
 
 </ResourceDictionary>

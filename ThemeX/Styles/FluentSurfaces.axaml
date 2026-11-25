@@ -1,0 +1,110 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
+    xmlns:themeX="clr-namespace:ThemeX">
+
+    <!--  Fluent 2 Acrylic Flyout surface (use inside an outer Border.fluent-flyout-shadow for rounded shadow + clip)  -->
+    <Style Selector="Border.acrylic-flyout">
+        <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="helpers:RoundedClipHelper.ClipToCornerRadius" Value="True" />
+        <Setter Property="BackdropEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.FlyoutBlurEffectKey}}" />
+        <Setter Property="BackdropEffectBoundsSource" Value="Layout" />
+        <Setter Property="BackdropEffectCache" Value="Volatile" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.EffectiveAcrylicFlyoutKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.SurfaceFlyout}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!--  Fluent 2 Acrylic Pane (persistent navigation bars, drawers, sidebars)  -->
+    <Style Selector="Border.acrylic-pane">
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="helpers:RoundedClipHelper.ClipToCornerRadius" Value="True" />
+        <Setter Property="BackdropEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.AcrylicBlurEffectKey}}" />
+        <Setter Property="BackdropEffectBoundsSource" Value="Layout" />
+        <Setter Property="BackdropEffectCache" Value="Retained" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.EffectiveAcrylicSurfaceKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Divider}" />
+    </Style>
+
+    <!--  Fluent 2 Acrylic Card (elevated translucent cards over wallpapers / Mica)  -->
+    <Style Selector="Border.acrylic-card">
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="helpers:RoundedClipHelper.ClipToCornerRadius" Value="True" />
+        <Setter Property="BackdropEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.CardBlurEffectKey}}" />
+        <Setter Property="BackdropEffectBoundsSource" Value="Layout" />
+        <Setter Property="BackdropEffectCache" Value="Retained" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.EffectiveAcrylicCardKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!--  Fluent 2 Acrylic Subtle overlay (hover overlays, floating pills, transient scrims)  -->
+    <Style Selector="Border.acrylic-subtle">
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="helpers:RoundedClipHelper.ClipToCornerRadius" Value="True" />
+        <Setter Property="BackdropEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.SubtleBlurEffectKey}}" />
+        <Setter Property="BackdropEffectBoundsSource" Value="Layout" />
+        <Setter Property="BackdropEffectCache" Value="Volatile" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.EffectiveAcrylicSubtleKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+    </Style>
+
+    <!--  Crisp non-blurred Fluent 2 Card  -->
+    <Style Selector="Border.fluent-card">
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!--  Elevated Fluent 2 Card with subtle shadow  -->
+    <Style Selector="Border.fluent-card-elevated">
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.Shadow.Card}" />
+    </Style>
+
+    <!--  Fluent 2 Card with subtle mouse-tracking Reveal Highlight border light + hover spotlight  -->
+    <Style Selector="Border.reveal-card">
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="themeX:RevealHighlight.IsEnabled" Value="True" />
+        <Setter Property="themeX:RevealHighlight.Tone" Value="Subtle" />
+    </Style>
+
+    <!--  Composable Reveal Highlight modifier (pair with acrylic-card, fluent-card, or custom Border)  -->
+    <Style Selector="Border.reveal-surface">
+        <Setter Property="themeX:RevealHighlight.IsEnabled" Value="True" />
+        <Setter Property="themeX:RevealHighlight.Tone" Value="Subtle" />
+    </Style>
+
+    <!--  Proximity border light only (no hover surface fill)  -->
+    <Style Selector="Border.reveal-border-only">
+        <Setter Property="themeX:RevealHighlight.IsEnabled" Value="True" />
+        <Setter Property="themeX:RevealHighlight.Mode" Value="BorderOnly" />
+        <Setter Property="themeX:RevealHighlight.Tone" Value="Subtle" />
+    </Style>
+
+    <!--  Outer non-clipped shadow wrapper for pairing with inner rounded BackdropEffect borders  -->
+    <Style Selector="Border.fluent-flyout-shadow">
+        <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+        <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.Shadow.Flyout}" />
+        <Setter Property="ClipToBounds" Value="False" />
+    </Style>
+
+    <!--  Two-tone Fluent 2 dialog footer bar  -->
+    <Style Selector="Border.fluent-dialog-footer">
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.LayerAlt}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Divider}" />
+        <Setter Property="BorderThickness" Value="0,1,0,0" />
+    </Style>
+
+</Styles>

@@ -1,0 +1,60 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers">
+
+    <ControlTheme x:Key="{x:Type controls:RevealBorder}" TargetType="controls:RevealBorder">
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="controls:RevealBorder">
+                <Border
+                    Name="PART_ShadowBorder"
+                    BoxShadow="{TemplateBinding BoxShadow}"
+                    ClipToBounds="False"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <Panel>
+                        <Border
+                            Name="PART_SurfaceBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            ClipToBounds="{TemplateBinding ClipContent}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            helpers:RoundedClipHelper.ClipToCornerRadius="{TemplateBinding ClipContent}">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <BrushTransition Property="Background" Duration="0:0:0.14" />
+                                    <BrushTransition Property="BorderBrush" Duration="0:0:0.14" />
+                                </Transitions>
+                            </Border.Transitions>
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                        <controls:RevealOverlay
+                            Name="PART_RevealOverlay"
+                            BorderLightRadius="{TemplateBinding BorderLightRadius}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            HoverLightRadius="{TemplateBinding HoverLightRadius}"
+                            IsRevealEnabled="{TemplateBinding IsRevealEnabled}"
+                            Mode="{TemplateBinding RevealMode}"
+                            RevealBorderThickness="{TemplateBinding RevealBorderThickness}"
+                            Tone="{TemplateBinding RevealTone}" />
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

@@ -1,0 +1,166 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:themeX="clr-namespace:ThemeX">
+
+    <ControlTheme x:Key="{x:Type controls:AcrylicSurface}" TargetType="controls:AcrylicSurface">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="IsBackdropEnabled" Value="{DynamicResource {x:Static themeX:ThemeSettings.EnableBackdropEffectKey}}" />
+        <Setter Property="BlurEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.AcrylicBlurEffectKey}}" />
+        <Setter Property="LuminosityBrush" Value="{DynamicResource ThemeX.Acrylic.Luminosity.Surface}" />
+        <Setter Property="TintBrush" Value="{DynamicResource ThemeX.Acrylic.Surface}" />
+        <Setter Property="SheenBrush" Value="{DynamicResource ThemeX.Acrylic.NoiseTint}" />
+        <Setter Property="SpecularBorderBrush" Value="{DynamicResource ThemeX.Acrylic.SpecularBevel}" />
+        <Setter Property="FallbackBrush" Value="{DynamicResource ThemeX.Acrylic.SurfaceFallback}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Divider}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="ElevationShadow" Value="{DynamicResource ThemeX.Shadow.Flyout}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="controls:AcrylicSurface">
+                <Border
+                    Name="PART_ShadowBorder"
+                    Background="{x:Null}"
+                    ClipToBounds="False"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <Panel>
+                        <Border
+                            Name="PART_BackdropBorder"
+                            BackdropEffect="{TemplateBinding BlurEffect}"
+                            BackdropEffectBoundsSource="Layout"
+                            BackdropEffectCache="Retained"
+                            Background="{x:Null}"
+                            BorderThickness="0"
+                            ClipToBounds="True"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Panel Background="{TemplateBinding Background}">
+                                <Border
+                                    Name="PART_LuminosityLayer"
+                                    Background="{TemplateBinding LuminosityBrush}"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    IsHitTestVisible="False"
+                                    Opacity="1">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <BrushTransition Property="Background" Duration="0:0:0.167" />
+                                            <DoubleTransition Property="Opacity" Duration="0:0:0.167" />
+                                        </Transitions>
+                                    </Border.Transitions>
+                                </Border>
+                                <Border
+                                    Name="PART_TintLayer"
+                                    Background="{TemplateBinding TintBrush}"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    IsHitTestVisible="False"
+                                    Opacity="{TemplateBinding TintOpacity}">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <BrushTransition Property="Background" Duration="0:0:0.167" />
+                                            <DoubleTransition Property="Opacity" Duration="0:0:0.167" />
+                                        </Transitions>
+                                    </Border.Transitions>
+                                </Border>
+                                <Border
+                                    Name="PART_SheenLayer"
+                                    Background="{TemplateBinding SheenBrush}"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    IsHitTestVisible="False"
+                                    Opacity="1">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <DoubleTransition Property="Opacity" Duration="0:0:0.167" />
+                                        </Transitions>
+                                    </Border.Transitions>
+                                </Border>
+                                <ContentPresenter
+                                    Name="PART_ContentPresenter"
+                                    Margin="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            </Panel>
+                        </Border>
+                        <Border
+                            Name="PART_OuterBorder"
+                            Background="{x:Null}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            IsHitTestVisible="False" />
+                        <controls:RevealOverlay
+                            Name="PART_RevealOverlay"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            IsRevealEnabled="{TemplateBinding IsRevealEnabled}"
+                            Mode="{TemplateBinding RevealMode}"
+                            Tone="{TemplateBinding RevealTone}" />
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <!--  Variant presets  -->
+        <Style Selector="^:flyout">
+            <Setter Property="BlurEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.FlyoutBlurEffectKey}}" />
+            <Setter Property="LuminosityBrush" Value="{DynamicResource ThemeX.Acrylic.Luminosity.Flyout}" />
+            <Setter Property="TintBrush" Value="{DynamicResource ThemeX.Acrylic.Flyout}" />
+            <Setter Property="FallbackBrush" Value="{DynamicResource ThemeX.Acrylic.FlyoutFallback}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.SurfaceFlyout}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+            <Setter Property="ElevationShadow" Value="{DynamicResource ThemeX.Shadow.Flyout}" />
+        </Style>
+
+        <Style Selector="^:card">
+            <Setter Property="BlurEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.CardBlurEffectKey}}" />
+            <Setter Property="LuminosityBrush" Value="{DynamicResource ThemeX.Acrylic.Luminosity.Card}" />
+            <Setter Property="TintBrush" Value="{DynamicResource ThemeX.Acrylic.Card}" />
+            <Setter Property="FallbackBrush" Value="{DynamicResource ThemeX.Acrylic.CardFallback}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+            <Setter Property="ElevationShadow" Value="{DynamicResource ThemeX.Shadow.Card}" />
+        </Style>
+
+        <Style Selector="^:subtle">
+            <Setter Property="BlurEffect" Value="{DynamicResource {x:Static themeX:ThemeSettings.SubtleBlurEffectKey}}" />
+            <Setter Property="LuminosityBrush" Value="{DynamicResource ThemeX.Acrylic.Luminosity.Subtle}" />
+            <Setter Property="TintBrush" Value="{DynamicResource ThemeX.Acrylic.Subtle}" />
+            <Setter Property="FallbackBrush" Value="{DynamicResource ThemeX.Acrylic.SubtleFallback}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Card}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        </Style>
+
+        <!--  Cache mode  -->
+        <Style Selector="^:volatile-cache /template/ Border#PART_BackdropBorder">
+            <Setter Property="BackdropEffectCache" Value="Volatile" />
+        </Style>
+
+        <!--  Outer elevation shadow  -->
+        <Style Selector="^:shadow /template/ Border#PART_ShadowBorder">
+            <Setter Property="BoxShadow" Value="{TemplateBinding ElevationShadow}" />
+        </Style>
+
+        <!--  Graceful opaque fallback when backdrop effect is disabled  -->
+        <Style Selector="^:backdrop-fallback /template/ Border#PART_BackdropBorder">
+            <Setter Property="BackdropEffect" Value="{x:Null}" />
+        </Style>
+        <Style Selector="^:backdrop-fallback /template/ Border#PART_LuminosityLayer">
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+        <Style Selector="^:backdrop-fallback /template/ Border#PART_SheenLayer">
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+        <Style Selector="^:backdrop-fallback /template/ Border#PART_TintLayer">
+            <Setter Property="Background" Value="{TemplateBinding FallbackBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

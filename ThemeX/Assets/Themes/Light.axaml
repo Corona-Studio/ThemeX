@@ -2,15 +2,35 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <BoxShadows x:Key="ThemeX.DefaultShadow">4 4 10 0 #70717171</BoxShadows>
+    <!--  Fluent 2 Elevation Shadows  -->
+    <BoxShadows x:Key="ThemeX.DefaultShadow">0 8 16 0 #24000000, 0 2 4 0 #14000000</BoxShadows>
+    <BoxShadows x:Key="ThemeX.Shadow.Card">0 2 4 0 #0A000000</BoxShadows>
+    <BoxShadows x:Key="ThemeX.Shadow.Flyout">0 8 16 0 #24000000, 0 2 4 0 #14000000</BoxShadows>
+    <BoxShadows x:Key="ThemeX.Shadow.Dialog">0 32 64 0 #30000000, 0 2 21 0 #26000000</BoxShadows>
 
-    <SolidColorBrush x:Key="ThemeX.Foreground.Error" Color="#ff1744" />
-    <SolidColorBrush x:Key="ThemeX.Foreground.Danger" Color="#ff1744" />
+    <!--  Semantic Status Foregrounds  -->
+    <SolidColorBrush x:Key="ThemeX.Foreground.Error" Color="#C42B1C" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Danger" Color="#C42B1C" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Success" Color="#0F7B0F" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Warning" Color="#9D5D00" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Info" Color="#005FB8" />
 
-    <SolidColorBrush x:Key="ThemeX.Foreground.Primary" Color="#000000" />
-    <SolidColorBrush x:Key="ThemeX.Foreground.Secondary" Color="#1b1b1b" />
-    <SolidColorBrush x:Key="ThemeX.Foreground.Tertiary" Color="#373737" />
+    <!--  Fluent 2 Text Hierarchy  -->
+    <SolidColorBrush x:Key="ThemeX.Foreground.Primary" Color="#E4000000" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Secondary" Color="#A8000000" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Tertiary" Color="#8A000000" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Disabled" Color="#6B000000" />
 
+    <SolidColorBrush x:Key="ThemeX.Foreground.Reverse.Primary" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Reverse.Secondary" Color="#FFF5F5F5" />
+    <SolidColorBrush x:Key="ThemeX.Foreground.Reverse.Tertiary" Color="#FFEBEBEB" />
+
+    <SolidColorBrush x:Key="ThemeX.Placeholder" Color="#8A000000" />
+    <SolidColorBrush x:Key="ThemeX.Focus.OuterBrush" Color="#E4000000" />
+    <SolidColorBrush x:Key="ThemeX.Focus.InnerBrush" Color="#B3FFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.HaloBrush" Color="#14000000" />
+
+    <!--  Translucent Helpers (backwards-compatible)  -->
     <SolidColorBrush x:Key="ThemeX.Transparent.Total" Color="#00FFFFFF" />
     <SolidColorBrush x:Key="ThemeX.Transparent.Primary" Color="#59FFFFFF" />
     <SolidColorBrush x:Key="ThemeX.Transparent.Secondary" Color="#8CFFFFFF" />
@@ -19,39 +39,120 @@
     <SolidColorBrush x:Key="ThemeX.Transparent.Reverse.Primary" Color="#59000000" />
     <SolidColorBrush x:Key="ThemeX.Transparent.Reverse.Secondary" Color="#8C000000" />
     <SolidColorBrush x:Key="ThemeX.Transparent.Reverse.Tertiary" Color="#BF000000" />
-
-    <SolidColorBrush x:Key="ThemeX.Foreground.Reverse.Primary" Color="#fafafa" />
-    <SolidColorBrush x:Key="ThemeX.Foreground.Reverse.Secondary" Color="#f5f5f5" />
-    <SolidColorBrush x:Key="ThemeX.Foreground.Reverse.Tertiary" Color="#eeeeee" />
-
-    <SolidColorBrush x:Key="ThemeX.BorderBrush" Color="#A8A8A8" />
-    <SolidColorBrush x:Key="ThemeX.BorderBrush.MouseOver" Color="LightGray" />
-    <SolidColorBrush x:Key="ThemeX.BorderBrush.Pressed" Color="#FFB8B8B8" />
-    <SolidColorBrush x:Key="ThemeX.BorderBrush.Reverse" Color="#8a8886" />
-    <SolidColorBrush x:Key="ThemeX.BorderBrush.Reverse.MouseOver" Color="LightGray" />
-    <SolidColorBrush x:Key="ThemeX.BorderBrush.Reverse.Pressed" Color="#FFB8B8B8" />
-
-    <SolidColorBrush x:Key="ThemeX.ContentBackground" Color="#FFF7F7F7" />
-    <SolidColorBrush x:Key="ThemeX.ContentBackground.Primary" Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="ThemeX.ContentBackground.Secondary" Color="#FFEEEEEE" />
-    <SolidColorBrush x:Key="ThemeX.ContentBackground.Tertiary" Color="#FFE2E2E2" />
-
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.MouseOver" Color="LightGray" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Pressed" Color="#FFB8B8B8" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Secondary" Color="LightGray" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Secondary.MouseOver" Color="LightGray" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Secondary.Pressed" Color="#FFB8B8B8" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Primary" Color="DarkGray" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Primary.MouseOver" Color="DarkGray" />
-    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Primary.Pressed" Color="#FFB8B8B8" />
-
-    <SolidColorBrush x:Key="ThemeX.Placeholder" Color="#FF606060" />
-
-    <Color x:Key="ThemeX.ContentBackground.Media">#FFF7F7F7</Color>
-    <Color x:Key="ThemeX.ContentBackground.Primary.Media">#FFFFFFFF</Color>
-    <Color x:Key="ThemeX.ContentBackground.Secondary.Media">#FFEEEEEE</Color>
-    <Color x:Key="ThemeX.ContentBackground.Tertiary.Media">#FFE2E2E2</Color>
     <Color x:Key="ThemeX.Transparent.Reverse.Tertiary.Color">#BF000000</Color>
+
+    <!--  Fluent 2 Surface & Layer Hierarchy  -->
+    <SolidColorBrush x:Key="ThemeX.Surface.Canvas" Color="#FFF3F3F3" />
+    <SolidColorBrush x:Key="ThemeX.Surface.Layer" Color="#B3FFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Surface.LayerAlt" Color="#FFF9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.Surface.Card" Color="#CCFFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Surface.CardSecondary" Color="#80F6F6F6" />
+    <SolidColorBrush x:Key="ThemeX.Surface.SubtleHover" Color="#0A000000" />
+    <SolidColorBrush x:Key="ThemeX.Surface.SubtlePressed" Color="#06000000" />
+    <SolidColorBrush x:Key="ThemeX.Surface.Control" Color="#B3FFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Surface.ControlHover" Color="#80F9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.Surface.ControlPressed" Color="#4DF9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.Surface.ControlDisabled" Color="#4DF9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.Surface.ControlInputActive" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Surface.Smoke" Color="#4D000000" />
+
+    <!--  Fluent 2 Acrylic & Backdrop Fallback Surfaces  -->
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Surface" Color="#C4F9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.SurfaceFallback" Color="#FFF9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Flyout" Color="#D8FCFCFC" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.FlyoutFallback" Color="#FFFCFCFC" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Card" Color="#B8FFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.CardFallback" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Subtle" Color="#9CF5F5F5" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.SubtleFallback" Color="#FFF5F5F5" />
+
+    <!--  Fluent 2 Acrylic Luminosity, Sheen & Specular Bevel Layers  -->
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Luminosity.Surface" Color="#4DFBFBFB" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Luminosity.Flyout" Color="#59FFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Luminosity.Card" Color="#3DFFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.Acrylic.Luminosity.Subtle" Color="#26FFFFFF" />
+    <LinearGradientBrush x:Key="ThemeX.Acrylic.SpecularBevel" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="#B8FFFFFF" />
+        <GradientStop Offset="0.08" Color="#38FFFFFF" />
+        <GradientStop Offset="0.35" Color="#00FFFFFF" />
+        <GradientStop Offset="1" Color="#00000000" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ThemeX.Acrylic.NoiseTint" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#2BFFFFFF" />
+        <GradientStop Offset="0.5" Color="#00FFFFFF" />
+        <GradientStop Offset="1" Color="#14FFFFFF" />
+    </LinearGradientBrush>
+
+    <!--  Fluent Reveal Highlight Tokens (whisper-quiet hairline edge light + subtle accent-tinted sheen)  -->
+    <Color x:Key="ThemeX.Reveal.BorderColor">#24000000</Color>
+    <Color x:Key="ThemeX.Reveal.BorderMidColor">#0E000000</Color>
+    <Color x:Key="ThemeX.Reveal.HoverColor">#140078D4</Color>
+    <Color x:Key="ThemeX.Reveal.HoverMidColor">#060078D4</Color>
+    <Color x:Key="ThemeX.Reveal.PressedColor">#1E0078D4</Color>
+    <Color x:Key="ThemeX.Reveal.AccentBorderColor">#48FFFFFF</Color>
+    <Color x:Key="ThemeX.Reveal.AccentBorderMidColor">#1AFFFFFF</Color>
+    <Color x:Key="ThemeX.Reveal.AccentHoverColor">#16FFFFFF</Color>
+    <Color x:Key="ThemeX.Reveal.AccentHoverMidColor">#06FFFFFF</Color>
+    <Color x:Key="ThemeX.Reveal.AccentPressedColor">#1EFFFFFF</Color>
+
+    <!--  Fluent 2 Strokes & Elevation Borders  -->
+    <SolidColorBrush x:Key="ThemeX.Stroke.Card" Color="#0F000000" />
+    <SolidColorBrush x:Key="ThemeX.Stroke.Divider" Color="#0F000000" />
+    <SolidColorBrush x:Key="ThemeX.Separator" Color="#0F000000" />
+    <SolidColorBrush x:Key="ThemeX.Stroke.Control" Color="#0F000000" />
+    <SolidColorBrush x:Key="ThemeX.Stroke.ControlStrong" Color="#72000000" />
+    <LinearGradientBrush x:Key="ThemeX.Stroke.SurfaceFlyout" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="#14000000" />
+        <GradientStop Offset="0.85" Color="#18000000" />
+        <GradientStop Offset="1" Color="#24000000" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ThemeX.Elevation.ControlBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="#0D000000" />
+        <GradientStop Offset="0.86" Color="#0D000000" />
+        <GradientStop Offset="1" Color="#22000000" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ThemeX.Elevation.ControlBorderHover" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="#12000000" />
+        <GradientStop Offset="0.86" Color="#12000000" />
+        <GradientStop Offset="1" Color="#2B000000" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ThemeX.Elevation.CircleBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="#0F000000" />
+        <GradientStop Offset="0.5" Color="#16000000" />
+        <GradientStop Offset="1" Color="#2E000000" />
+    </LinearGradientBrush>
+
+    <!--  Legacy Border Aliases (refined to Fluent 2)  -->
+    <SolidColorBrush x:Key="ThemeX.BorderBrush" Color="#29000000" />
+    <SolidColorBrush x:Key="ThemeX.BorderBrush.MouseOver" Color="#3D000000" />
+    <SolidColorBrush x:Key="ThemeX.BorderBrush.Pressed" Color="#14000000" />
+    <SolidColorBrush x:Key="ThemeX.BorderBrush.Reverse" Color="#18000000" />
+    <SolidColorBrush x:Key="ThemeX.BorderBrush.Reverse.MouseOver" Color="#28000000" />
+    <SolidColorBrush x:Key="ThemeX.BorderBrush.Reverse.Pressed" Color="#1E000000" />
+
+    <!--  Legacy ContentBackground Aliases (refined to Fluent 2)  -->
+    <SolidColorBrush x:Key="ThemeX.ContentBackground" Color="#FFF3F3F3" />
+    <SolidColorBrush x:Key="ThemeX.ContentBackground.Primary" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.ContentBackground.Secondary" Color="#FFF9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.ContentBackground.Tertiary" Color="#FFEFEFEF" />
+
+    <Color x:Key="ThemeX.ContentBackground.Media">#FFF3F3F3</Color>
+    <Color x:Key="ThemeX.ContentBackground.Primary.Media">#FFFFFFFF</Color>
+    <Color x:Key="ThemeX.ContentBackground.Secondary.Media">#FFF9F9F9</Color>
+    <Color x:Key="ThemeX.ContentBackground.Tertiary.Media">#FFEFEFEF</Color>
+
+    <!--  Legacy ButtonBackground Aliases (refined to Fluent 2)  -->
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground" Color="#B3FFFFFF" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.MouseOver" Color="#80F9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Pressed" Color="#4DF9F9F9" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Secondary" Color="#0F000000" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Secondary.MouseOver" Color="#18000000" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Secondary.Pressed" Color="#0C000000" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Primary" Color="#14000000" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Primary.MouseOver" Color="#1F000000" />
+    <SolidColorBrush x:Key="ThemeX.ButtonBackground.Primary.Pressed" Color="#0F000000" />
+
+    <Color x:Key="LauncherX.Notify.Hover">#0F000000</Color>
 
 </ResourceDictionary>

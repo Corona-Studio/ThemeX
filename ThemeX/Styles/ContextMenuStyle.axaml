@@ -1,83 +1,49 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:scroll="clr-namespace:ThemeX.Controls.Scroll"
     xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Border
-            Width="400"
-            Height="200"
-            Margin="16"
-            Padding="48"
-            Background="RosyBrown">
-            <Border.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Standard _Menu Item" />
-                    <MenuItem Header="Disabled" IsEnabled="False" />
-                    <Separator />
-                    <MenuItem Header="Menu with _Submenu">
-                        <MenuItem Header="Submenu _1" />
-                        <MenuItem Header="Submenu _2" />
-                    </MenuItem>
-                    <MenuItem Header="Menu Item with _Icon" />
-                    <MenuItem Header="Menu Item with _Checkbox">
-                        <MenuItem.Icon>
-                            <CheckBox
-                                BorderThickness="0"
-                                IsChecked="True"
-                                IsHitTestVisible="False" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </ContextMenu>
-            </Border.ContextMenu>
-            <TextBlock Text="Defined in XAML" />
-        </Border>
-    </Design.PreviewWith>
-
-    <!--  Added missing resource  -->
-    <Thickness x:Key="MenuFlyoutScrollerMargin">0,4,0,4</Thickness>
-
     <ControlTheme x:Key="{x:Type ContextMenu}" TargetType="ContextMenu">
-
-        <!-->Setter Property="Background">
-            <Setter.Value>
-                <DynamicResource ResourceKey="{OnPlatform 'ThemeX.ContentBackground.Tertiary', Windows='ThemeX.Transparent.Secondary'}" />
-            </Setter.Value>
-        </-->
-        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.SurfaceFlyout}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
         <Setter Property="MaxWidth" Value="{DynamicResource FlyoutThemeMaxWidth}" />
         <Setter Property="MinHeight" Value="{DynamicResource MenuFlyoutThemeMinHeight}" />
-        <Setter Property="Padding" Value="2,4" />
+        <Setter Property="Padding" Value="4" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="TextBlock.FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="TextBlock.FontWeight" Value="Normal" />
         <Setter Property="WindowManagerAddShadowHint" Value="False" />
+        <Setter Property="helpers:PopupOverlayHelper.PreferOverlayForContextMenu" Value="True" />
         <Setter Property="Template">
-            <ControlTemplate>
-                <Border
+            <ControlTemplate TargetType="ContextMenu">
+                <controls:AcrylicSurface
                     MinHeight="{TemplateBinding MinHeight}"
                     MaxWidth="{TemplateBinding MaxWidth}"
-                    Margin="8"
+                    Margin="12,12,12,20"
                     Padding="{TemplateBinding Padding}"
                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
-                    CornerRadius="{TemplateBinding CornerRadius}">
+                    BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                    BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}}"
+                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}}"
+                    ShowElevationShadow="True"
+                    UseVolatileCache="True"
+                    Variant="Flyout">
                     <scroll:SmoothScrollViewer
                         UseSmoothScrolling="{DynamicResource {x:Static themeX:ThemeSettings.FluentScrollKey}}">
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
+                            Grid.IsSharedSizeScope="True"
                             ItemsPanel="{TemplateBinding ItemsPanel}"
                             KeyboardNavigation.TabNavigation="Continue" />
                     </scroll:SmoothScrollViewer>
-                </Border>
+                </controls:AcrylicSurface>
             </ControlTemplate>
         </Setter>
-
     </ControlTheme>
 
 </ResourceDictionary>

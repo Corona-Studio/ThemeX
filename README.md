@@ -183,31 +183,14 @@ ThemeX includes several helper classes:
 
 | Helper | Description |
 | ------ | ----------- |
-| `ColorHelper` | Image palette extraction, brightness detection, color manipulation |
+| `ColorHelper` | Luminance, WCAG contrast, and color manipulation utilities |
 | `AnimationHelper` | Composition animation creation utilities |
 | `BindingHelper` | Compiled binding helpers |
 | `GeometryHelper` | Path and geometry calculations |
 
-### Example: Extract Image Palette
-
-```csharp
-using ThemeX.Helpers;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-
-var image = Image.Load<Rgba32>("image.jpg");
-var palette = image.GetPaletteFromBitmap(colorCount: 8);
-
-foreach (var color in palette)
-{
-    Console.WriteLine($"Color: {color.Color}, Population: {color.Population}");
-}
-```
-
 ## Dependencies
 
 - [Avalonia](https://avaloniaui.net/) (11.3.10+)
-- [SixLabors.ImageSharp](https://github.com/SixLabors/ImageSharp) - Image processing
 - [CommunityToolkit.Diagnostics](https://github.com/CommunityToolkit/dotnet) - Diagnostics utilities
 
 ## License

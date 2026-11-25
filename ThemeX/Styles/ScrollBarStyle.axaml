@@ -1,105 +1,55 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks"
-    xmlns:helpers="clr-namespace:ThemeX.Helpers">
-    <!--  Another really complex template...  -->
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
+    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks">
 
-    <Design.PreviewWith>
-        <Border Padding="50" Background="#F3F3f3">
-            <StackPanel>
-                <ScrollViewer
-                    MaxWidth="180"
-                    MaxHeight="100"
-                    HorizontalScrollBarVisibility="Auto">
-                    <StackPanel Spacing="5">
-                        <Rectangle
-                            Width="200"
-                            Height="40"
-                            Fill="CadetBlue" />
-                        <Rectangle
-                            Width="200"
-                            Height="40"
-                            Fill="CadetBlue" />
-                        <Rectangle
-                            Width="200"
-                            Height="40"
-                            Fill="CadetBlue" />
-                        <Rectangle
-                            Width="200"
-                            Height="40"
-                            Fill="CadetBlue" />
-                        <Rectangle
-                            Width="200"
-                            Height="40"
-                            Fill="CadetBlue" />
-                    </StackPanel>
-                </ScrollViewer>
-                <Panel Width="150" Height="150">
-                    <ScrollBar
-                        Margin="0,0,0,20"
-                        HorizontalAlignment="Right"
-                        AllowAutoHide="False"
-                        Orientation="Vertical" />
-                    <ScrollBar
-                        VerticalAlignment="Bottom"
-                        AllowAutoHide="False"
-                        Orientation="Horizontal" />
-                </Panel>
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
-
-
-    <!--<x:String x:Key="ScrollBarExpandDuration">00:00:00.167</x:String>
-        <x:String x:Key="ScrollBarOpacityChangeDuration">00:00:00.083</x:String>
-        <x:String x:Key="ScrollBarColorChangeDuration">00:00:00.083</x:String>
-        <x:String x:Key="ScrollBarContractDuration">00:00:00.167</x:String>-->
     <x:Double x:Key="ScrollBarThumbOffset">2</x:Double>
-
-    <!--<x:String x:Key="ScrollBarContractDelay">00:00:02</x:String>
-        <x:String x:Key="ScrollBarContractFinalKeyframe">00:00:02.1</x:String>-->
     <x:Double x:Key="ScrollBarSize">12</x:Double>
-    <Thickness x:Key="ScrollBarMargin">1</Thickness>
 
-    <x:Double x:Key="ScrollBarVerticalThumbMinHeight">30</x:Double>
+    <x:Double x:Key="ScrollBarVerticalThumbMinHeight">32</x:Double>
     <x:Double x:Key="ScrollBarVerticalThumbMinWidth">12</x:Double>
-    <x:Double x:Key="ScrollBarHorizontalThumbMinWidth">30</x:Double>
+    <x:Double x:Key="ScrollBarHorizontalThumbMinWidth">32</x:Double>
     <x:Double x:Key="ScrollBarHorizontalThumbMinHeight">12</x:Double>
-    <x:Double x:Key="ScrollBarThumbStrokeThickness">4</x:Double>
+    <x:Double x:Key="ScrollBarThumbStrokeThickness">3</x:Double>
     <x:Double x:Key="ScrollBarButtonArrowIconFontSize">8</x:Double>
 
     <ControlTheme x:Key="ScrollBarThumb" TargetType="Thumb">
-        <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ScrollBarThumbBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Stroke.ControlStrong}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Rectangle
-                        Name="ThumbVisual"
-                        Fill="{DynamicResource ThemeX.Transparent.Reverse.Primary}"
-                        RadiusX="4"
-                        RadiusY="4"
-                        Stroke="{TemplateBinding BorderBrush}"
-                        StrokeThickness="{DynamicResource ScrollBarThumbStrokeThickness}" />
-                </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate>
+                <Rectangle
+                    Name="ThumbVisual"
+                    Fill="{TemplateBinding Background}"
+                    Opacity="0.48"
+                    RadiusX="5"
+                    RadiusY="5"
+                    Stroke="{TemplateBinding BorderBrush}"
+                    StrokeThickness="{StaticResource ScrollBarThumbStrokeThickness}">
+                    <Rectangle.Transitions>
+                        <Transitions>
+                            <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                        </Transitions>
+                    </Rectangle.Transitions>
+                </Rectangle>
+            </ControlTemplate>
         </Setter>
         <Setter Property="Transitions">
             <Transitions>
                 <CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.1" />
-                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" />
             </Transitions>
         </Setter>
 
-        <Style Selector="^:pointerover /template/ Border">
-            <Setter Property="Background" Value="{DynamicResource ScrollBarThumbFillPointerOver}" />
+        <Style Selector="^:pointerover /template/ Rectangle#ThumbVisual">
+            <Setter Property="Opacity" Value="0.78" />
         </Style>
-        <Style Selector="^:pressed  /template/ Border">
-            <Setter Property="Background" Value="{DynamicResource ScrollBarThumbFillPressed}" />
+        <Style Selector="^:pressed /template/ Rectangle#ThumbVisual">
+            <Setter Property="Opacity" Value="0.96" />
         </Style>
-        <Style Selector="^:disabled  /template/ Border">
-            <Setter Property="Background" Value="{DynamicResource ScrollBarThumbFillDisabled}" />
+        <Style Selector="^:disabled /template/ Rectangle#ThumbVisual">
+            <Setter Property="Opacity" Value="0.25" />
         </Style>
     </ControlTheme>
 
@@ -120,22 +70,22 @@
             <ControlTemplate>
                 <Border
                     x:Name="Root"
-                    Background="{DynamicResource ScrollBarButtonBackground}"
-                    BorderBrush="{DynamicResource ScrollBarButtonBorderBrush}"
+                    Background="Transparent"
                     CornerRadius="{DynamicResource ControlCornerRadius}">
                     <iconPacks:IconPack
                         Name="ArrowGlyph"
                         Padding="0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        FontSize="{DynamicResource ScrollBarButtonArrowIconFontSize}"
-                        Foreground="{DynamicResource ThemeX.Foreground.Primary}"
+                        FontSize="{StaticResource ScrollBarButtonArrowIconFontSize}"
+                        Foreground="{DynamicResource ThemeX.Foreground.Tertiary}"
                         RenderTransform="none"
                         RenderTransformOrigin="50%,50%"
                         Symbol="{TemplateBinding Content}">
                         <iconPacks:IconPack.Transitions>
                             <Transitions>
-                                <TransformOperationsTransition Property="RenderTransform" Duration="00:00:00.016" />
+                                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.05" />
+                                <BrushTransition Property="Foreground" Duration="0:0:0.1" />
                             </Transitions>
                         </iconPacks:IconPack.Transitions>
                     </iconPacks:IconPack>
@@ -146,30 +96,30 @@
         <Setter Property="Transitions">
             <Transitions>
                 <DoubleTransition Property="Opacity" Duration="0:0:0.1" />
-                <TransformOperationsTransition Property="RenderTransform" Duration="00:00:00.016" />
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.05" />
             </Transitions>
         </Setter>
 
-        <Style Selector="^:pointerover /template/ iconPacks|IconPack">
-            <Setter Property="Foreground" Value="{DynamicResource ScrollBarButtonArrowForegroundPointerOver}" />
+        <Style Selector="^:pointerover /template/ iconPacks|IconPack#ArrowGlyph">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
-        <Style Selector="^:pressed /template/ iconPacks|IconPack">
+        <Style Selector="^:pressed /template/ iconPacks|IconPack#ArrowGlyph">
             <Setter Property="RenderTransform" Value="scale(0.875)" />
-            <Setter Property="Foreground" Value="{DynamicResource ScrollBarButtonArrowForegroundPressed}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
-        <Style Selector="^:disabled /template/ iconPacks|IconPack">
-            <Setter Property="Foreground" Value="{DynamicResource ScrollBarButtonArrowForegroundDisabled}" />
+        <Style Selector="^:disabled /template/ iconPacks|IconPack#ArrowGlyph">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar">
         <Setter Property="helpers:ScrollBarAutoHideHelper.IsEnabled" Value="True" />
-        <Setter Property="MinWidth" Value="{DynamicResource ScrollBarSize}" />
-        <Setter Property="MinHeight" Value="{DynamicResource ScrollBarSize}" />
-        <Setter Property="Background" Value="{DynamicResource ScrollBarBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource ScrollBarForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ScrollBarBorderBrush}" />
-        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="MinWidth" Value="{StaticResource ScrollBarSize}" />
+        <Setter Property="MinHeight" Value="{StaticResource ScrollBarSize}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="6" />
 
         <Style Selector="^:vertical">
             <Setter Property="Template">
@@ -180,23 +130,26 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}">
                             <Grid RowDefinitions="Auto,*,Auto">
-
                                 <Rectangle
                                     Name="TrackRect"
                                     Grid.RowSpan="3"
                                     Margin="0"
-                                    Fill="{DynamicResource ScrollBarTrackFill}"
+                                    Fill="{DynamicResource ThemeX.Surface.SubtleHover}"
                                     Opacity="0"
                                     RadiusX="6"
-                                    RadiusY="6"
-                                    Stroke="{DynamicResource ScrollBarTrackStroke}"
-                                    StrokeThickness="{DynamicResource ScrollBarTrackBorderThemeThickness}" />
+                                    RadiusY="6">
+                                    <Rectangle.Transitions>
+                                        <Transitions>
+                                            <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                                        </Transitions>
+                                    </Rectangle.Transitions>
+                                </Rectangle>
 
                                 <RepeatButton
                                     Name="PART_LineUpButton"
                                     Grid.Row="0"
-                                    Width="{DynamicResource ScrollBarSize}"
-                                    Height="{DynamicResource ScrollBarSize}"
+                                    Width="{StaticResource ScrollBarSize}"
+                                    Height="{StaticResource ScrollBarSize}"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDDB;"
                                     Focusable="False"
@@ -211,8 +164,7 @@
                                     Minimum="{TemplateBinding Minimum}"
                                     Orientation="{TemplateBinding Orientation}"
                                     ViewportSize="{TemplateBinding ViewportSize}"
-                                    Value="{TemplateBinding Value,
-                                                            Mode=TwoWay}">
+                                    Value="{TemplateBinding Value, Mode=TwoWay}">
                                     <Track.DecreaseButton>
                                         <RepeatButton
                                             Name="PART_PageUpButton"
@@ -232,8 +184,6 @@
                                     <Thumb
                                         MinWidth="{StaticResource ScrollBarVerticalThumbMinWidth}"
                                         MinHeight="{StaticResource ScrollBarVerticalThumbMinHeight}"
-                                        Background="{DynamicResource ScrollBarPanningThumbBackground}"
-                                        BorderBrush="{DynamicResource ScrollBarThumbBorderBrush}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         Opacity="1"
                                         RenderTransformOrigin="50%,50%"
@@ -243,18 +193,16 @@
                                 <RepeatButton
                                     Name="PART_LineDownButton"
                                     Grid.Row="2"
-                                    Height="{DynamicResource ScrollBarSize}"
-                                    Width="{DynamicResource ScrollBarSize}"
+                                    Width="{StaticResource ScrollBarSize}"
+                                    Height="{StaticResource ScrollBarSize}"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDDC;"
                                     Focusable="False"
                                     Interval="50"
                                     Opacity="0"
                                     Theme="{StaticResource ScrollBarLineButton}" />
-
                             </Grid>
                         </Border>
-
                     </Grid>
                 </ControlTemplate>
             </Setter>
@@ -273,29 +221,26 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}">
                             <Grid ColumnDefinitions="Auto,*,Auto">
-
                                 <Rectangle
                                     Name="TrackRect"
                                     Grid.ColumnSpan="3"
                                     Margin="0"
-                                    Fill="{DynamicResource ScrollBarTrackFill}"
+                                    Fill="{DynamicResource ThemeX.Surface.SubtleHover}"
                                     Opacity="0"
                                     RadiusX="6"
-                                    RadiusY="6"
-                                    Stroke="{DynamicResource ScrollBarTrackStroke}"
-                                    StrokeThickness="{DynamicResource ScrollBarTrackBorderThemeThickness}">
+                                    RadiusY="6">
                                     <Rectangle.Transitions>
                                         <Transitions>
-                                            <DoubleTransition Property="Opacity" Duration="0:0:0.1" />
+                                            <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
                                         </Transitions>
                                     </Rectangle.Transitions>
                                 </Rectangle>
 
                                 <RepeatButton
                                     Name="PART_LineUpButton"
-                                    Grid.Row="0"
-                                    Width="{DynamicResource ScrollBarSize}"
-                                    Height="{DynamicResource ScrollBarSize}"
+                                    Grid.Column="0"
+                                    Width="{StaticResource ScrollBarSize}"
+                                    Height="{StaticResource ScrollBarSize}"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDD9;"
                                     Focusable="False"
@@ -309,8 +254,7 @@
                                     Minimum="{TemplateBinding Minimum}"
                                     Orientation="{TemplateBinding Orientation}"
                                     ViewportSize="{TemplateBinding ViewportSize}"
-                                    Value="{TemplateBinding Value,
-                                                            Mode=TwoWay}">
+                                    Value="{TemplateBinding Value, Mode=TwoWay}">
                                     <Track.DecreaseButton>
                                         <RepeatButton
                                             Name="PART_PageUpButton"
@@ -328,9 +272,8 @@
                                             Theme="{StaticResource ScrollBarPageButton}" />
                                     </Track.IncreaseButton>
                                     <Thumb
-                                        MinHeight="{DynamicResource ScrollBarHorizontalThumbMinHeight}"
-                                        Background="{DynamicResource ScrollBarPanningThumbBackground}"
-                                        BorderBrush="{DynamicResource ScrollBarThumbBorderBrush}"
+                                        MinWidth="{StaticResource ScrollBarHorizontalThumbMinWidth}"
+                                        MinHeight="{StaticResource ScrollBarHorizontalThumbMinHeight}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         Opacity="1"
                                         RenderTransformOrigin="50%,50%"
@@ -340,18 +283,16 @@
                                 <RepeatButton
                                     Name="PART_LineDownButton"
                                     Grid.Column="2"
-                                    Height="{DynamicResource ScrollBarSize}"
-                                    Width="{DynamicResource ScrollBarSize}"
+                                    Width="{StaticResource ScrollBarSize}"
+                                    Height="{StaticResource ScrollBarSize}"
                                     HorizontalAlignment="Center"
                                     Content="&#xEDDA;"
                                     Focusable="False"
                                     Interval="50"
                                     Opacity="0"
                                     Theme="{StaticResource ScrollBarLineButton}" />
-
                             </Grid>
                         </Border>
-
                     </Grid>
                 </ControlTemplate>
             </Setter>
@@ -375,16 +316,11 @@
         </Style>
 
         <Style Selector="^.auto-hide-expanded, ^[AllowAutoHide=false]">
-            <Style Selector="^ /template/ Grid#Root">
-                <Setter Property="Background" Value="{DynamicResource ScrollBarBackgroundPointerOver}" />
-            </Style>
             <Style Selector="^ /template/ Rectangle#TrackRect">
-                <Setter Property="Stroke" Value="{DynamicResource ScrollBarTrackStrokePointerOver}" />
                 <Setter Property="Opacity" Value="1" />
             </Style>
             <Style Selector="^ /template/ Thumb">
                 <Setter Property="RenderTransform" Value="none" />
-                <Setter Property="Background" Value="{DynamicResource ScrollBarThumbBackground}" />
             </Style>
             <Style Selector="^ /template/ RepeatButton">
                 <Setter Property="Opacity" Value="1" />
@@ -392,7 +328,7 @@
         </Style>
 
         <Style Selector="^:disabled /template/ Thumb">
-            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Opacity" Value="0.4" />
         </Style>
     </ControlTheme>
 

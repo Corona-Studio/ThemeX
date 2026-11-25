@@ -3,105 +3,88 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Border Padding="50" ClipToBounds="False">
-            <DockPanel ClipToBounds="False" LastChildFill="True">
-                <StackPanel
-                    ClipToBounds="False"
-                    DockPanel.Dock="Top"
-                    Spacing="10">
-                    <Slider Value="100" />
-                    <Slider IsEnabled="False" Value="50" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Spacing="10">
-                    <Slider
-                        Height="150"
-                        Orientation="Vertical"
-                        Value="50" />
-                    <Slider
-                        IsEnabled="False"
-                        Orientation="Vertical"
-                        Value="50" />
-                </StackPanel>
-            </DockPanel>
-        </Border>
-    </Design.PreviewWith>
-
-    <Thickness x:Key="SliderTopHeaderMargin">0,0,0,4</Thickness>
     <CornerRadius x:Key="SliderTrackCornerRadius">2</CornerRadius>
     <CornerRadius x:Key="SliderThumbCornerRadius">10</CornerRadius>
-    <!--  Changed to GridLength  -->
-    <GridLength x:Key="SliderPreContentMargin">14</GridLength>
-    <GridLength x:Key="SliderPostContentMargin">14</GridLength>
+    <GridLength x:Key="SliderPreContentMargin">6</GridLength>
+    <GridLength x:Key="SliderPostContentMargin">6</GridLength>
 
     <x:Double x:Key="SliderInnerThumbHeight">12</x:Double>
+    <x:Double x:Key="SliderInnerThumbWidth">12</x:Double>
     <x:Double x:Key="SliderHorizontalHeight">32</x:Double>
     <x:Double x:Key="SliderVerticalWidth">32</x:Double>
-    <x:Double x:Key="SliderHorizontalThumbWidth">18</x:Double>
-    <x:Double x:Key="SliderHorizontalThumbHeight">18</x:Double>
-    <x:Double x:Key="SliderVerticalThumbWidth">18</x:Double>
-    <x:Double x:Key="SliderVerticalThumbHeight">18</x:Double>
-    <x:Double x:Key="SliderInnerThumbWidth">12</x:Double>
+    <x:Double x:Key="SliderHorizontalThumbWidth">20</x:Double>
+    <x:Double x:Key="SliderHorizontalThumbHeight">20</x:Double>
+    <x:Double x:Key="SliderVerticalThumbWidth">20</x:Double>
+    <x:Double x:Key="SliderVerticalThumbHeight">20</x:Double>
 
     <x:Double x:Key="SliderOutsideTickBarThemeHeight">4</x:Double>
-    <x:Double x:Key="SliderTrackThemeHeight">2</x:Double>
+    <x:Double x:Key="SliderTrackThemeHeight">4</x:Double>
     <Thickness x:Key="SliderBorderThemeThickness">0</Thickness>
 
+    <!--  Fluent 2 Elevated Circular Thumb  -->
     <ControlTheme x:Key="SliderThumbStyle" TargetType="Thumb">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Background"
-                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.CircleBorder}" />
         <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <!--  Elevation Brush effect really doesn't come through with this...  -->
+            <ControlTemplate>
+                <Panel
+                    Width="{TemplateBinding Width}"
+                    Height="{TemplateBinding Height}"
+                    ClipToBounds="False">
                     <Border
-                        Margin="-2"
-                        Background="{TemplateBinding BorderBrush}"
+                        Name="ThumbOuter"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Background="{DynamicResource ThemeX.ContentBackground.Primary}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{DynamicResource SliderThumbCornerRadius}"
-                        RenderTransform="scaleY(-1)">
+                        BoxShadow="{DynamicResource ThemeX.Shadow.Card}"
+                        CornerRadius="{StaticResource SliderThumbCornerRadius}">
                         <Ellipse
                             Name="SliderInnerThumb"
-                            Width="{DynamicResource SliderInnerThumbWidth}"
-                            Height="{DynamicResource SliderInnerThumbHeight}"
+                            Width="{StaticResource SliderInnerThumbWidth}"
+                            Height="{StaticResource SliderInnerThumbHeight}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
                             Fill="{TemplateBinding Background}"
-                            RenderTransform="scaleX(0.86) scaleY(0.86)">
+                            RenderTransform="scale(0.85)"
+                            RenderTransformOrigin="50%,50%">
                             <Ellipse.Transitions>
                                 <Transitions>
                                     <TransformOperationsTransition
-                                        Easing="0,0 0,1"
+                                        Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
                                         Property="RenderTransform"
-                                        Duration="00:00:00.167" />
+                                        Duration="0:0:0.15" />
+                                    <BrushTransition Property="Fill" Duration="0:0:0.12" />
                                 </Transitions>
                             </Ellipse.Transitions>
                         </Ellipse>
                     </Border>
-                </ControlTemplate>
-            </Setter.Value>
+                </Panel>
+            </ControlTemplate>
         </Setter>
 
         <Style Selector="^:pointerover /template/ Ellipse#SliderInnerThumb">
-            <Setter Property="RenderTransform" Value="scaleX(1.167) scaleY(1.167)" />
+            <Setter Property="RenderTransform" Value="scale(1.08)" />
         </Style>
         <Style Selector="^:pressed /template/ Ellipse#SliderInnerThumb">
-            <Setter Property="RenderTransform" Value="scaleX(0.71) scaleY(0.71)" />
+            <Setter Property="RenderTransform" Value="scale(0.72)" />
         </Style>
         <Style Selector="^:disabled /template/ Ellipse#SliderInnerThumb">
-            <Setter Property="RenderTransform" Value="scaleX(1.167) scaleY(1.167)" />
+            <Setter Property="RenderTransform" Value="scale(0.85)" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
         </Style>
     </ControlTheme>
 
     <ControlTheme x:Key="{x:Type Slider}" TargetType="Slider">
-        <Setter Property="BorderThickness" Value="{DynamicResource SliderBorderThemeThickness}" />
-        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Secondary}" />
-        <Setter Property="Foreground"
-                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+        <Setter Property="BorderThickness" Value="{StaticResource SliderBorderThemeThickness}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="FocusAdorner" Value="{StaticResource ThemeX.FocusAdorner.Control}" />
 
         <Style Selector="^:horizontal">
             <Setter Property="Template">
@@ -111,24 +94,16 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             ClipToBounds="False"
-                            CornerRadius="{DynamicResource SliderTrackCornerRadius}">
-
+                            CornerRadius="{StaticResource SliderTrackCornerRadius}">
                             <Grid
                                 Name="grid"
                                 Margin="{TemplateBinding Padding}"
                                 ClipToBounds="False"
-                                RowDefinitions="Auto, *">
-                                <!--  Hide the header b/c property doesn't exist in Avalonia  -->
-                                <!--<ContentPresenter x:Name="HeaderContentPresenter"
-                                              Grid.Row="0"
-                                              FontWeight="{DynamicResource SliderHeaderThemeFontWeight}"
-                                              Foreground="{DynamicResource SliderHeaderForeground}"
-                                              Margin="{DynamicResource SliderTopHeaderMargin}"
-                                              />-->
-
+                                RowDefinitions="Auto,*">
                                 <Grid
                                     x:Name="SliderContainer"
                                     Grid.Row="1"
+                                    Background="Transparent"
                                     ClipToBounds="False">
                                     <Grid.Styles>
                                         <Style Selector="TickBar">
@@ -138,38 +113,32 @@
 
                                     <Grid
                                         x:Name="HorizontalTemplate"
-                                        MinHeight="{DynamicResource SliderHorizontalHeight}"
+                                        MinHeight="{StaticResource SliderHorizontalHeight}"
                                         ClipToBounds="False"
                                         ColumnDefinitions="Auto,Auto,*">
-
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="{DynamicResource SliderPreContentMargin}" />
+                                            <RowDefinition Height="{StaticResource SliderPreContentMargin}" />
                                             <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="{DynamicResource SliderPostContentMargin}" />
+                                            <RowDefinition Height="{StaticResource SliderPostContentMargin}" />
                                         </Grid.RowDefinitions>
 
                                         <TickBar
                                             Name="TopTickBar"
                                             Grid.ColumnSpan="3"
-                                            Height="{DynamicResource SliderOutsideTickBarThemeHeight}"
+                                            Height="{StaticResource SliderOutsideTickBarThemeHeight}"
                                             Margin="0,0,0,4"
                                             VerticalAlignment="Bottom"
                                             Placement="Top" />
-
-                                        <!-- <TickBar Name="HorizontalInlineTickBar" Placement="Top" Fill="{DynamicResource SliderInlineTickBarFill}" Height="{DynamicResource SliderTrackThemeHeight}" Grid.Row="1" Grid.ColumnSpan="3" /> -->
 
                                         <TickBar
                                             Name="BottomTickBar"
                                             Grid.Row="2"
                                             Grid.ColumnSpan="3"
-                                            Height="{DynamicResource SliderOutsideTickBarThemeHeight}"
+                                            Height="{StaticResource SliderOutsideTickBarThemeHeight}"
                                             Margin="0,4,0,0"
                                             VerticalAlignment="Top"
                                             Placement="Bottom" />
 
-                                        <!--
-                                            Added a 2px Horizontal margin here otherwise the thumb gets clipped Despite EVERY...SINGLE...ITEM having ClipToBounds=False
-                                        -->
                                         <Track
                                             Name="PART_Track"
                                             Grid.Row="1"
@@ -195,10 +164,10 @@
                                                                     Background="Transparent" />
                                                                 <Border
                                                                     Name="TrackBackground"
-                                                                    Height="{DynamicResource SliderTrackThemeHeight}"
+                                                                    Height="{StaticResource SliderTrackThemeHeight}"
                                                                     VerticalAlignment="Center"
                                                                     Background="{TemplateBinding Background}"
-                                                                    CornerRadius="{DynamicResource SliderTrackCornerRadius}" />
+                                                                    CornerRadius="{StaticResource SliderTrackCornerRadius}" />
                                                             </Grid>
                                                         </ControlTemplate>
                                                     </RepeatButton.Template>
@@ -219,10 +188,10 @@
                                                                     Background="Transparent" />
                                                                 <Border
                                                                     Name="TrackBackground"
-                                                                    Height="{DynamicResource SliderTrackThemeHeight}"
+                                                                    Height="{StaticResource SliderTrackThemeHeight}"
                                                                     VerticalAlignment="Center"
                                                                     Background="{TemplateBinding Background}"
-                                                                    CornerRadius="{DynamicResource SliderTrackCornerRadius}" />
+                                                                    CornerRadius="{StaticResource SliderTrackCornerRadius}" />
                                                             </Grid>
                                                         </ControlTemplate>
                                                     </RepeatButton.Template>
@@ -230,8 +199,8 @@
                                             </Track.IncreaseButton>
                                             <Thumb
                                                 Name="thumb"
-                                                Width="{DynamicResource SliderHorizontalThumbWidth}"
-                                                Height="{DynamicResource SliderHorizontalThumbHeight}"
+                                                Width="{StaticResource SliderHorizontalThumbWidth}"
+                                                Height="{StaticResource SliderHorizontalThumbHeight}"
                                                 Margin="0"
                                                 Padding="0"
                                                 DataContext="{TemplateBinding Value}"
@@ -253,18 +222,14 @@
                         <Border
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{DynamicResource SliderTrackCornerRadius}">
+                            ClipToBounds="False"
+                            CornerRadius="{StaticResource SliderTrackCornerRadius}">
                             <Grid
                                 Name="grid"
                                 Margin="{TemplateBinding Padding}"
-                                RowDefinitions="Auto, *">
-                                <!--  Hide the header b/c property doesn't exist in Avalonia  -->
-                                <!--<ContentPresenter x:Name="HeaderContentPresenter"
-                                              Grid.Row="0"
-                                              FontWeight="{DynamicResource SliderHeaderThemeFontWeight}"
-                                              Foreground="{DynamicResource SliderHeaderForeground}"
-                                              Margin="{DynamicResource SliderTopHeaderMargin}" />-->
-                                <Grid x:Name="SliderContainer" Grid.Row="1">
+                                ClipToBounds="False"
+                                RowDefinitions="Auto,*">
+                                <Grid x:Name="SliderContainer" Grid.Row="1" Background="Transparent" ClipToBounds="False">
                                     <Grid.Styles>
                                         <Style Selector="TickBar">
                                             <Setter Property="ReservedSpace" Value="{Binding #PART_Track.Thumb.Bounds}" />
@@ -272,36 +237,32 @@
                                     </Grid.Styles>
                                     <Grid
                                         x:Name="VerticalTemplate"
-                                        MinWidth="{DynamicResource SliderVerticalWidth}"
+                                        MinWidth="{StaticResource SliderVerticalWidth}"
+                                        ClipToBounds="False"
                                         RowDefinitions="*,Auto,Auto">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="{DynamicResource SliderPreContentMargin}" />
+                                            <ColumnDefinition Width="{StaticResource SliderPreContentMargin}" />
                                             <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="{DynamicResource SliderPostContentMargin}" />
+                                            <ColumnDefinition Width="{StaticResource SliderPostContentMargin}" />
                                         </Grid.ColumnDefinitions>
 
                                         <TickBar
                                             Name="LeftTickBar"
                                             Grid.RowSpan="3"
-                                            Width="{DynamicResource SliderOutsideTickBarThemeHeight}"
+                                            Width="{StaticResource SliderOutsideTickBarThemeHeight}"
                                             Margin="0,0,4,0"
                                             HorizontalAlignment="Right"
                                             Placement="Left" />
-                                        <!-- <TickBar Name="VerticalInlineTickBar" Placement="Inline" Fill="{DynamicResource SliderInlineTickBarFill}" Width="{DynamicResource SliderTrackThemeHeight}" Grid.Column="1" Grid.RowSpan="3" /> -->
 
                                         <TickBar
                                             Name="RightTickBar"
                                             Grid.RowSpan="3"
                                             Grid.Column="2"
-                                            Width="{DynamicResource SliderOutsideTickBarThemeHeight}"
+                                            Width="{StaticResource SliderOutsideTickBarThemeHeight}"
                                             Margin="4,0,0,0"
                                             HorizontalAlignment="Left"
                                             Placement="Right" />
 
-                                        <!--
-                                            Added a 2px Vertical margin here otherwise the thumb gets clipped
-                                            Despite EVERY...SINGLE...ITEM having ClipToBounds=False
-                                        -->
                                         <Track
                                             Name="PART_Track"
                                             Grid.RowSpan="3"
@@ -322,14 +283,14 @@
                                                             <Grid>
                                                                 <Border
                                                                     Name="FocusTarget"
-                                                                    Margin="0,-10"
+                                                                    Margin="-10,0"
                                                                     Background="Transparent" />
                                                                 <Border
                                                                     Name="TrackBackground"
-                                                                    Width="{DynamicResource SliderTrackThemeHeight}"
+                                                                    Width="{StaticResource SliderTrackThemeHeight}"
                                                                     HorizontalAlignment="Center"
                                                                     Background="{TemplateBinding Background}"
-                                                                    CornerRadius="{DynamicResource ControlCornerRadius}" />
+                                                                    CornerRadius="{StaticResource SliderTrackCornerRadius}" />
                                                             </Grid>
                                                         </ControlTemplate>
                                                     </RepeatButton.Template>
@@ -346,14 +307,14 @@
                                                             <Grid>
                                                                 <Border
                                                                     Name="FocusTarget"
-                                                                    Margin="0,-10"
+                                                                    Margin="-10,0"
                                                                     Background="Transparent" />
                                                                 <Border
                                                                     Name="TrackBackground"
-                                                                    Width="{DynamicResource SliderTrackThemeHeight}"
+                                                                    Width="{StaticResource SliderTrackThemeHeight}"
                                                                     HorizontalAlignment="Center"
                                                                     Background="{TemplateBinding Background}"
-                                                                    CornerRadius="{DynamicResource ControlCornerRadius}" />
+                                                                    CornerRadius="{StaticResource SliderTrackCornerRadius}" />
                                                             </Grid>
                                                         </ControlTemplate>
                                                     </RepeatButton.Template>
@@ -361,8 +322,8 @@
                                             </Track.IncreaseButton>
                                             <Thumb
                                                 Name="SliderThumb"
-                                                Width="{DynamicResource SliderVerticalThumbWidth}"
-                                                Height="{DynamicResource SliderVerticalThumbHeight}"
+                                                Width="{StaticResource SliderVerticalThumbWidth}"
+                                                Height="{StaticResource SliderVerticalThumbHeight}"
                                                 Margin="0"
                                                 Padding="0"
                                                 DataContext="{TemplateBinding Value}"
@@ -378,7 +339,7 @@
         </Style>
 
         <Style Selector="^ /template/ TickBar">
-            <Setter Property="Fill" Value="{DynamicResource SliderTickBarFill}" />
+            <Setter Property="Fill" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
             <Setter Property="TickFrequency" Value="{TemplateBinding Slider.TickFrequency}" />
             <Setter Property="Orientation" Value="{TemplateBinding Slider.Orientation}" />
             <Setter Property="Minimum" Value="{TemplateBinding Slider.Minimum}" />
@@ -387,119 +348,56 @@
             <Setter Property="Ticks" Value="{TemplateBinding Ticks}" />
         </Style>
 
-        <Style
-            Selector="^[TickPlacement=TopLeft] /template/ TickBar#LeftTickBar,                           ^[TickPlacement=Outside] /template/ TickBar#LeftTickBar">
+        <Style Selector="^[TickPlacement=TopLeft] /template/ TickBar#LeftTickBar, ^[TickPlacement=Outside] /template/ TickBar#LeftTickBar">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[TickPlacement=TopLeft] /template/ TickBar#TopTickBar, ^[TickPlacement=Outside] /template/ TickBar#TopTickBar">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[TickPlacement=BottomRight] /template/ TickBar#BottomTickBar, ^[TickPlacement=Outside] /template/ TickBar#BottomTickBar">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="^[TickPlacement=BottomRight] /template/ TickBar#RightTickBar, ^[TickPlacement=Outside] /template/ TickBar#RightTickBar">
             <Setter Property="IsVisible" Value="True" />
         </Style>
 
-        <Style
-            Selector="^[TickPlacement=TopLeft] /template/ TickBar#TopTickBar,                          ^[TickPlacement=Outside] /template/ TickBar#TopTickBar">
-            <Setter Property="IsVisible" Value="True" />
+        <Style Selector="^:pointerover /template/ RepeatButton#PART_IncreaseButton">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Primary.MouseOver}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ RepeatButton#PART_DecreaseButton">
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorHoverKey}}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ Thumb">
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorHoverKey}}" />
         </Style>
 
-        <Style
-            Selector="^[TickPlacement=BottomRight] /template/ TickBar#BottomTickBar,                          ^[TickPlacement=Outside] /template/ TickBar#BottomTickBar">
-            <Setter Property="IsVisible" Value="True" />
+        <Style Selector="^:pressed /template/ RepeatButton#PART_DecreaseButton">
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorPressedKey}}" />
         </Style>
-
-        <Style
-            Selector="^[TickPlacement=BottomRight] /template/ TickBar#RightTickBar,                          ^[TickPlacement=Outside] /template/ TickBar#RightTickBar">
-            <Setter Property="IsVisible" Value="True" />
-        </Style>
-
-        <Style Selector="^ /template/ RepeatButton#PART_IncreaseButton">
-
-            <Setter Property="Transitions">
-                <Setter.Value>
-                    <Transitions>
-                        <BrushTransition Property="Background" Duration="00:00:00.125">
-                            <BrushTransition.Easing>
-                                <QuadraticEaseInOut />
-                            </BrushTransition.Easing>
-                        </BrushTransition>
-                    </Transitions>
-                </Setter.Value>
-            </Setter>
-
+        <Style Selector="^:pressed /template/ Thumb">
+            <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorPressedKey}}" />
         </Style>
 
         <Style Selector="^:disabled">
-            <Style Selector="^ /template/ ContentPresenter#HeaderContentPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource SliderHeaderForegroundDisabled}" />
-            </Style>
-
             <Style Selector="^ /template/ RepeatButton#PART_DecreaseButton">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
             </Style>
-
             <Style Selector="^ /template/ RepeatButton#PART_IncreaseButton">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
             </Style>
-
             <Style Selector="^ /template/ Thumb">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+                <Setter Property="Background" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
             </Style>
-
             <Style Selector="^ /template/ TickBar">
-                <Setter Property="Fill" Value="{DynamicResource SliderTickBarFillDisabled}" />
-            </Style>
-
-            <Style Selector="^ /template/ Grid#SliderContainer">
-                <Setter Property="Background" Value="{DynamicResource SliderContainerBackgroundDisabled}" />
-            </Style>
-        </Style>
-
-        <Style Selector="^:pointerover">
-
-            <Style Selector="^ /template/ RepeatButton#PART_IncreaseButton">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLightTransparent3Key}}" />
-            </Style>
-
-            <Style Selector="^ /template/ Thumb">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-            </Style>
-
-            <Style Selector="^ /template/ Grid#SliderContainer">
-                <Setter Property="Background" Value="{DynamicResource SliderContainerBackgroundPointerOver}" />
-            </Style>
-
-            <Style Selector="^ /template/ RepeatButton#PART_DecreaseButton">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-            </Style>
-
-        </Style>
-
-        <Style Selector="^:pressed">
-
-            <Style Selector="^ /template/ RepeatButton#PART_IncreaseButton">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLightTransparent4Key}}" />
-            </Style>
-
-            <Style Selector="^ /template/ Thumb">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            </Style>
-
-            <Style Selector="^ /template/ Grid#SliderContainer">
-                <Setter Property="Background" Value="{DynamicResource SliderContainerBackgroundPressed}" />
-            </Style>
-
-            <Style Selector="^ /template/ RepeatButton#PART_DecreaseButton">
-                <Setter Property="Background"
-                        Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+                <Setter Property="Fill" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
             </Style>
         </Style>
 
         <Style Selector="^:error">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Error}" />
             <Style Selector="^ /template/ Thumb">
                 <Setter Property="Background" Value="{DynamicResource ThemeX.Foreground.Error}" />
             </Style>
-
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Error}" />
         </Style>
     </ControlTheme>
 

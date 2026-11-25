@@ -11,14 +11,9 @@ namespace ThemeX.Helpers;
 /// <summary>
 /// Defers a popup's close long enough for its child presenter to fade out.
 /// </summary>
-public static class PopupFadeAnimationHelper
+public static partial class PopupFadeAnimationHelper
 {
     public static readonly TimeSpan FadeDuration = TimeSpan.FromMilliseconds(120);
-
-    public static readonly AttachedProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.RegisterAttached<Popup, bool>(
-            "IsEnabled",
-            typeof(PopupFadeAnimationHelper));
 
     private static readonly AttachedProperty<AnimationState?> StateProperty =
         AvaloniaProperty.RegisterAttached<Popup, AnimationState?>(
@@ -33,8 +28,8 @@ public static class PopupFadeAnimationHelper
             new Action<Popup, AvaloniaPropertyChangedEventArgs<bool>>(OnIsOpenChanged));
     }
 
-    public static bool GetIsEnabled(Popup element) => element.GetValue(IsEnabledProperty);
-    public static void SetIsEnabled(Popup element, bool value) => element.SetValue(IsEnabledProperty, value);
+    [GeneratedAttachedProperty]
+    public static partial bool GetIsEnabled(Popup element);
 
     private static void OnIsEnabledChanged(Popup popup, AvaloniaPropertyChangedEventArgs<bool> args)
     {

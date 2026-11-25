@@ -5,19 +5,16 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Media;
-using Avalonia.Threading;
-using ThemeX.Controls.Effects;
+using Avalonia.Media.Immutable;
 
 namespace ThemeX.Controls.Animations;
 
-public sealed class ActivatableToggle : AnimationLayer
+public sealed partial class ActivatableToggle : AnimationLayer
 {
     public static readonly StyledProperty<IBrush?> ActiveBrushProperty =
         AvaloniaProperty.Register<ActivatableToggle, IBrush?>(
-            nameof(ActiveBrush), new SolidColorBrush(Color.FromArgb(64, 0, 0, 0)));
-
-    public static readonly StyledProperty<bool> ActivatedProperty = AvaloniaProperty.Register<ActivatableToggle, bool>(
-        nameof(Activated));
+            nameof(ActiveBrush),
+            new ImmutableSolidColorBrush(Color.FromArgb(64, 0, 0, 0)));
 
     [Category("Animation")]
     public IBrush? ActiveBrush
@@ -26,11 +23,8 @@ public sealed class ActivatableToggle : AnimationLayer
         set => SetValue(ActiveBrushProperty, value);
     }
 
-    public bool Activated
-    {
-        get => GetValue(ActivatedProperty);
-        set => SetValue(ActivatedProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial bool Activated { get; set; }
 
     protected override Type StyleKeyOverride => typeof(AnimationLayer);
 
@@ -75,9 +69,9 @@ public sealed class ActivatableToggle : AnimationLayer
         }
 
         if (Activated)
-            DispatcherTimer.RunOnce(() => ActiveRect.Opacity = Activated ? 1 : 0, Ripple.Duration);
+            ActiveRect.Opacity = 1;
         else
-            ActiveRect.Opacity = 0;
+            ActiveRect.Opacity = IsPointerOver && MouseEnterAnimation ? 1 : 0;
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

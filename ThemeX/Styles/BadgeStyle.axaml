@@ -1,69 +1,56 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
     xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks;assembly=ThemeX"
-    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX"
-    xmlns:controls="clr-namespace:ThemeX.Controls">
-    <Design.PreviewWith>
-        <Border Padding="20">
-            <controls:Badge
-                Background="{DynamicResource ThemeX.Foreground.Error}"
-                Content="TEST NOTICE"
-                Symbol="&#xF83E;,&#xE998;" />
-        </Border>
-    </Design.PreviewWith>
+    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX">
 
     <ControlTheme x:Key="{x:Type controls:Badge}" TargetType="controls:Badge">
-
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="Background"
-                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-        <Setter Property="Padding" Value="5, 2" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Badge}">
-                    <Border
-                        x:Name="ClippingBorder"
-                        Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}">
+            <ControlTemplate TargetType="{x:Type controls:Badge}">
+                <Border
+                    x:Name="ClippingBorder"
+                    Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                        <Grid HorizontalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <iconPacks:IconPack
+                            x:Name="Icon"
+                            Margin="0,0,4,0"
+                            VerticalAlignment="Center"
+                            FontSize="12"
+                            Foreground="{TemplateBinding Foreground}"
+                            IsVisible="{TemplateBinding Symbol, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                            OverlayForeground="{TemplateBinding Foreground}"
+                            OverlaySymbol="{TemplateBinding Symbol2}"
+                            Symbol="{TemplateBinding Symbol1}" />
 
-                            <iconPacks:IconPack
-                                x:Name="Icon"
-                                Padding="0,0,5,0"
-                                FontSize="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeIconKey}}"
-                                VerticalAlignment="Center"
-                                IsVisible="{TemplateBinding Symbol,
-                                                            Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                                Symbol="{TemplateBinding Symbol1}"
-                                Foreground="{TemplateBinding Foreground}"
-                                OverlaySymbol="{TemplateBinding Symbol2}"
-                                OverlayForeground="{TemplateBinding Foreground}" />
-
-                            <ContentPresenter
-                                Grid.Column="1"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Content}"
-                                MaxLines="1"
-                                TextBlock.Foreground="{TemplateBinding Foreground}"
-                                TextTrimming="CharacterEllipsis" />
-
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
+                        <ContentPresenter
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="{TemplateBinding Content}"
+                            MaxLines="1"
+                            TextBlock.Foreground="{TemplateBinding Foreground}"
+                            TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
         </Setter>
-
     </ControlTheme>
 
 </ResourceDictionary>

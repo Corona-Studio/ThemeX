@@ -182,31 +182,14 @@ ThemeX 包含多个辅助类：
 
 | 辅助类 | 描述 |
 | ------ | ---- |
-| `ColorHelper` | 图片调色板提取、亮度检测、颜色处理 |
+| `ColorHelper` | 亮度、WCAG 对比度及颜色处理辅助方法 |
 | `AnimationHelper` | Composition 动画创建工具 |
 | `BindingHelper` | 编译绑定辅助方法 |
 | `GeometryHelper` | 路径和几何计算 |
 
-### 示例：提取图片调色板
-
-```csharp
-using ThemeX.Helpers;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-
-var image = Image.Load<Rgba32>("image.jpg");
-var palette = image.GetPaletteFromBitmap(colorCount: 8);
-
-foreach (var color in palette)
-{
-    Console.WriteLine($"颜色: {color.Color}, 数量: {color.Population}");
-}
-```
-
 ## 依赖项
 
 - [Avalonia](https://avaloniaui.net/) (11.3.10+)
-- [SixLabors.ImageSharp](https://github.com/SixLabors/ImageSharp) - 图像处理
 - [CommunityToolkit.Diagnostics](https://github.com/CommunityToolkit/dotnet) - 诊断工具
 
 ## 许可证

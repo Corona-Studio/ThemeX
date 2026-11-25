@@ -9,11 +9,8 @@ using Avalonia.VisualTree;
 namespace ThemeX.Helpers;
 
 /// <summary>Reveals scrollbars on scrolling or pointer proximity, then contracts before fading.</summary>
-public static class ScrollBarAutoHideHelper
+public static partial class ScrollBarAutoHideHelper
 {
-    public static readonly AttachedProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.RegisterAttached<ScrollBar, bool>("IsEnabled", typeof(ScrollBarAutoHideHelper));
-
     private static readonly AttachedProperty<State?> StateProperty =
         AvaloniaProperty.RegisterAttached<ScrollBar, State?>("State", typeof(ScrollBarAutoHideHelper));
 
@@ -28,8 +25,8 @@ public static class ScrollBarAutoHideHelper
         });
     }
 
-    public static bool GetIsEnabled(ScrollBar bar) => bar.GetValue(IsEnabledProperty);
-    public static void SetIsEnabled(ScrollBar bar, bool value) => bar.SetValue(IsEnabledProperty, value);
+    [GeneratedAttachedProperty]
+    public static partial bool GetIsEnabled(ScrollBar bar);
 
     private sealed class State : IDisposable
     {

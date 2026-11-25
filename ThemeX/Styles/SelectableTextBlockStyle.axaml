@@ -7,6 +7,8 @@
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="SelectionBrush"
                 Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}" />
+        <Setter Property="SelectionForegroundBrush"
+                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
     </ControlTheme>
 
 </ResourceDictionary>

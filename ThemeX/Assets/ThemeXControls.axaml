@@ -4,6 +4,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <MergeResourceInclude Source="avares://ThemeX/Styles/IconPack/IconPackStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/AcrylicSurfaceStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/AnimationLayerStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/AutoCompleteBoxStyles.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/BadgeStyle.axaml" />
@@ -29,6 +30,7 @@
                 <MergeResourceInclude Source="avares://ThemeX/Styles/ProgressBarStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/ProgressRingStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/RadioButtonStyle.axaml" />
+                <MergeResourceInclude Source="avares://ThemeX/Styles/RevealBorderStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/RippleEffectStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/ScrollBarStyle.axaml" />
                 <MergeResourceInclude Source="avares://ThemeX/Styles/ScrollViewerStyle.axaml" />

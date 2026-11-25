@@ -8,24 +8,9 @@ namespace ThemeX.Helpers;
 /// Keeps a menu item's popup alive briefly after IsSubMenuOpen becomes false,
 /// allowing the popup presenter to finish its opacity transition.
 /// </summary>
-public static class SubmenuAnimationHelper
+public static partial class SubmenuAnimationHelper
 {
     public static readonly TimeSpan FadeDuration = TimeSpan.FromMilliseconds(120);
-
-    public static readonly AttachedProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.RegisterAttached<MenuItem, bool>(
-            "IsEnabled",
-            typeof(SubmenuAnimationHelper));
-
-    public static readonly AttachedProperty<bool> IsPopupOpenProperty =
-        AvaloniaProperty.RegisterAttached<MenuItem, bool>(
-            "IsPopupOpen",
-            typeof(SubmenuAnimationHelper));
-
-    public static readonly AttachedProperty<double> OpacityProperty =
-        AvaloniaProperty.RegisterAttached<MenuItem, double>(
-            "Opacity",
-            typeof(SubmenuAnimationHelper));
 
     private static readonly AttachedProperty<AnimationState?> StateProperty =
         AvaloniaProperty.RegisterAttached<MenuItem, AnimationState?>(
@@ -40,14 +25,14 @@ public static class SubmenuAnimationHelper
             new Action<MenuItem, AvaloniaPropertyChangedEventArgs<bool>>(OnIsSubMenuOpenChanged));
     }
 
-    public static bool GetIsEnabled(MenuItem element) => element.GetValue(IsEnabledProperty);
-    public static void SetIsEnabled(MenuItem element, bool value) => element.SetValue(IsEnabledProperty, value);
+    [GeneratedAttachedProperty]
+    public static partial bool GetIsEnabled(MenuItem element);
 
-    public static bool GetIsPopupOpen(MenuItem element) => element.GetValue(IsPopupOpenProperty);
-    public static void SetIsPopupOpen(MenuItem element, bool value) => element.SetValue(IsPopupOpenProperty, value);
+    [GeneratedAttachedProperty]
+    public static partial bool GetIsPopupOpen(MenuItem element);
 
-    public static double GetOpacity(MenuItem element) => element.GetValue(OpacityProperty);
-    public static void SetOpacity(MenuItem element, double value) => element.SetValue(OpacityProperty, value);
+    [GeneratedAttachedProperty]
+    public static partial double GetOpacity(MenuItem element);
 
     private static void OnIsEnabledChanged(MenuItem menuItem, AvaloniaPropertyChangedEventArgs<bool> args)
     {

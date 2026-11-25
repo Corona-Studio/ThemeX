@@ -10,12 +10,8 @@ using ThemeX.Helpers;
 
 namespace ThemeX.Controls.Animations;
 
-public sealed class RevealEffect : AnimationLayer
+public sealed partial class RevealEffect : AnimationLayer
 {
-    public static readonly StyledProperty<ISolidColorBrush> HaloBrushProperty =
-        AvaloniaProperty.Register<RevealEffect, ISolidColorBrush>(
-            nameof(HaloBrush));
-
     private static readonly IBrush MaskBrush = new RadialGradientBrush
     {
         GradientStops =
@@ -33,11 +29,8 @@ public sealed class RevealEffect : AnimationLayer
         MouseEnterAnimation = false;
     }
 
-    public ISolidColorBrush HaloBrush
-    {
-        get => GetValue(HaloBrushProperty);
-        set => SetValue(HaloBrushProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial ISolidColorBrush HaloBrush { get; set; }
 
     protected override Type StyleKeyOverride => typeof(AnimationLayer);
 
@@ -45,22 +38,24 @@ public sealed class RevealEffect : AnimationLayer
     {
         base.OnPointerMoved(e);
 
-        if (_last == null) return;
+        if (_last == null || PART_RippleCanvasRoot == null) return;
 
         var p = e.GetPosition(PART_RippleCanvasRoot);
+        var width = _last.Bounds.Width > 0 ? _last.Bounds.Width : _last.Width;
+        var height = _last.Bounds.Height > 0 ? _last.Bounds.Height : _last.Height;
 
-        Canvas.SetTop(_last, p.Y - _last.Bounds.Height / 2);
-        Canvas.SetLeft(_last, p.X - _last.Bounds.Width / 2);
+        Canvas.SetTop(_last, p.Y - height / 2);
+        Canvas.SetLeft(_last, p.X - width / 2);
     }
 
     protected override void OnPointerEntered(PointerEventArgs e)
     {
         base.OnPointerEntered(e);
 
-        if (_pointers != 0) return;
+        if (_pointers != 0 || PART_RippleCanvasRoot == null || !ThemeSettings.IsAnimationEnabled || !ThemeSettings.IsRevealEffectEnabled) return;
 
         _last = CreateHalo(e);
-        PART_RippleCanvasRoot!.Children.Add(_last);
+        PART_RippleCanvasRoot.Children.Add(_last);
         _pointers++;
 
         var (rippleVisual, opacityAnimation) = AnimationHelper.CreateAutoFinalEasingFloatAnimation(
@@ -82,6 +77,21 @@ public sealed class RevealEffect : AnimationLayer
         RemoveLastHalo();
     }
 
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        if (_last is { } last)
+        {
+            var elementVisual = ElementComposition.GetElementVisual(last);
+            if (elementVisual != null)
+                elementVisual.ImplicitAnimations = null;
+            PART_RippleCanvasRoot?.Children.Remove(last);
+            _last = null;
+            _pointers = 0;
+        }
+
+        base.OnDetachedFromVisualTree(e);
+    }
+
     private void RemoveLastHalo()
     {
         var last = _last;
@@ -89,10 +99,9 @@ public sealed class RevealEffect : AnimationLayer
         if (last == null)
             return;
 
-        _pointers--;
+        if (_pointers > 0)
+            _pointers--;
 
-        // This way to handle pointer released is pretty tricky
-        // could have better way to improve
         OnReleaseHandler(last);
         _last = null;
     }
@@ -109,10 +118,10 @@ public sealed class RevealEffect : AnimationLayer
         void RemoveRippleTask()
         {
             var elementVisual = ElementComposition.GetElementVisual(e);
+            if (elementVisual != null)
+                elementVisual.ImplicitAnimations = null;
 
-            elementVisual?.ImplicitAnimations = null;
-
-            PART_RippleCanvasRoot!.Children.Remove(e);
+            PART_RippleCanvasRoot?.Children.Remove(e);
         }
     }
 
@@ -130,8 +139,8 @@ public sealed class RevealEffect : AnimationLayer
             Opacity = 0
         };
 
-        Canvas.SetTop(halo, p.Y - halo.Bounds.Height / 2);
-        Canvas.SetLeft(halo, p.X - halo.Bounds.Width / 2);
+        Canvas.SetTop(halo, p.Y - maxSize / 2);
+        Canvas.SetLeft(halo, p.X - maxSize / 2);
 
         return halo;
     }

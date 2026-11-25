@@ -1,89 +1,52 @@
-﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
+    xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Grid
-            HorizontalAlignment="Center"
-            ColumnDefinitions="Auto,Auto"
-            RowDefinitions="Auto,Auto">
-            <Border
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="5"
-                Padding="50"
-                Background="GreenYellow"
-                ToolTip.Tip="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
-                <TextBlock>Hover Here</TextBlock>
-            </Border>
-            <CheckBox
-                Grid.Row="0"
-                Grid.Column="1"
-                Margin="5"
-                Content="ToolTip Open"
-                IsChecked="{Binding ElementName=Border, Path=(ToolTip.IsOpen)}" />
-            <Border
-                Name="Border"
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="5"
-                Padding="50"
-                Background="GreenYellow"
-                ToolTip.HorizontalOffset="0"
-                ToolTip.Placement="Bottom"
-                ToolTip.VerticalOffset="0">
-                <ToolTip.Tip>
-                    <StackPanel>
-                        <TextBlock Classes="h1">ToolTip</TextBlock>
-                        <TextBlock Classes="h2">A control which pops up a hint when a control is hovered</TextBlock>
-                    </StackPanel>
-                </ToolTip.Tip>
-                <TextBlock>ToolTip bottom placement</TextBlock>
-            </Border>
-        </Grid>
-    </Design.PreviewWith>
-
-    <Thickness x:Key="ToolTipBorderPadding">4</Thickness>
+    <Thickness x:Key="ToolTipBorderPadding">12,8</Thickness>
     <x:Double x:Key="ToolTipMaxWidth">320</x:Double>
     <Thickness x:Key="ToolTipBorderThemeThickness">1</Thickness>
     <x:Double x:Key="ToolTipContentThemeFontSize">12</x:Double>
 
     <ControlTheme x:Key="{x:Type ToolTip}" TargetType="ToolTip">
         <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Tertiary}">
-            <!--Setter.Value>
-                <DynamicResource
-                    ResourceKey="{OnPlatform 'ThemeX.ContentBackground.Tertiary', Windows='ThemeX.Transparent.Secondary'}" />
-            </Setter.Value-->
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ToolTipBorderBrush}" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ToolTipBorderThemeThickness}" />
-        <Setter Property="FontSize" Value="{DynamicResource ToolTipContentThemeFontSize}" />
-        <Setter Property="Padding" Value="{DynamicResource ToolTipBorderPadding}" />
-        <Setter Property="MaxWidth" Value="{DynamicResource ToolTipMaxWidth}" />
-        <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.SurfaceFlyout}" />
+        <Setter Property="BorderThickness" Value="{StaticResource ToolTipBorderThemeThickness}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}" />
+        <Setter Property="Padding" Value="{StaticResource ToolTipBorderPadding}" />
+        <Setter Property="MaxWidth" Value="{StaticResource ToolTipMaxWidth}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Opacity" Value="0" />
         <Setter Property="Transitions">
             <Transitions>
-                <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                <DoubleTransition
+                    Easing="QuadraticEaseOut"
+                    Property="Opacity"
+                    Duration="0:0:0.14" />
             </Transitions>
         </Setter>
         <Setter Property="Template">
-            <ControlTemplate>
-                <Border
+            <ControlTemplate TargetType="ToolTip">
+                <controls:AcrylicSurface
                     Name="PART_LayoutRoot"
-                    Margin="0,0,10,10"
+                    Margin="12,8,12,20"
                     Padding="{TemplateBinding Padding}"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
-                    CornerRadius="{TemplateBinding CornerRadius}">
+                    BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                    BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}}"
+                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}}"
+                    ShowElevationShadow="True"
+                    UseVolatileCache="True"
+                    Variant="Flyout">
                     <ContentPresenter
                         Name="PART_ContentPresenter"
                         MaxWidth="{TemplateBinding MaxWidth}"
                         Content="{TemplateBinding Content}"
                         ContentTemplate="{TemplateBinding ContentTemplate}"
+                        LineHeight="16"
                         TextWrapping="Wrap" />
-                </Border>
+                </controls:AcrylicSurface>
             </ControlTemplate>
         </Setter>
 

@@ -1,86 +1,53 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
     xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks"
     xmlns:scroll="clr-namespace:ThemeX.Controls.Scroll"
     xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Border Padding="50">
-            <StackPanel Spacing="5">
-                <ComboBox>
-                    <ComboBoxItem Content="Item1" />
-                    <ComboBoxItem Content="Item2" />
-                    <ComboBoxItem Content="Item3" />
-                </ComboBox>
-                <ComboBox PlaceholderText="Placeholder">
-                    <ComboBoxItem Content="Item1" />
-                    <ComboBoxItem Content="Item2" />
-                    <ComboBoxItem Content="Item3" />
-                </ComboBox>
-
-                <ComboBox IsEnabled="False" />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
-
-    <x:Double x:Key="ComboBoxArrowThemeFontSize">21</x:Double>
+    <x:Double x:Key="ComboBoxArrowThemeFontSize">12</x:Double>
     <x:Double x:Key="ComboBoxThemeMinWidth">64</x:Double>
-    <x:Double x:Key="ComboBoxPopupThemeMinWidth">80</x:Double>
-    <x:Double x:Key="ComboBoxPopupThemeTouchMinWidth">240</x:Double>
     <x:Double x:Key="ComboBoxItemPillHeight">16</x:Double>
     <x:Double x:Key="ComboBoxItemPillWidth">3</x:Double>
-    <!--<x:Double x:Key="ComboBoxItemPillMinScale">0.625</x:Double>-->
     <x:Double x:Key="ComboBoxMinHeight">32</x:Double>
 
-    <x:Int32 x:Key="ComboBoxPopupMaxNumberOfItems">15</x:Int32>
-    <x:Int32 x:Key="ComboBoxPopupMaxNumberOfItemsThatCanBeShownOnOneSide">7</x:Int32>
-
-    <x:String x:Key="ComboBoxItemScaleAnimationDuration">00:00:00.167</x:String>
-
     <Thickness x:Key="ComboBoxBorderThemeThickness">1</Thickness>
-    <Thickness x:Key="ComboBoxDropdownBorderThickness">1</Thickness>
-    <Thickness x:Key="ComboBoxHeaderThemeMargin">0,0,0,4</Thickness>
-    <Thickness x:Key="ComboBoxPopupBorderThemeThickness">2</Thickness>
-    <Thickness x:Key="ComboBoxItemThemePadding">11,5,11,7</Thickness>
-    <Thickness x:Key="ComboBoxItemThemeTouchPadding">11,11,11,13</Thickness>
-    <Thickness x:Key="ComboBoxItemThemeGameControllerPadding">11,11,11,13</Thickness>
-    <Thickness x:Key="ComboBoxBackgroundBorderThicknessFocused">2</Thickness>
-    <Thickness x:Key="ComboBoxDropdownBorderPadding">0</Thickness>
-    <Thickness x:Key="ComboBoxDropdownContentMargin">0,4</Thickness>
+    <Thickness x:Key="ComboBoxItemThemePadding">12,4,12,4</Thickness>
+    <Thickness x:Key="ComboBoxDropdownBorderPadding">4</Thickness>
     <Thickness x:Key="ComboBoxTopHeaderMargin">0,0,0,8</Thickness>
-    <Thickness x:Key="ComboBoxPadding">12,7,12,5</Thickness>
-    <Thickness x:Key="ComboBoxEditableTextPadding">11,5,32,6</Thickness>
+    <Thickness x:Key="ComboBoxPadding">12,4,8,4</Thickness>
 
     <FontWeight x:Key="ComboBoxHeaderThemeFontWeight">Normal</FontWeight>
-    <FontWeight x:Key="ComboBoxPlaceholderTextThemeFontWeight">SemiLight</FontWeight>
 
     <ControlTheme x:Key="{x:Type ComboBox}" TargetType="ComboBox">
-
         <Setter Property="Padding" Value="{DynamicResource ComboBoxPadding}" />
         <Setter Property="MaxDropDownHeight" Value="504" />
+        <Setter Property="MinHeight" Value="{DynamicResource ComboBoxMinHeight}" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Control}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.ControlBorder}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThemeThickness}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="PlaceholderForeground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
+        <Setter Property="PlaceholderForeground" Value="{DynamicResource ThemeX.Placeholder}" />
+        <Setter Property="FocusAdorner" Value="{StaticResource ThemeX.FocusAdorner.Control}" />
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
-                <StackPanel />
+                <StackPanel Spacing="2" />
             </ItemsPanelTemplate>
         </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <DataValidationErrors>
-                    <Grid ColumnDefinitions="*,32" RowDefinitions="Auto, *, Auto">
+                    <Grid ColumnDefinitions="*,32" RowDefinitions="Auto,*,Auto">
                         <ContentPresenter
                             x:Name="HeaderContentPresenter"
                             Grid.Row="0"
@@ -90,29 +57,25 @@
                             VerticalAlignment="Top"
                             IsVisible="False"
                             TextElement.FontWeight="{DynamicResource ComboBoxHeaderThemeFontWeight}" />
+
                         <Border
                             x:Name="Background"
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             MinWidth="{DynamicResource ComboBoxThemeMinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            RenderTransform="scaleY(-1)" />
-
-                        <Border
-                            x:Name="HighlightBackground"
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            BorderThickness="{TemplateBinding BorderThickness}" />
-
-                        <Border
-                            Name="Pill"
-                            Grid.Row="1"
-                            Margin="1,0,0,0" />
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <BrushTransition Property="Background" Duration="0:0:0.12" />
+                                    <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
 
                         <TextBlock
                             x:Name="PlaceholderTextBlock"
@@ -123,7 +86,8 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Foreground="{TemplateBinding PlaceholderForeground}"
                             IsVisible="{TemplateBinding SelectionBoxItem, Converter={x:Static ObjectConverters.IsNull}}"
-                            Text="{TemplateBinding PlaceholderText}" />
+                            Text="{TemplateBinding PlaceholderText}"
+                            TextTrimming="CharacterEllipsis" />
 
                         <ContentControl
                             x:Name="ContentPresenter"
@@ -135,221 +99,172 @@
                             Content="{TemplateBinding SelectionBoxItem}"
                             ContentTemplate="{TemplateBinding ItemTemplate}" />
 
-                        <Border
-                            x:Name="DropDownOverlay"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Width="30"
-                            Margin="0,1,1,1"
-                            HorizontalAlignment="Right"
-                            Background="Transparent"
-                            IsVisible="False" />
-
                         <iconPacks:IconPack
                             Name="DropDownGlyph"
                             Grid.Row="1"
                             Grid.Column="1"
-                            MinHeight="{DynamicResource ComboBoxMinHeight}"
-                            Margin="0,0,14,0"
+                            Margin="0,0,12,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            FontSize="12"
+                            FontSize="{StaticResource ComboBoxArrowThemeFontSize}"
+                            Foreground="{DynamicResource ThemeX.Foreground.Secondary}"
                             IsHitTestVisible="False"
-                            Symbol="&#xE70D;" />
+                            RenderTransform="rotate(0deg)"
+                            RenderTransformOrigin="50%,50%"
+                            Symbol="&#xE70D;">
+                            <iconPacks:IconPack.Transitions>
+                                <Transitions>
+                                    <TransformOperationsTransition
+                                        Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
+                                        Property="RenderTransform"
+                                        Duration="0:0:0.167" />
+                                    <BrushTransition Property="Foreground" Duration="0:0:0.12" />
+                                </Transitions>
+                            </iconPacks:IconPack.Transitions>
+                        </iconPacks:IconPack>
 
                         <Popup
                             Name="PART_Popup"
-                            MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
                             MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                            HorizontalOffset="-12"
+                            helpers:PopupFadeAnimationHelper.IsEnabled="True"
+                            helpers:PopupOverlayHelper.PreferOverlayForBackdrop="True"
                             InheritsTransform="True"
                             IsLightDismissEnabled="True"
                             IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
                             PlacementTarget="Background"
-                            helpers:PopupFadeAnimationHelper.IsEnabled="True"
+                            VerticalOffset="0"
                             WindowManagerAddShadowHint="False">
-                            <Border
+                            <controls:AcrylicSurface
                                 x:Name="PopupBorder"
+                                MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                                Margin="12,4,12,16"
                                 Padding="{DynamicResource ComboBoxDropdownBorderPadding}"
                                 HorizontalAlignment="Stretch"
-                                Background="{DynamicResource ThemeX.ContentBackground.Secondary}"
-                                BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
                                 CornerRadius="{DynamicResource OverlayCornerRadius}"
-                                Opacity="0">
-                                <Border.Transitions>
+                                Opacity="0"
+                                ShowElevationShadow="True"
+                                UseVolatileCache="True"
+                                Variant="Flyout">
+                                <controls:AcrylicSurface.Transitions>
                                     <Transitions>
                                         <DoubleTransition
                                             Easing="QuadraticEaseOut"
                                             Property="Opacity"
                                             Duration="{x:Static helpers:PopupFadeAnimationHelper.FadeDuration}" />
                                     </Transitions>
-                                </Border.Transitions>
+                                </controls:AcrylicSurface.Transitions>
                                 <scroll:SmoothScrollViewer
                                     HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                     UseSmoothScrolling="{DynamicResource {x:Static themeX:ThemeSettings.FluentScrollKey}}"
                                     VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                                    <ItemsPresenter Name="PART_ItemsPresenter"
-                                                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+                                    <ItemsPresenter
+                                        Name="PART_ItemsPresenter"
+                                        ItemsPanel="{TemplateBinding ItemsPanel}" />
                                 </scroll:SmoothScrollViewer>
-                            </Border>
+                            </controls:AcrylicSurface>
                         </Popup>
                     </Grid>
                 </DataValidationErrors>
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^ /template/ Border#Background">
-            <Setter Property="Transitions">
-                <Setter.Value>
-                    <Transitions>
-                        <BrushTransition Property="BorderBrush" Duration="00:00:00.167" />
-                    </Transitions>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style Selector="^ /template/ ContentPresenter#HeaderContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
-        <Style Selector="^ /template/ iconPacks|IconPack#DropDownGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition Property="RenderTransform" Duration="00:00:00.167" />
-                </Transitions>
-            </Setter>
-        </Style>
-
         <Style Selector="^:dropdownopen /template/ iconPacks|IconPack#DropDownGlyph">
             <Setter Property="RenderTransform" Value="rotate(180deg)" />
-        </Style>
-
-        <Style Selector="^ /template/ Border#HighlightBackground">
-            <Setter Property="Opacity" Value="0" />
-            <Setter Property="Background" Value="{DynamicResource ComboBoxBackgroundFocused}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxBackgroundBorderBrushFocused}" />
-            <Setter Property="BorderThickness" Value="{StaticResource ComboBoxBackgroundBorderThicknessFocused}" />
-        </Style>
-
-        <Style Selector="^ /template/ Border#Pill">
-            <Setter Property="Opacity" Value="0" />
-        </Style>
-
-        <Style Selector="^ /template/ Border#DropDownOverlay">
-            <Setter Property="IsVisible" Value="False" />
-            <Setter Property="Margin" Value="-4,4,4,4" />
-            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <!--  PointerOver  -->
-        <Style Selector="^:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
-        <Style Selector="^:pointerover /template/ TextBlock#PlaceholderTextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
         <Style Selector="^:pointerover /template/ Border#Background">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlHover}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.ControlBorderHover}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ iconPacks|IconPack#DropDownGlyph">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <!--  Pressed  -->
-        <Style Selector="^:pressed /template/ TextBlock#PlaceholderTextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource ComboBoxPlaceHolderForegroundPressed}" />
-        </Style>
-
-        <Style Selector="^:pressed /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ComboBoxForegroundPressed}" />
-        </Style>
-
         <Style Selector="^:pressed /template/ Border#Background">
-            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Reverse.Primary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlPressed}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
         </Style>
-
-        <!--  Disabled  -->
-        <Style Selector="^:disabled /template/ TextBlock#PlaceholderTextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource ComboBoxHeaderForegroundDisabled}" />
-        </Style>
-
-        <Style Selector="^:disabled /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
-        </Style>
-
-        <Style Selector="^:disabled /template/ Border#Background">
-            <Setter Property="Background" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
-        </Style>
-
-        <Style Selector="^:disabled /template/ ContentPresenter#HeaderContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
-        <Style Selector="^:disabled /template/ iconPacks|IconPack#DropDownGlyph">
-            <Setter Property="Symbol" Value="&#xE9AE;" />
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Style Selector="^:pressed /template/ ContentControl#ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
         <!--  Focused  -->
-        <Style Selector="^:focus-visible /template/ Border#Pill">
-            <Setter Property="Opacity" Value="1" />
-        </Style>
-
-        <Style Selector="^:focus-visible /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
-        <Style Selector="^:focus-visible /template/ TextBlock#PlaceholderTextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource ComboBoxPlaceHolderForegroundFocused}" />
-        </Style>
-
-        <Style Selector="^:focus-visible /template/ iconPacks|IconPack#DropDownGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
         <Style Selector="^:focus /template/ Border#Background">
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="BorderBrush"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
         </Style>
 
-        <!--  Error State  -->
+        <!--  Disabled  -->
+        <Style Selector="^:disabled /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
+        </Style>
+        <Style Selector="^:disabled /template/ ContentControl#ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
+        <Style Selector="^:disabled /template/ TextBlock#PlaceholderTextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
+        <Style Selector="^:disabled /template/ iconPacks|IconPack#DropDownGlyph">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
+
+        <!--  Error  -->
         <Style Selector="^:error /template/ Border#Background">
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Error}" />
         </Style>
-
     </ControlTheme>
 
-    <!--  ComboBoxItem  -->
-
+    <!--  Fluent 2 ComboBoxItem with left accent selection pill  -->
     <ControlTheme x:Key="{x:Type ComboBoxItem}" TargetType="ComboBoxItem">
-
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Padding" Value="{DynamicResource ComboBoxItemThemePadding}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="FocusAdorner">
-            <FocusAdornerTemplate>
-                <Border
-                    Margin="-3"
-                    BorderBrush="{DynamicResource SystemControlFocusVisualPrimaryBrush}"
-                    BorderThickness="2">
-                    <Border BorderBrush="{DynamicResource SystemControlFocusVisualSecondaryBrush}" BorderThickness="2" />
-                </Border>
-            </FocusAdornerTemplate>
-        </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="FocusAdorner" Value="{StaticResource ThemeX.FocusAdorner.Control}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Border
                     Name="LayoutRoot"
-                    Margin="5"
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     CornerRadius="{DynamicResource ControlCornerRadius}"
                     TemplatedControl.IsTemplateFocusTarget="True">
+                    <Border.Transitions>
+                        <Transitions>
+                            <BrushTransition Property="Background" Duration="0:0:0.1" />
+                        </Transitions>
+                    </Border.Transitions>
                     <Panel>
-                        <Border Name="Pill" />
+                        <Border
+                            Name="Pill"
+                            Width="{StaticResource ComboBoxItemPillWidth}"
+                            Height="{StaticResource ComboBoxItemPillHeight}"
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}"
+                            CornerRadius="2"
+                            Opacity="0"
+                            RenderTransform="scaleY(0.5)"
+                            RenderTransformOrigin="50%,50%">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                                    <TransformOperationsTransition
+                                        Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
+                                        Property="RenderTransform"
+                                        Duration="0:0:0.167" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
 
                         <ContentPresenter
                             Name="ContentPresenter"
@@ -357,154 +272,54 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Background="Transparent"
-                            BorderBrush="{x:Null}"
-                            BorderThickness="0"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             TextBlock.Foreground="{TemplateBinding Foreground}" />
                     </Panel>
-
                 </Border>
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^ /template/ Border#Pill">
-            <Setter Property="Opacity" Value="0" />
-        </Style>
-
         <!--  PointerOver  -->
-        <Style Selector="^:pointerover">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-        </Style>
-
         <Style Selector="^:pointerover /template/ Border#LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
-        </Style>
-
-        <Style Selector="^:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
         </Style>
 
         <!--  Pressed  -->
-        <Style Selector="^:pressed">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-        </Style>
-
         <Style Selector="^:pressed /template/ Border#LayoutRoot">
-            <Setter Property="Background"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            <Setter Property="BorderBrush"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
         </Style>
-
         <Style Selector="^:pressed /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
-        </Style>
-
-        <!--  Disabled  -->
-        <Style Selector="^:disabled">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-        </Style>
-
-        <Style Selector="^:disabled /template/ Border#LayoutRoot">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Transparent.Reverse.Tertiary}" />
-        </Style>
-
-        <Style Selector="^:disabled /template/ ContentPresenter#ContentPresenter">
             <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
         <!--  Selected  -->
-
-        <Style Selector="^:selected">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-        </Style>
-
         <Style Selector="^:selected /template/ Border#LayoutRoot">
-            <Setter Property="Background"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            <Setter Property="BorderBrush"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
         </Style>
-
-        <Style Selector="^:selected /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-        </Style>
-
-        <!--<Style Selector="ComboBoxItem:focus-within /template/ Border#Pill">
-        <Setter Property="Opacity" Value="1" />
-        </Style>
-        <Style Selector="ComboBoxItem:focus-within /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelected}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushSelected}" />
-        </Style>
-        <Style Selector="ComboBoxItem:focus-within /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelected}" />
-        </Style>-->
-
-        <!--  WinUI styles not implemented: SelectedUnfocused  -->
-
-        <!--  Selected Disabled  -->
-        <Style Selector="^:selected:disabled /template/ Border#Pill">
+        <Style Selector="^:selected /template/ Border#Pill">
             <Setter Property="Opacity" Value="1" />
-        </Style>
-
-        <Style Selector="^:selected:disabled /template/ Border#LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelectedDisabled}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushSelectedDisabled}" />
-        </Style>
-
-        <Style Selector="^:selected:disabled /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelectedDisabled}" />
-        </Style>
-
-        <!--  Selected PointerOver  -->
-        <Style Selector="^:selected:pointerover">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-        </Style>
-
-        <Style Selector="^:selected:pointerover /template/ Border#Pill">
-            <Setter Property="Opacity" Value="1" />
+            <Setter Property="RenderTransform" Value="scaleY(1)" />
         </Style>
 
         <Style Selector="^:selected:pointerover /template/ Border#LayoutRoot">
-            <Setter Property="Background"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-            <Setter Property="BorderBrush"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorLight1Key}}" />
-        </Style>
-
-        <Style Selector="^:selected:pointerover /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorForegroundKey}}" />
-        </Style>
-
-
-        <!--  Selected Pressed  -->
-        <Style Selector="^:selected:pressed /template/ Border#Pill">
-            <Setter Property="Opacity" Value="1" />
-            <Setter Property="RenderTransform" Value="scaleY(0.625)" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlHover}" />
         </Style>
 
         <Style Selector="^:selected:pressed /template/ Border#LayoutRoot">
-            <Setter Property="Background"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
-            <Setter Property="BorderBrush"
-                    Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
+        </Style>
+        <Style Selector="^:selected:pressed /template/ Border#Pill">
+            <Setter Property="RenderTransform" Value="scaleY(0.625)" />
         </Style>
 
-        <Style Selector="^:selected:pressed /template/ ContentPresenter#ContentPresenter">
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelectedPressed}" />
+        <!--  Disabled  -->
+        <Style Selector="^:disabled">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
         </Style>
-
-        <!--  WinUI styles not implemented: All InputModeStates  -->
-
+        <Style Selector="^:disabled /template/ Border#Pill">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
     </ControlTheme>
 
 </ResourceDictionary>

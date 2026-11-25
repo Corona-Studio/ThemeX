@@ -2,10 +2,11 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:effects="clr-namespace:ThemeX.Controls.Effects;assembly=ThemeX"
+    xmlns:helpers="clr-namespace:ThemeX.Helpers"
     xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX">
 
     <Design.PreviewWith>
-        <Border Padding="10">
+        <Border Padding="12">
             <effects:RippleEffect
                 Width="180"
                 Height="180"
@@ -17,9 +18,14 @@
 
     <ControlTheme x:Key="{x:Type effects:RippleEffect}" TargetType="effects:RippleEffect">
 
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Border ClipToBounds="True" CornerRadius="{TemplateBinding CornerRadius}">
+                <Border
+                    Background="{TemplateBinding Background}"
+                    ClipToBounds="True"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    helpers:RoundedClipHelper.ClipToCornerRadius="True">
                     <Panel>
                         <ContentPresenter Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}" />
@@ -40,19 +46,19 @@
             <Setter Property="Transitions">
                 <Transitions>
                     <ThicknessTransition
-                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                        Easing="{StaticResource ThemeX.Easing.FluentStandard}"
                         Property="Margin"
                         Duration="{x:Static effects:Ripple.Duration}" />
                     <DoubleTransition
-                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                        Easing="{StaticResource ThemeX.Easing.FluentStandard}"
                         Property="Width"
                         Duration="{x:Static effects:Ripple.Duration}" />
                     <DoubleTransition
-                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                        Easing="{StaticResource ThemeX.Easing.FluentStandard}"
                         Property="Height"
                         Duration="{x:Static effects:Ripple.Duration}" />
                     <DoubleTransition
-                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                        Easing="{StaticResource ThemeX.Easing.FluentStandard}"
                         Property="Opacity"
                         Duration="{x:Static effects:Ripple.Duration}" />
                 </Transitions>

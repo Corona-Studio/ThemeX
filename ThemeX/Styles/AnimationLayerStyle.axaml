@@ -3,20 +3,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="clr-namespace:ThemeX.Controls.Animations;assembly=ThemeX"
     xmlns:cc="clr-namespace:ThemeX.Controls.Effects;assembly=ThemeX"
-    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX"
-    xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls">
-    <Design.PreviewWith>
-        <Border>
-            <animations:AnimationLayer Width="180" Height="180" />
-        </Border>
-    </Design.PreviewWith>
+    xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls"
+    xmlns:themeX="clr-namespace:ThemeX;assembly=ThemeX">
 
     <ControlTheme x:Key="{x:Type animations:AnimationLayer}" TargetType="animations:AnimationLayer">
-
         <ControlTheme.Resources>
             <converters:CornerRadiusToDoubleConverter x:Key="TopLeftCornerConverter" Corner="TopLeft" />
         </ControlTheme.Resources>
 
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Panel
@@ -27,31 +22,30 @@
                         Name="ActiveRect"
                         ClipToBounds="True"
                         Fill="{TemplateBinding MouseOnBrush}"
+                        IsHitTestVisible="False"
                         Opacity="0"
-                        RadiusX="{TemplateBinding CornerRadius,
-                                                  Converter={StaticResource TopLeftCornerConverter}}"
-                        RadiusY="{TemplateBinding CornerRadius,
-                                                  Converter={StaticResource TopLeftCornerConverter}}">
+                        RadiusX="{TemplateBinding CornerRadius, Converter={StaticResource TopLeftCornerConverter}}"
+                        RadiusY="{TemplateBinding CornerRadius, Converter={StaticResource TopLeftCornerConverter}}">
                         <Rectangle.Transitions>
                             <Transitions>
                                 <DoubleTransition
-                                    Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
+                                    Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
                                     Property="Opacity"
-                                    Duration="{x:Static cc:Ripple.Duration}" />
+                                    Duration="0:0:0.167" />
                             </Transitions>
                         </Rectangle.Transitions>
                     </Rectangle>
+                    <!--  Keep ripple/halo canvas transparent so it never occludes ActiveRect  -->
                     <Canvas
                         Name="PART_RippleCanvasRoot"
-                        Background="{TemplateBinding Background}"
+                        Background="Transparent"
                         IsHitTestVisible="False" />
-                    <ContentPresenter Content="{TemplateBinding Content}"
-                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
-
+                    <ContentPresenter
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}" />
                 </Panel>
             </ControlTemplate>
         </Setter>
-
     </ControlTheme>
 
 </ResourceDictionary>

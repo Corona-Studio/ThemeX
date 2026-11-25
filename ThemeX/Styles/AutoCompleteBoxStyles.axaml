@@ -1,37 +1,24 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
     xmlns:helpers="clr-namespace:ThemeX.Helpers">
-    <Design.PreviewWith>
-        <Border Padding="50">
-            <StackPanel Orientation="Vertical" Spacing="5">
-                <AutoCompleteBox />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
 
     <ControlTheme x:Key="{x:Type AutoCompleteBox}" TargetType="AutoCompleteBox">
-
         <ControlTheme.Resources>
-            <Thickness x:Key="AutoSuggestBoxTopHeaderMargin">0,0,0,8</Thickness>
-            <Thickness x:Key="AutoSuggestBoxInnerButtonMargin">1,3</Thickness>
-            <Thickness x:Key="AutoSuggestBoxDeleteButtonMargin">0,4</Thickness>
-            <!--  Taken from generic.xaml  -->
-            <Thickness x:Key="AutoSuggestListMargin">0 2</Thickness>
-            <x:Double x:Key="AutoSuggestListMaxHeight">374</x:Double>
-            <Thickness x:Key="AutoSuggestListPadding">-1,0</Thickness>
+            <Thickness x:Key="AutoSuggestListMargin">4</Thickness>
+            <x:Double x:Key="AutoSuggestListMaxHeight">384</x:Double>
         </ControlTheme.Resources>
 
-        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        <Setter Property="Background" Value="{DynamicResource ThemeX.ContentBackground.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush}" />
-        <Setter Property="BorderThickness" Value="0.2, 0.2, 0.2, 1" />
-        <Setter Property="UseLayoutRounding" Value="False" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Control}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.ControlBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
-        <Setter Property="MaxDropDownHeight" Value="{DynamicResource AutoCompleteListMaxHeight}" />
+        <Setter Property="MaxDropDownHeight" Value="{StaticResource AutoSuggestListMaxHeight}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -39,6 +26,7 @@
                     <TextBox
                         Name="PART_TextBox"
                         Width="{TemplateBinding Width}"
+                        MinHeight="{TemplateBinding MinHeight}"
                         Margin="0"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
@@ -49,43 +37,47 @@
                         FontSize="{TemplateBinding FontSize}"
                         FontWeight="{TemplateBinding FontWeight}"
                         Foreground="{TemplateBinding Foreground}"
-                        PlaceholderText="{TemplateBinding PlaceholderText}" />
+                        PlaceholderText="{TemplateBinding PlaceholderText}"
+                        UseFloatingPlaceholder="{TemplateBinding UseFloatingPlaceholder}" />
 
                     <Popup
                         Name="PART_Popup"
-                        MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
                         MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                        HorizontalOffset="-12"
+                        helpers:PopupFadeAnimationHelper.IsEnabled="True"
+                        helpers:PopupOverlayHelper.PreferOverlayForBackdrop="True"
                         IsLightDismissEnabled="True"
                         PlacementTarget="{TemplateBinding}"
-                        helpers:PopupFadeAnimationHelper.IsEnabled="True"
+                        VerticalOffset="0"
                         WindowManagerAddShadowHint="False">
-                        <Border
+                        <controls:AcrylicSurface
                             Name="PART_SuggestionsContainer"
-                            Padding="{DynamicResource AutoSuggestListMargin}"
-                            Background="{DynamicResource ThemeX.ContentBackground.Primary}"
-                            BorderBrush="{DynamicResource AutoSuggestBoxSuggestionsListBorderBrush}"
-                            BorderThickness="{DynamicResource AutoSuggestListBorderThemeThickness}"
+                            MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                            Margin="12,4,12,16"
+                            Padding="{StaticResource AutoSuggestListMargin}"
                             CornerRadius="{DynamicResource OverlayCornerRadius}"
-                            Opacity="0">
-                            <Border.Transitions>
+                            Opacity="0"
+                            ShowElevationShadow="True"
+                            UseVolatileCache="True"
+                            Variant="Flyout">
+                            <controls:AcrylicSurface.Transitions>
                                 <Transitions>
                                     <DoubleTransition
                                         Easing="QuadraticEaseOut"
                                         Property="Opacity"
                                         Duration="{x:Static helpers:PopupFadeAnimationHelper.FadeDuration}" />
                                 </Transitions>
-                            </Border.Transitions>
+                            </controls:AcrylicSurface.Transitions>
                             <ListBox
                                 Name="PART_SelectingItemsControl"
-                                Margin="{DynamicResource AutoSuggestListPadding}"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 ItemTemplate="{TemplateBinding ItemTemplate}" />
-                        </Border>
+                        </controls:AcrylicSurface>
                     </Popup>
                 </Panel>
             </ControlTemplate>
         </Setter>
-
     </ControlTheme>
+
 </ResourceDictionary>

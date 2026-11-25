@@ -5,6 +5,7 @@ namespace ThemeX;
 public partial class ThemeSettings
 {
     public const string EnableAnimationKey = "ThemeX.Animation.IsEnabled";
+    public const string EnableRevealEffectKey = "ThemeX.Reveal.IsEnabled";
     public const string AnimationDurationKey = "ThemeX.Animation.Duration";
     public const string AnimationEasingKey = "ThemeX.Animation.Easing";
     public const string FluentScrollKey = "ThemeX.Animation.EnableFluentScroll";
@@ -13,17 +14,33 @@ public partial class ThemeSettings
 
     private bool _enableAnimation;
 
+    public static bool IsAnimationEnabled { get; private set; } = true;
+    public static bool IsRevealEffectEnabled { get; private set; } = true;
     public static TimeSpan AnimationDuration { get; private set; }
     public static Easing AnimationEasing { get; private set; } = null!;
+
+    internal static event Action<bool>? AnimationEnabledChanged;
+    public static event Action<bool>? RevealEffectEnabledChanged;
 
     public void SetEnableAnimation(bool value)
     {
         _enableAnimation = value;
+        IsAnimationEnabled = value;
 
         _resourceDic[EnableAnimationKey] = value;
         _resourceDic[AnimationDurationKey] = value ? _animationDuration : TimeSpan.FromTicks(1);
         _resourceDic[AnimationEasingKey] = value ? _animationEasing : new LinearEasing();
 
+        AnimationEnabledChanged?.Invoke(value);
+        RaiseResourcesChanged();
+    }
+
+    public void SetEnableRevealEffect(bool value)
+    {
+        IsRevealEffectEnabled = value;
+        _resourceDic[EnableRevealEffectKey] = value;
+
+        RevealEffectEnabledChanged?.Invoke(value);
         RaiseResourcesChanged();
     }
 

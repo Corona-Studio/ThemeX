@@ -2,148 +2,131 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="clr-namespace:ThemeX.Controls.Animations"
-    xmlns:themeX="clr-namespace:ThemeX"
-    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks">
+    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks"
+    xmlns:themeX="clr-namespace:ThemeX">
 
     <ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
-
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusAdorner" Value="{StaticResource ThemeX.FocusAdorner.Control}" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <animations:ActivatableToggle
-                        Activated="{TemplateBinding IsSelected}"
-                        ActiveBrush="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTransparentKey}}"
-                        CornerRadius="{DynamicResource ControlCornerRadius}"
-                        MouseOnBrush="{DynamicResource ThemeX.BorderBrush.Pressed}">
-                        <ContentPresenter Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
-                    </animations:ActivatableToggle>
-                </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate>
+                <animations:ActivatableToggle
+                    Activated="{TemplateBinding IsSelected}"
+                    ActiveBrush="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorSubtleKey}}"
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    MouseOnBrush="{DynamicResource ThemeX.Surface.SubtleHover}">
+                    <ContentPresenter
+                        Padding="{TemplateBinding Padding}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        TextBlock.Foreground="{TemplateBinding Foreground}" />
+                </animations:ActivatableToggle>
+            </ControlTemplate>
         </Setter>
 
+        <Style Selector="^:disabled">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
     </ControlTheme>
 
     <ControlTheme
         x:Key="ListViewItemNotFocusableStyle"
         BasedOn="{StaticResource {x:Type ListBoxItem}}"
         TargetType="ListBoxItem">
-
         <Setter Property="Focusable" Value="False" />
-
     </ControlTheme>
 
     <ControlTheme x:Key="ListViewItemShadowStyle" TargetType="ListBoxItem">
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
+            <ControlTemplate>
+                <Panel Margin="8">
                     <Border
                         x:Name="ShadowBorder"
-                        Margin="6,8"
-                        Background="{DynamicResource ThemeX.ContentBackground.Primary}"
-                        CornerRadius="{DynamicResource ControlCornerRadius}">
-                        <ContentPresenter Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <Style Selector="^ /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="4 4 0 0 #00000000" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BoxShadowsTransition
-                        Property="BoxShadow"
-                        Duration="0:0:0.225">
-                        <BoxShadowsTransition.Easing>
-                            <SplineEasing X1="0.1" Y1="0.9" X2="0.2" />
-                        </BoxShadowsTransition.Easing>
-                    </BoxShadowsTransition>
-                </Transitions>
-            </Setter>
-        </Style>
-
-        <Style Selector="^:pointerover /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
-        </Style>
-
-        <Style Selector="^:selected /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
-        </Style>
-
-    </ControlTheme>
-
-    <ControlTheme x:Key="ListViewItemShadowPinStyle" TargetType="ListBoxItem">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border
-                        x:Name="ShadowBorder"
-                        BorderBrush="{DynamicResource ThemeX.Transparent.Total}"
+                        Background="{DynamicResource ThemeX.Surface.Card}"
+                        BorderBrush="{DynamicResource ThemeX.Stroke.Card}"
                         BorderThickness="1"
-                        Margin="6,8"
-                        Background="{DynamicResource ThemeX.ContentBackground.Primary}"
-                        CornerRadius="{DynamicResource ControlCornerRadius}">
-                        <ContentPresenter Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        BoxShadow="{DynamicResource ThemeX.Shadow.Card}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                                <BoxShadowsTransition
+                                    Easing="{StaticResource ThemeX.Easing.FluentStandard}"
+                                    Property="BoxShadow"
+                                    Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+                        <ContentPresenter
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
                     </Border>
-                </ControlTemplate>
-            </Setter.Value>
+                </Panel>
+            </ControlTemplate>
         </Setter>
 
-        <Style Selector="^ /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="4 4 0 0 #00000000" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition Property="BorderBrush" Duration="0:0:0.18" />
-                    <BoxShadowsTransition
-                        Property="BoxShadow"
-                        Duration="0:0:0.225">
-                        <BoxShadowsTransition.Easing>
-                            <SplineEasing X1="0.1" Y1="0.9" X2="0.2" />
-                        </BoxShadowsTransition.Easing>
-                    </BoxShadowsTransition>
-                </Transitions>
-            </Setter>
-        </Style>
-
         <Style Selector="^:pointerover /template/ Border#ShadowBorder">
-            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.BorderBrush.MouseOver}" />
+            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.Shadow.Flyout}" />
         </Style>
 
         <Style Selector="^:selected /template/ Border#ShadowBorder">
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.AccentColor}" />
-            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.DefaultShadow}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+            <Setter Property="BoxShadow" Value="{DynamicResource ThemeX.Shadow.Flyout}" />
         </Style>
-
     </ControlTheme>
+
+    <ControlTheme
+        x:Key="ListViewItemShadowPinStyle"
+        BasedOn="{StaticResource ListViewItemShadowStyle}"
+        TargetType="ListBoxItem" />
 
     <ControlTheme x:Key="ListViewItemServerListPinStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
+            <ControlTemplate>
+                <Panel Margin="0,4">
                     <Border
                         x:Name="ShadowBorder"
                         HorizontalAlignment="Stretch"
-                        Margin="0,4,16,4"
-                        CornerRadius="{DynamicResource ControlCornerRadius}">
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
                         <Panel>
-                            <ContentPresenter Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            <ContentPresenter
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
                             <iconPacks:IconPack
                                 x:Name="PinIcon"
-                                Width="15"
-                                Height="15"
-                                Margin="0,0,10,10"
+                                Width="16"
+                                Height="16"
+                                Margin="0,0,12,12"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
-                                Foreground="{DynamicResource ThemeX.Foreground.Primary}"
+                                FontSize="14"
+                                Foreground="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorTextKey}}"
                                 Symbol="&#xE718;" />
                         </Panel>
                     </Border>
-                </ControlTemplate>
-            </Setter.Value>
+                </Panel>
+            </ControlTemplate>
         </Setter>
 
         <Style Selector="^ /template/ iconPacks|IconPack#PinIcon">
@@ -153,57 +136,77 @@
         <Style Selector="^:selected /template/ iconPacks|IconPack#PinIcon">
             <Setter Property="IsVisible" Value="True" />
         </Style>
-
     </ControlTheme>
 
     <ControlTheme
         x:Key="ListViewItemShadowSmallMarginStyle"
         BasedOn="{StaticResource ListViewItemShadowStyle}"
         TargetType="ListBoxItem">
-
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
+            <ControlTemplate>
+                <Panel Margin="4">
                     <Border
                         x:Name="ShadowBorder"
-                        Margin="5"
-                        Background="{DynamicResource ThemeX.ContentBackground.Primary}"
-                        CornerRadius="{DynamicResource ControlCornerRadius}">
-                        <ContentPresenter Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        Background="{DynamicResource ThemeX.Surface.Card}"
+                        BorderBrush="{DynamicResource ThemeX.Stroke.Card}"
+                        BorderThickness="1"
+                        BoxShadow="{DynamicResource ThemeX.Shadow.Card}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                                <BoxShadowsTransition
+                                    Easing="{StaticResource ThemeX.Easing.FluentStandard}"
+                                    Property="BoxShadow"
+                                    Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+                        <ContentPresenter
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
                     </Border>
-                </ControlTemplate>
-            </Setter.Value>
+                </Panel>
+            </ControlTemplate>
         </Setter>
-
     </ControlTheme>
 
     <ControlTheme x:Key="ListViewItemNoEffectStyle" TargetType="ListBoxItem">
-
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <ContentPresenter Content="{TemplateBinding Content}"
-                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
-                </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate>
+                <ContentPresenter
+                    Padding="{TemplateBinding Padding}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Background="{TemplateBinding Background}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </ControlTemplate>
         </Setter>
-
     </ControlTheme>
 
     <ControlTheme x:Key="ListViewItemNoEffectFocusableStyle" TargetType="ListBoxItem">
-
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Focusable" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <ContentPresenter Content="{TemplateBinding Content}"
-                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
-                </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate>
+                <ContentPresenter
+                    Padding="{TemplateBinding Padding}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Background="{TemplateBinding Background}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </ControlTemplate>
         </Setter>
-
     </ControlTheme>
 
 </ResourceDictionary>

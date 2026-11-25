@@ -6,9 +6,9 @@
     <Design.PreviewWith>
         <Panel Width="100" Height="100">
             <iconPack:IconPack
-                Width="50"
-                Height="50"
-                Padding="3"
+                Width="48"
+                Height="48"
+                Padding="4"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="Black"

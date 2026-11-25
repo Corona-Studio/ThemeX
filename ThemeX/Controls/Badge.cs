@@ -1,27 +1,22 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Styling;
 using Avalonia.Threading;
 using ThemeX.Helpers;
 
 namespace ThemeX.Controls;
 
-public sealed class Badge : ContentControl
+public sealed partial class Badge : ContentControl
 {
-    public static readonly StyledProperty<string> SymbolProperty =
-        AvaloniaProperty.Register<Badge, string>(nameof(Symbol));
-
     public static readonly StyledProperty<string> Symbol1Property =
         AvaloniaProperty.Register<Badge, string>(nameof(Symbol1));
 
     public static readonly StyledProperty<string> Symbol2Property =
         AvaloniaProperty.Register<Badge, string>(nameof(Symbol2));
 
-    public string Symbol
-    {
-        get => GetValue(SymbolProperty);
-        set => SetValue(SymbolProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial string Symbol { get; set; }
 
     private string Symbol1
     {
@@ -41,17 +36,44 @@ public sealed class Badge : ContentControl
     {
         base.OnAttachedToVisualTree(e);
 
+        ActualThemeVariantChanged -= OnActualThemeVariantChanged;
+        ActualThemeVariantChanged += OnActualThemeVariantChanged;
+        OnBackgroundChanged();
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        ActualThemeVariantChanged -= OnActualThemeVariantChanged;
+
+        base.OnDetachedFromVisualTree(e);
+    }
+
+    private void OnActualThemeVariantChanged(object? sender, EventArgs e)
+    {
         OnBackgroundChanged();
     }
 
     private void OnBackgroundChanged()
     {
         if (!TryReadBackgroundColor(Background, out var color))
+        {
+            ClearValue(ForegroundProperty);
             return;
+        }
 
-        var foreground = color.GetGrayLevel() < 0.5 ? ThemeSettings.LightBrush : ThemeSettings.DarkBrush;
+        var backdrop = ResolveBackdropColor();
+        var foreground = color.GetGrayLevel(backdrop) < 0.5 ? ThemeSettings.LightBrush : ThemeSettings.DarkBrush;
 
         SetValue(ForegroundProperty, foreground);
+    }
+
+    private Color ResolveBackdropColor()
+    {
+        var variant = ActualThemeVariant;
+        if (variant != ThemeVariant.Dark && variant != ThemeVariant.Light)
+            variant = Application.Current?.ActualThemeVariant ?? ThemeVariant.Light;
+
+        return ThemeSettings.GetBackdropColor(variant);
     }
 
     private static bool TryReadBackgroundColor(IBrush? brush, out Color color)
@@ -64,7 +86,7 @@ public sealed class Badge : ContentControl
 
             // Immutable brushes are not AvaloniaObjects and are safe to read from any thread.
             case IImmutableSolidColorBrush immutable:
-                color = immutable.Color;
+                color = ApplyBrushOpacity(immutable.Color, immutable.Opacity);
                 return true;
 
             // Mutable SolidColorBrush is an AvaloniaObject affined to its owning dispatcher.
@@ -73,7 +95,7 @@ public sealed class Badge : ContentControl
                 if (Dispatcher.UIThread.CheckAccess())
                     try
                     {
-                        color = solid.Color;
+                        color = ApplyBrushOpacity(solid.Color, solid.Opacity);
                         return true;
                     }
                     catch (InvalidOperationException)
@@ -90,6 +112,15 @@ public sealed class Badge : ContentControl
                 color = default;
                 return false;
         }
+    }
+
+    private static Color ApplyBrushOpacity(Color color, double opacity)
+    {
+        if (opacity >= 1.0)
+            return color;
+
+        var effectiveAlpha = (byte)Math.Clamp(Math.Round(color.A * Math.Clamp(opacity, 0.0, 1.0)), 0, 255);
+        return Color.FromArgb(effectiveAlpha, color.R, color.G, color.B);
     }
 
     private void OnSymbolChanged()

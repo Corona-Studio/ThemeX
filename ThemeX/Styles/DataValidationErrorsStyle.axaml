@@ -2,28 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:collections="using:System.Collections"
-    xmlns:sys="using:System">
-    <Design.PreviewWith>
-        <Border Padding="20">
-            <StackPanel Spacing="20">
-                <TextBox Text="Sample">
-                    <DataValidationErrors.Error>
-                        <sys:Exception />
-                    </DataValidationErrors.Error>
-                </TextBox>
-                <TextBox Text="Sample">
-                    <TextBox.Styles>
-                        <Style Selector="DataValidationErrors">
-                            <Setter Property="Theme" Value="{DynamicResource TooltipDataValidationErrors}" />
-                        </Style>
-                    </TextBox.Styles>
-                    <DataValidationErrors.Error>
-                        <sys:Exception />
-                    </DataValidationErrors.Error>
-                </TextBox>
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
+    xmlns:themeX="clr-namespace:ThemeX">
 
     <ControlTheme x:Key="{x:Type DataValidationErrors}" TargetType="DataValidationErrors">
         <Setter Property="Template">
@@ -52,10 +31,12 @@
             <DataTemplate>
                 <ItemsControl
                     x:DataType="DataValidationErrors"
+                    FontSize="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}"
                     Foreground="{DynamicResource ThemeX.Foreground.Error}"
                     ItemsSource="{Binding}">
                     <ItemsControl.Styles>
                         <Style Selector="TextBlock">
+                            <Setter Property="LineHeight" Value="16" />
                             <Setter Property="TextWrapping" Value="Wrap" />
                         </Style>
                     </ItemsControl.Styles>
@@ -94,8 +75,7 @@
                             <Setter Property="Margin" Value="8,0" />
                         </Style>
                         <Style Selector="Panel#PART_InlineErrorTemplatePanel ToolTip">
-                            <Setter Property="BorderBrush"
-                                    Value="{DynamicResource SystemControlErrorTextForegroundBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Error}" />
                         </Style>
                         <Style Selector="Panel#PART_InlineErrorTemplatePanel ToolTip TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -108,10 +88,11 @@
                         Width="14"
                         Height="14"
                         Data="M14,7 A7,7 0 0,0 0,7 M0,7 A7,7 0 1,0 14,7 M7,3l0,5 M7,9l0,2"
-                        Stroke="{DynamicResource SystemControlErrorTextForegroundBrush}"
+                        Stroke="{DynamicResource ThemeX.Foreground.Error}"
                         StrokeThickness="2" />
                 </Panel>
             </DataTemplate>
         </Setter>
     </ControlTheme>
+
 </ResourceDictionary>

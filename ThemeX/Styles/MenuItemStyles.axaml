@@ -1,176 +1,152 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ThemeX.Controls"
     xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls"
     xmlns:helpers="clr-namespace:ThemeX.Helpers"
+    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:iconPacks="clr-namespace:ThemeX.Controls.IconPacks">
+    xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Border
-            Width="400"
-            Height="200"
-            Padding="20">
-            <Menu VerticalAlignment="Top">
-                <MenuItem Header="File">
-                    <MenuItem Header="Disabled" IsEnabled="False" />
-                    <MenuItem
-                        Header="New"
-                        Icon="&#xE72D;"
-                        InputGesture="Ctrl+N">
-                        <MenuItem Header="XML" />
-                    </MenuItem>
-                    <MenuItem Header="Open">
-                        <MenuItem.Icon>
-                            <iconPacks:IconPack
-                                BorderThickness="0"
-                                IsHitTestVisible="False"
-                                Symbol="&#xE72D;" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <Separator />
-                    <MenuItem Header="Exit" InputGesture="Alt+F4" />
-                </MenuItem>
-                <MenuItem Header="Edit">
-                    <MenuItem Header="Go To">
-                        <MenuItem Header="Go To Line" />
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="View">
-                    <MenuItem Header="Designer" InputGesture="Shift+F7" />
-                </MenuItem>
-                <MenuItem Header="Project">
-                    <MenuItem Header="Add class" />
-                </MenuItem>
-            </Menu>
-        </Border>
-    </Design.PreviewWith>
-
-    <Thickness x:Key="MenuBarItemButtonPadding">2</Thickness>
-    <Thickness x:Key="MenuBarItemMargin">4,4,4,4</Thickness>
+    <Thickness x:Key="MenuBarItemMargin">4,4</Thickness>
     <x:Double x:Key="MenuFlyoutSeparatorHeight">1</x:Double>
-    <Thickness x:Key="MenuFlyoutPresenterThemePadding">10</Thickness>
+    <Thickness x:Key="MenuFlyoutPresenterThemePadding">4</Thickness>
     <x:Double x:Key="MenuFlyoutThemeMinHeight">32</x:Double>
-    <Thickness x:Key="MenuFlyoutItemChevronMargin">24,0,0,0</Thickness>
-    <Thickness x:Key="MenuFlyoutSeparatorThemePadding">-4,1,-4,1</Thickness>
-    <Thickness x:Key="MenuFlyoutItemMargin">4,2,4,2</Thickness>
-    <Thickness x:Key="MenuFlyoutItemThemePadding">11,8,11,9</Thickness>
-    <Thickness x:Key="MenuFlyoutItemThemePaddingNarrow">11,8,11,9</Thickness>
-    <Thickness x:Key="MenuIconPresenterMargin">0,0,12,0</Thickness>
+    <Thickness x:Key="MenuFlyoutItemChevronMargin">20,0,0,0</Thickness>
+    <Thickness x:Key="MenuFlyoutSeparatorThemePadding">8,4</Thickness>
+    <Thickness x:Key="MenuFlyoutItemMargin">0,2</Thickness>
+    <Thickness x:Key="MenuFlyoutItemThemePadding">12,4,12,4</Thickness>
+    <Thickness x:Key="MenuFlyoutItemThemePaddingNarrow">12,4,12,4</Thickness>
+    <Thickness x:Key="MenuIconPresenterMargin">0,0,8,0</Thickness>
     <Thickness x:Key="MenuInputGestureTextMargin">24,0,0,0</Thickness>
-    <x:Double x:Key="MenuFlyoutSubItemPopupHorizontalOffset">-4</x:Double>
+    <x:Double x:Key="MenuFlyoutSubItemPopupHorizontalOffset">-12</x:Double>
     <converters:PlatformKeyGestureConverter x:Key="KeyGestureConverter" />
 
     <ControlTheme x:Key="{x:Type MenuItem}" TargetType="MenuItem">
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="{DynamicResource MenuBarItemBorderThickness}" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="MinHeight" Value="32" />
         <Setter Property="helpers:SubmenuAnimationHelper.IsEnabled" Value="True" />
-        <!--  Narrow padding should be used for mouse input, when non-narrow one should be used for touch input in future.  -->
         <Setter Property="Padding" Value="{DynamicResource MenuFlyoutItemThemePaddingNarrow}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Panel>
-                    <Border
-                        Name="PART_LayoutRoot"
-                        Margin="{StaticResource MenuFlyoutItemMargin}"
-                        Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid Background="Transparent">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIcon" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGT" />
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemChevron" />
-                            </Grid.ColumnDefinitions>
+                    <Panel Margin="{StaticResource MenuFlyoutItemMargin}">
+                        <Border
+                            Name="PART_LayoutRoot"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <BrushTransition Property="Background" Duration="0:0:0.1" />
+                                </Transitions>
+                            </Border.Transitions>
+                            <Grid Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIcon" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGT" />
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemChevron" />
+                                </Grid.ColumnDefinitions>
 
-                            <Viewbox
-                                Name="PART_IconPresenter"
-                                Width="16"
-                                Height="16"
-                                Margin="{DynamicResource MenuIconPresenterMargin}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                IsVisible="False"
-                                StretchDirection="DownOnly">
-                                <ContentPresenter Name="PART_IconContentPresenter" Content="{TemplateBinding Icon}" />
-                            </Viewbox>
+                                <Viewbox
+                                    Name="PART_IconPresenter"
+                                    Width="16"
+                                    Height="16"
+                                    Margin="{DynamicResource MenuIconPresenterMargin}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsVisible="False"
+                                    StretchDirection="DownOnly">
+                                    <ContentPresenter
+                                        Name="PART_IconContentPresenter"
+                                        Content="{TemplateBinding Icon}"
+                                        Foreground="{TemplateBinding Foreground}" />
+                                </Viewbox>
 
-                            <ContentPresenter
-                                Name="PART_HeaderPresenter"
-                                Grid.Column="1"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Header}">
-                                <ContentPresenter.DataTemplates>
-                                    <DataTemplate DataType="system:String">
-                                        <AccessText Text="{Binding}" />
-                                    </DataTemplate>
-                                </ContentPresenter.DataTemplates>
-                            </ContentPresenter>
-                            <TextBlock
-                                x:Name="PART_InputGestureText"
-                                Grid.Column="2"
-                                Margin="{DynamicResource MenuInputGestureTextMargin}"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Text="{TemplateBinding InputGesture, Converter={StaticResource KeyGestureConverter}}" />
-                            <iconPacks:IconPack
-                                Name="PART_ChevronPath"
-                                Grid.Column="3"
-                                Height="16"
-                                Margin="{DynamicResource MenuFlyoutItemChevronMargin}"
-                                VerticalAlignment="Center"
-                                FontSize="18"
-                                Foreground="{DynamicResource ThemeX.Foreground.Primary}"
-                                Symbol="&#xE00F;" />
-                        </Grid>
-                    </Border>
+                                <ContentPresenter
+                                    Name="PART_HeaderPresenter"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Header}"
+                                    Foreground="{TemplateBinding Foreground}">
+                                    <ContentPresenter.DataTemplates>
+                                        <DataTemplate DataType="system:String">
+                                            <AccessText Text="{Binding}" />
+                                        </DataTemplate>
+                                    </ContentPresenter.DataTemplates>
+                                </ContentPresenter>
+
+                                <TextBlock
+                                    x:Name="PART_InputGestureText"
+                                    Grid.Column="2"
+                                    Margin="{DynamicResource MenuInputGestureTextMargin}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="{DynamicResource {x:Static themeX:ThemeSettings.FontSizeCaptionKey}}"
+                                    Foreground="{DynamicResource ThemeX.Foreground.Tertiary}"
+                                    Text="{TemplateBinding InputGesture, Converter={StaticResource KeyGestureConverter}}" />
+
+                                <iconPacks:IconPack
+                                    Name="PART_ChevronPath"
+                                    Grid.Column="3"
+                                    Width="12"
+                                    Height="12"
+                                    Margin="{DynamicResource MenuFlyoutItemChevronMargin}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource ThemeX.Foreground.Secondary}"
+                                    Symbol="&#xE76C;" />
+                            </Grid>
+                        </Border>
+                    </Panel>
+
                     <Popup
                         Name="PART_Popup"
                         HorizontalOffset="{DynamicResource MenuFlyoutSubItemPopupHorizontalOffset}"
+                        VerticalOffset="-12"
+                        helpers:PopupOverlayHelper.PreferOverlayForBackdrop="True"
                         IsLightDismissEnabled="False"
                         IsOpen="{TemplateBinding (helpers:SubmenuAnimationHelper.IsPopupOpen)}"
-                        Placement="Right"
+                        Placement="RightEdgeAlignedTop"
                         WindowManagerAddShadowHint="False">
-                        <Border
+                        <controls:AcrylicSurface
                             Name="PART_SubmenuPresenter"
-                            Margin="0, 8, 8, 8"
-                            BoxShadow="{DynamicResource ThemeX.DefaultShadow}"
                             MinHeight="{DynamicResource MenuFlyoutThemeMinHeight}"
                             MaxWidth="{DynamicResource FlyoutThemeMaxWidth}"
+                            Margin="12,8,12,20"
+                            Padding="{DynamicResource MenuFlyoutPresenterThemePadding}"
                             HorizontalAlignment="Stretch"
-                            Background="{DynamicResource ThemeX.ContentBackground.Tertiary}"
                             CornerRadius="{DynamicResource OverlayCornerRadius}"
                             IsHitTestVisible="{TemplateBinding IsSubMenuOpen}"
-                            Opacity="{TemplateBinding (helpers:SubmenuAnimationHelper.Opacity)}">
-
-                            <Border.Transitions>
+                            Opacity="{TemplateBinding (helpers:SubmenuAnimationHelper.Opacity)}"
+                            ShowElevationShadow="True"
+                            UseVolatileCache="True"
+                            Variant="Flyout">
+                            <controls:AcrylicSurface.Transitions>
                                 <Transitions>
                                     <DoubleTransition
                                         Easing="QuadraticEaseOut"
                                         Property="Opacity"
                                         Duration="{x:Static helpers:SubmenuAnimationHelper.FadeDuration}" />
                                 </Transitions>
-                            </Border.Transitions>
-
-                            <!--Border.Background>
-                                <DynamicResource ResourceKey="{OnPlatform 'ThemeX.ContentBackground.Tertiary', Windows='ThemeX.Transparent.Secondary'}" />
-                            </Border.Background-->
-
+                            </controls:AcrylicSurface.Transitions>
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                 <ItemsPresenter
                                     Name="PART_ItemsPresenter"
-                                    Margin="{DynamicResource MenuFlyoutPresenterThemePadding}"
                                     Grid.IsSharedSizeScope="True"
                                     ItemsPanel="{TemplateBinding ItemsPanel}" />
                             </ScrollViewer>
-                        </Border>
+                        </controls:AcrylicSurface>
                     </Popup>
                 </Panel>
             </ControlTemplate>
@@ -180,65 +156,26 @@
             <Setter Property="IsVisible" Value="True" />
         </Style>
 
-        <Style Selector="^:selected">
-            <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Secondary}" />
-            </Style>
-            <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
-            </Style>
-            <Style Selector="^ /template/ TextBlock#PART_InputGestureText">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
-            </Style>
-            <Style Selector="^ /template/ iconPacks|IconPack#PART_ChevronPath">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
-            </Style>
+        <Style Selector="^:selected /template/ Border#PART_LayoutRoot">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
         </Style>
 
-        <!--  Listen for PART_LayoutRoot:pointerover, so it will not be triggered when subitem is pressed  -->
         <Style Selector="^:pressed /template/ Border#PART_LayoutRoot:pointerover">
-            <Setter Property="Background" Value="{DynamicResource ThemeX.Transparent.Primary}" />
-            <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-            </Style>
-            <Style Selector="^ TextBlock#PART_InputGestureText">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-            </Style>
-            <Style Selector="^ iconPacks|IconPack#PART_ChevronPath">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
-            </Style>
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
         </Style>
-
 
         <Style Selector="^:disabled">
-            <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
-            </Style>
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
             <Style Selector="^ /template/ TextBlock#PART_InputGestureText">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
             </Style>
             <Style Selector="^ /template/ iconPacks|IconPack#PART_ChevronPath">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
             </Style>
-            <Style Selector="^ /template/ ContentPresenter#PART_IconContentPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource ThemeX.Transparent.Reverse.Secondary}" />
-            </Style>
-        </Style>
-
-        <Style Selector="^ /template/ ContentPresenter#PART_IconContentPresenter">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
-        <Style Selector="^ /template/ iconPacks|IconPack#PART_ChevronPath">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        </Style>
-
-        <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:open /template/ iconPacks|IconPack#PART_ChevronPath">
-            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Tertiary}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
         </Style>
 
         <Style Selector="^:empty /template/ iconPacks|IconPack#PART_ChevronPath">
@@ -248,7 +185,7 @@
         <Style Selector="^:separator">
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Separator />
+                    <Separator Margin="{StaticResource MenuFlyoutSeparatorThemePadding}" />
                 </ControlTemplate>
             </Setter>
         </Style>

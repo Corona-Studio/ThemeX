@@ -8,17 +8,8 @@ namespace ThemeX.Controls.IconPacks;
 /// <summary>
 ///     Draws one or two icon-font glyphs in a single visual.
 /// </summary>
-public sealed class IconPack : TemplatedControl
+public sealed partial class IconPack : TemplatedControl
 {
-    public static readonly StyledProperty<string?> SymbolProperty =
-        AvaloniaProperty.Register<IconPack, string?>(nameof(Symbol));
-
-    public static readonly StyledProperty<string?> OverlaySymbolProperty =
-        AvaloniaProperty.Register<IconPack, string?>(nameof(OverlaySymbol));
-
-    public static readonly StyledProperty<IBrush?> OverlayForegroundProperty =
-        AvaloniaProperty.Register<IconPack, IBrush?>(nameof(OverlayForeground));
-
     private LayoutCache _symbolLayout;
     private LayoutCache _overlayLayout;
 
@@ -51,29 +42,20 @@ public sealed class IconPack : TemplatedControl
     /// <summary>
     ///     Gets or sets the primary glyph.
     /// </summary>
-    public string? Symbol
-    {
-        get => GetValue(SymbolProperty);
-        set => SetValue(SymbolProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial string? Symbol { get; set; }
 
     /// <summary>
     ///     Gets or sets an optional glyph drawn over <see cref="Symbol" />.
     /// </summary>
-    public string? OverlaySymbol
-    {
-        get => GetValue(OverlaySymbolProperty);
-        set => SetValue(OverlaySymbolProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial string? OverlaySymbol { get; set; }
 
     /// <summary>
     ///     Gets or sets the overlay glyph brush. When unset, <see cref="TemplatedControl.Foreground" /> is used.
     /// </summary>
-    public IBrush? OverlayForeground
-    {
-        get => GetValue(OverlayForegroundProperty);
-        set => SetValue(OverlayForegroundProperty, value);
-    }
+    [GeneratedStyledProperty]
+    public partial IBrush? OverlayForeground { get; set; }
 
     protected override Size MeasureOverride(Size availableSize)
     {

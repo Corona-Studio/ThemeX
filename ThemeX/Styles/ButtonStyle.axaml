@@ -2,58 +2,17 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:ThemeX.Controls"
-    xmlns:animations="clr-namespace:ThemeX.Controls.Animations"
     xmlns:themeX="clr-namespace:ThemeX">
 
-    <Design.PreviewWith>
-        <Border Padding="50">
-            <StackPanel Spacing="5">
-                <controls:PrimaryButton
-                    Width="100"
-                    Padding="16,0"
-                    Content="TEST"
-                    FontSize="12" />
-                <controls:PrimaryButton
-                    Width="100"
-                    Padding="16,0"
-                    Content="DISABLED"
-                    FontSize="12"
-                    IsEnabled="False" />
-                <controls:PrimaryButton
-                    Width="100"
-                    Padding="16,0"
-                    Background="Aquamarine"
-                    Content="TEST"
-                    FontSize="12" />
-                <Button
-                    x:Name="NextButton"
-                    Padding="5"
-                    HorizontalAlignment="Right"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    Content="Disabled"
-                    FontSize="14"
-                    Foreground="Red"
-                    IsEnabled="False" />
-                <Button Background="#00696969" Content="Button" />
-                <Button Content="Button" />
-                <Button Content="Button" IsEnabled="False" />
-                <Border Height="1" Background="Gray" />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
+    <Thickness x:Key="ButtonPadding">12,4</Thickness>
 
-    <Thickness x:Key="ButtonPadding">11, 6</Thickness>
-    <SolidColorBrush x:Key="HaloColorBrush">#62000000</SolidColorBrush>
-
+    <!--  Fluent 2 Standard Button with Proximity Reveal Border Light + Hover Spotlight  -->
     <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
-
-        <Setter Property="UseLayoutRounding" Value="False" />
-        <Setter Property="BorderThickness" Value="0.2, 0.2, 0.2, 1" />
-        <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground}" />
+        <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.Control}" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Foreground.Reverse.Primary}" />
-        <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.ControlBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="{DynamicResource ThemeX.Control.Padding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontWeight" Value="Normal" />
@@ -62,31 +21,47 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="MinWidth" Value="96" />
-        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="MinHeight" Value="{DynamicResource ControlMinHeight}" />
+        <Setter Property="FocusAdorner" Value="{StaticResource ThemeX.FocusAdorner.Control}" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <animations:RevealEffect
+            <ControlTemplate>
+                <Panel
+                    x:Name="RootPanel"
+                    RenderTransform="scale(1)"
+                    RenderTransformOrigin="50%,50%">
+                    <Panel.Transitions>
+                        <Transitions>
+                            <TransformOperationsTransition
+                                Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
+                                Property="RenderTransform"
+                                Duration="0:0:0.083" />
+                        </Transitions>
+                    </Panel.Transitions>
+                    <Border
+                        x:Name="EffectBorder"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        HaloBrush="{StaticResource HaloColorBrush}"
-                        MouseEnterAnimation="True"
-                        MouseOnBrush="{StaticResource HaloColorBrush}">
-                        <Border
-                            x:Name="EffectBorder"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-
-                            <Border.Transitions>
-                                <Transitions>
-                                    <ThicknessTransition
-                                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
-                                        Property="BorderThickness"
-                                        Duration="00:00:00.200" />
-                                </Transitions>
-                            </Border.Transitions>
-
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        ClipToBounds="True"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="Background" Duration="0:0:0.12" />
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                            </Transitions>
+                        </Border.Transitions>
+                        <Panel>
+                            <Border
+                                x:Name="PART_StateLayer"
+                                Background="Transparent"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                IsHitTestVisible="False">
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <BrushTransition Property="Background" Duration="0:0:0.12" />
+                                    </Transitions>
+                                </Border.Transitions>
+                            </Border>
                             <ContentPresenter
                                 Name="PART_ContentPresenter"
                                 Padding="{TemplateBinding Padding}"
@@ -94,61 +69,111 @@
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Content="{TemplateBinding Content}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
-                                CornerRadius="{TemplateBinding CornerRadius}" />
-                        </Border>
-                    </animations:RevealEffect>
-                </ControlTemplate>
-            </Setter.Value>
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                RecognizesAccessKey="True" />
+                        </Panel>
+                    </Border>
+                    <controls:RevealOverlay
+                        x:Name="PART_RevealOverlay"
+                        BorderLightRadius="84"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        HoverLightRadius="112"
+                        IsRevealEnabled="True"
+                        Mode="BorderAndHover"
+                        RevealBorderThickness="1"
+                        Tone="Standard" />
+                </Panel>
+            </ControlTemplate>
         </Setter>
 
         <Style Selector="^:pointerover /template/ Border#EffectBorder">
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Elevation.ControlBorderHover}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ Border#PART_StateLayer">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
         </Style>
 
-        <Style Selector="^:pressed /template/ Border#BorderElement">
-            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+        <Style Selector="^:pressed /template/ Panel#RootPanel">
+            <Setter Property="RenderTransform" Value="scale(0.985)" />
+        </Style>
+        <Style Selector="^:pressed /template/ Border#EffectBorder">
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
+        </Style>
+        <Style Selector="^:pressed /template/ Border#PART_StateLayer">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
+        </Style>
+        <Style Selector="^:pressed /template/ controls|RevealOverlay#PART_RevealOverlay">
+            <Setter Property="IsPressedState" Value="True" />
         </Style>
         <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
         </Style>
 
-        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
-            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.BorderBrush}" />
+        <Style Selector="^:disabled /template/ Border#EffectBorder">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
         </Style>
-
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
     </ControlTheme>
 
-    <!--  Transparent Background Button  -->
-    <ControlTheme
-        x:Key="TransparentBg"
-        BasedOn="{StaticResource {x:Type Button}}"
-        TargetType="Button">
-
+    <!--  Fluent 2 Borderless Ghost / Transparent Background Button (zero border, zero Reveal)  -->
+    <ControlTheme x:Key="TransparentBg" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Primary}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="{DynamicResource ThemeX.Control.Padding}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="MinWidth" Value="32" />
+        <Setter Property="MinHeight" Value="{DynamicResource ControlMinHeight}" />
+        <Setter Property="FocusAdorner" Value="{StaticResource ThemeX.FocusAdorner.Control}" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <animations:RevealEffect
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        HaloBrush="{DynamicResource ThemeX.Transparent.Reverse.Tertiary}"
-                        MouseEnterAnimation="True"
-                        MouseOnBrush="{DynamicResource ThemeX.Transparent.Reverse.Secondary}">
-                        <Border
-                            x:Name="EffectBorder"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-
-                            <Border.Transitions>
-                                <Transitions>
-                                    <ThicknessTransition
-                                        Easing="{DynamicResource {x:Static themeX:ThemeSettings.AnimationEasingKey}}"
-                                        Property="BorderThickness"
-                                        Duration="00:00:00.200" />
-                                </Transitions>
-                            </Border.Transitions>
-
+            <ControlTemplate>
+                <Panel
+                    x:Name="RootPanel"
+                    RenderTransform="scale(1)"
+                    RenderTransformOrigin="50%,50%">
+                    <Panel.Transitions>
+                        <Transitions>
+                            <TransformOperationsTransition
+                                Easing="{StaticResource ThemeX.Easing.FluentDecelerate}"
+                                Property="RenderTransform"
+                                Duration="0:0:0.083" />
+                        </Transitions>
+                    </Panel.Transitions>
+                    <Border
+                        x:Name="EffectBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        ClipToBounds="True"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="Background" Duration="0:0:0.12" />
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                            </Transitions>
+                        </Border.Transitions>
+                        <Panel>
+                            <Border
+                                x:Name="PART_StateLayer"
+                                Background="Transparent"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                IsHitTestVisible="False">
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <BrushTransition Property="Background" Duration="0:0:0.12" />
+                                    </Transitions>
+                                </Border.Transitions>
+                            </Border>
                             <ContentPresenter
                                 Name="PART_ContentPresenter"
                                 Padding="{TemplateBinding Padding}"
@@ -156,74 +181,127 @@
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Content="{TemplateBinding Content}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
-                                CornerRadius="{TemplateBinding CornerRadius}" />
-                        </Border>
-                    </animations:RevealEffect>
-                </ControlTemplate>
-            </Setter.Value>
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                RecognizesAccessKey="True" />
+                        </Panel>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
         </Setter>
 
+        <Style Selector="^:pointerover /template/ Border#PART_StateLayer">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtleHover}" />
+        </Style>
+
+        <Style Selector="^:pressed /template/ Panel#RootPanel">
+            <Setter Property="RenderTransform" Value="scale(0.985)" />
+        </Style>
+        <Style Selector="^:pressed /template/ Border#PART_StateLayer">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.SubtlePressed}" />
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Secondary}" />
+        </Style>
+
+        <Style Selector="^:disabled /template/ Border#EffectBorder">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
     </ControlTheme>
 
-    <!--  Cubic Button  -->
+    <!--  Compact Square Surface Button  -->
     <ControlTheme
         x:Key="CubicButton"
         BasedOn="{StaticResource {x:Type Button}}"
         TargetType="Button">
-
-        <Setter Property="MinWidth" Value="25" />
-        <Setter Property="MinHeight" Value="25" />
-        <Setter Property="Width" Value="25" />
-        <Setter Property="Height" Value="25" />
+        <Setter Property="MinWidth" Value="32" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
 
+        <Style Selector="^ /template/ controls|RevealOverlay#PART_RevealOverlay">
+            <Setter Property="Tone" Value="Subtle" />
+            <Setter Property="BorderLightRadius" Value="72" />
+            <Setter Property="HoverLightRadius" Value="84" />
+            <Setter Property="RevealBorderThickness" Value="1" />
+        </Style>
     </ControlTheme>
 
+    <!--  Compact Square Borderless Icon Button (zero border, zero Reveal)  -->
     <ControlTheme
         x:Key="CubicTransparentBgButton"
         BasedOn="{StaticResource TransparentBg}"
         TargetType="Button">
-
-        <Setter Property="MinWidth" Value="25" />
-        <Setter Property="MinHeight" Value="25" />
-        <Setter Property="Width" Value="25" />
-        <Setter Property="Height" Value="25" />
+        <Setter Property="MinWidth" Value="32" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
-
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
     </ControlTheme>
 
-    <!--  Accent  -->
-
+    <!--  Fluent 2 Accent / Primary Button with Refined White Reveal  -->
     <ControlTheme
         x:Key="AccentButton"
         BasedOn="{StaticResource {x:Type Button}}"
         TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorKey}}" />
+        <Setter Property="Foreground" Value="{Binding Background, RelativeSource={RelativeSource Self}, Converter={StaticResource GreyLevelToForegroundConverter}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentElevationBorderKey}}" />
+        <Setter Property="BorderThickness" Value="1" />
 
-        <Setter Property="Background"
-                Value="{DynamicResource ThemeX.AccentColor}" />
-        <Setter Property="Foreground"
-                Value="{Binding Background, RelativeSource={RelativeSource Self}, Converter={StaticResource GreyLevelToForegroundConverter}}" />
-        <Setter Property="BorderBrush"
-                Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentColorDark3Key}}" />
+        <Style Selector="^ /template/ controls|RevealOverlay#PART_RevealOverlay">
+            <Setter Property="Tone" Value="Accent" />
+            <Setter Property="BorderLightRadius" Value="92" />
+            <Setter Property="HoverLightRadius" Value="116" />
+            <Setter Property="RevealBorderThickness" Value="1.1" />
+        </Style>
 
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-            <!--<Setter Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrush}" />-->
-            <Setter Property="TextBlock.Foreground"
-                    Value="{TemplateBinding Background, Converter={StaticResource GreyLevelToForegroundConverter}}" />
+            <Setter Property="TextBlock.Foreground" Value="{TemplateBinding Background, Converter={StaticResource GreyLevelToForegroundConverter}}" />
         </Style>
 
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter TextBlock">
-            <Setter Property="Foreground"
-                    Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ContentPresenter}}" />
+            <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ContentPresenter}}" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ Border#EffectBorder">
+            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentElevationBorderKey}}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ Border#PART_StateLayer">
+            <Setter Property="Background" Value="#14FFFFFF" />
+        </Style>
+
+        <Style Selector="^:pressed /template/ Border#EffectBorder">
+            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static themeX:ThemeSettings.AccentElevationBorderKey}}" />
+        </Style>
+        <Style Selector="^:pressed /template/ Border#PART_StateLayer">
+            <Setter Property="Background" Value="#22000000" />
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="TextBlock.Foreground" Value="{TemplateBinding Background, Converter={StaticResource GreyLevelToForegroundConverter}}" />
+            <Setter Property="Opacity" Value="0.82" />
         </Style>
 
         <Style Selector="^:disabled">
-            <Setter Property="Background" Value="{DynamicResource ThemeX.ButtonBackground.Pressed}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.ButtonBackground.Pressed}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
         </Style>
-
+        <Style Selector="^:disabled /template/ Border#EffectBorder">
+            <Setter Property="Background" Value="{DynamicResource ThemeX.Surface.ControlDisabled}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeX.Stroke.Control}" />
+        </Style>
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource ThemeX.Foreground.Disabled}" />
+        </Style>
     </ControlTheme>
 
     <ControlTheme
